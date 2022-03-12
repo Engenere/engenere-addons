@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_invoice_partner_confirmation_user,account.invoice.partner.confirmation.user,model_account_invoice_partner_confirmation,account.group_account_invoice,1,1,1,1
+access_account_invoice_partner_confirmation_readonly,account.invoice.partner.confirmation.readonly,model_account_invoice_partner_confirmation,account.group_account_readonly,1,0,0,0
+access_account_invoice_partner_confirmation_register_user,account.invoice.partner.confirmation.register.user,model_account_invoice_partner_confirmation_register,account.group_account_invoice,1,1,1,1

@@ -1,0 +1,1 @@
+from . import account_invoice_partner_confirmation_register
