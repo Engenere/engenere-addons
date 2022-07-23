@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="financial_discount_field_account_move_form" model="ir.ui.view">
+        <field name="name">financial_discount_field.account.move.form</field>
+        <field name="model">account.move</field>
+        <field name="priority">97</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <group id="header_right_group" position="inside">
+                <field name="invoice_discount_percent_until_due" attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))]}" />
+            </group>
+        </field>
+    </record>
+</odoo>
