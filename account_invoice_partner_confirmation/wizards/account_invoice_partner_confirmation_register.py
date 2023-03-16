@@ -61,9 +61,6 @@ class AccountInvoicePartnerConfirmationRegister(models.TransientModel):
                 self._context.get("active_ids", [])
             )
 
-            if len(invoice_ids) > 10:
-                raise UserError(_("You can select a maximum of 10 invoices."))
-
             for invoice in invoice_ids:
 
                 if invoice.move_type != "out_invoice":
