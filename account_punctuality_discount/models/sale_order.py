@@ -10,9 +10,7 @@ class SaleOrder(models.Model):
 
     @api.onchange("partner_id")
     def _onchange_partner_id(self):
-        res = super(SaleOrder, self)._onchange_partner_id()
         self.punctuality_discount = self.partner_id.punctuality_discount
-        return res
 
     def _prepare_invoice(self):
         self.ensure_one()
