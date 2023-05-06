@@ -1,8 +1,8 @@
-
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright (C) 2023 Antônio S. P. Neto <neto@engene.one> - Engenere LTDA (https://engenere.one). -->
-<!-- License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
+<!--
+    Copyright (C) 2023 Antônio S. P. Neto <neto@engene.one> - Engenere LTDA (https://engenere.one).
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
 <odoo>
     <record id="nfse_paulistana_direct_print_document_form_inherit" model="ir.ui.view">
         <field name="name">l10n_br_nfse_paulistana_direct_print.document.form.inherit</field>
