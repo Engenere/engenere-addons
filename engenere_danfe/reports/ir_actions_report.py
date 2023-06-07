@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from .danfe import danfe
 from odoo import models
+from odoo.exceptions import UserError
 import pytz
 import base64
 import logging
@@ -22,22 +23,28 @@ class IrActionsReport(models.Model):
         return super(IrActionsReport, self)._render_qweb_html(res_ids, data=data)
 
     def _render_qweb_pdf(self, res_ids, data=None):
-        if self.report_name == "engenere_danfe.main_template_danfe_oca":
-            return self.print_danfe_oca(res_ids)
-        elif self.report_name != "engenere_danfe.main_template_danfe":
+
+        if self.report_name not in ["engenere_danfe.main_template_danfe", "engenere_danfe.main_template_danfe_oca"]:
             return super(IrActionsReport, self)._render_qweb_pdf(res_ids, data=data)
 
         nfe = self.env["account.move"].search([("id", "in", res_ids)])
 
-        nfe_xml = None
+        if nfe.document_type != "55":
+            raise UserError("You can only print a danfe of a NFe(55).")
+        if nfe.state != "posted":
+            raise UserError("You can only print a posted NFe.")
+
+        if self.report_name == "engenere_danfe.main_template_danfe_oca":
+            return self.print_danfe_oca(nfe)
+
+        nfe_xml = False
         if nfe.authorization_file_id:
             nfe_xml = base64.b64decode(nfe.authorization_file_id.datas)
         elif nfe.send_file_id:
             nfe_xml = base64.b64decode(nfe.send_file_id.datas)
 
         if not nfe_xml:
-            # Handle the error
-            raise ValueError("No file was found.")
+            raise UserError("No xml file was found.")
 
         logo = False
         if nfe.issuer == "company" and nfe.company_id.logo:
@@ -68,9 +75,7 @@ class IrActionsReport(models.Model):
 
         return danfe_file, "pdf"
 
-    def print_danfe_oca(self, res_ids):
-
-        nfe = self.env["account.move"].search([("id", "in", res_ids)])
+    def print_danfe_oca(self, nfe):
 
         if nfe.authorization_file_id:
             arquivo = nfe.authorization_file_id
