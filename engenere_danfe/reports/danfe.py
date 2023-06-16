@@ -83,7 +83,7 @@ def getdateByTimezone(cDateUTC, timezone=None):
 
 def format_number(cNumber):
     if cNumber:
-        return cNumber.replace(",", "X").replace("X", ".").replace(".", ",")
+        return ("{:,.2f}".format(float(cNumber))).replace(".", "X").replace(",", ".").replace("X", ",")
     return ""
 
 
