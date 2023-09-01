@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="invoice_tree_usability" model="ir.ui.view">
+        <field name="name">l10n_br_account.invoice.tree.usability</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='document_number']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='document_number']" position="after">
+                <field name="document_number_integer" string="Número do Documento" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
