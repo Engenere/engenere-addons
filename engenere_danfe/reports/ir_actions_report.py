@@ -27,11 +27,11 @@ class IrActionsReport(models.Model):
         if self.report_name not in ["engenere_danfe.main_template_danfe", "engenere_danfe.main_template_danfe_oca"]:
             return super(IrActionsReport, self)._render_qweb_pdf(res_ids, data=data)
 
-        nfe = self.env["account.move"].search([("id", "in", res_ids)])
+        nfe = self.env["account.invoice"].search([("id", "in", res_ids)])
 
         if nfe.document_type != "55":
             raise UserError("You can only print a danfe of a NFe(55).")
-        if nfe.state != "posted":
+        if nfe.state in ('draft', 'cancel'):
             raise UserError("You can only print a posted NFe.")
 
         if self.report_name == "engenere_danfe.main_template_danfe_oca":

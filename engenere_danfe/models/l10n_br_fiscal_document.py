@@ -28,7 +28,7 @@ class L10n_br_fiscalDocument(models.Model):
             return super().make_pdf()
 
         report = self.env.ref('engenere_danfe.report_engenere_danfe')
-        pdf_data = report._render_qweb_pdf(self.move_ids.ids)  # Gera o PDF
+        pdf_data = report._render_qweb_pdf(self.invoice_ids.ids)  # Gera o PDF
 
         self.file_report_id = self.env["ir.attachment"].create(
             {
