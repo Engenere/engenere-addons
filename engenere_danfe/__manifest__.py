@@ -5,7 +5,7 @@
     'name': 'Engenere Danfe',
     'description': """
         Generate a new danfe layout compatible with OCA/l10n_brazil""",
-    'version': '14.0.0.0.0',
+    'version': '12.0.1.0.0',
     'license': 'AGPL-3',
     'author': 'Engenere.one',
     'website': 'https://engenere.one',
