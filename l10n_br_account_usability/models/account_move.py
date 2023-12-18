@@ -9,10 +9,11 @@ class AccountMove(models.Model):
 
     _inherit = "account.move"
 
-    total_faturado = fields.Float(
+    total_faturado = fields.Monetary(
         string="Faturamento",
         help="Exibe o total faturado bruto, sem descontar as retenções",
         compute="_compute_total_faturado",
+        store=True,
     )
 
     def _compute_total_faturado(self):
@@ -21,4 +22,3 @@ class AccountMove(models.Model):
             # que é a soma dos vencimentos, porem sem descontar o valor retido.
             # por isso que aqui o valor retido é somado novamente.
             move.total_faturado = move.amount_total + move.amount_tax_withholding
-
