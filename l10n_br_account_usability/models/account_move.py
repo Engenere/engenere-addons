@@ -9,7 +9,7 @@ class AccountMove(models.Model):
 
     _inherit = "account.move"
 
-    total_faturado = fields.Float(
+    total_faturado = fields.Monetary(
         string="Faturamento",
         help="Exibe o total faturado bruto, sem descontar as retenções",
         compute="_compute_total_faturado",
