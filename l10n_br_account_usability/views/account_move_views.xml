@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="invoice_tree_usability" model="ir.ui.view">
         <field name="name">l10n_br_account.invoice.tree.usability</field>
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_invoice_tree" />
         <field name="arch" type="xml">
-            <field name="amount_total_signed" position="before">
-                <field name="total_faturado" />
+            <field name="amount_total_signed" position="after">
+                <field name="total_faturado" sum="Total Faturado" />
                 <field name="amount_tax_withholding" />
             </field>
         </field>

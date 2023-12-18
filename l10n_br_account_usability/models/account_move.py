@@ -5,14 +5,20 @@ from odoo import models, fields
 
 
 class AccountMove(models.Model):
-    """Extend Account Move"""
-
     _inherit = "account.move"
 
-    total_faturado = fields.Float(
+    total_faturado = fields.Monetary(
         string="Faturamento",
         help="Exibe o total faturado bruto, sem descontar as retenções",
         compute="_compute_total_faturado",
+        store=True,  # Adicione store=True para armazenar o resultado no banco de dados
+    )
+
+    total_faturado_global = fields.Monetary(
+        string="Total Faturado Global",
+        help="Total do faturamento de todos os registros",
+        compute="_compute_total_faturado_global",
+        store=True,  # Adicione store=True para armazenar o resultado no banco de dados
     )
 
     def _compute_total_faturado(self):
@@ -22,3 +28,6 @@ class AccountMove(models.Model):
             # por isso que aqui o valor retido é somado novamente.
             move.total_faturado = move.amount_total + move.amount_tax_withholding
 
+    def _compute_total_faturado_global(self):
+        total_global = sum(self.mapped("total_faturado"))
+        self.total_faturado_global = total_global
