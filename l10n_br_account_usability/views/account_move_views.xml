@@ -5,8 +5,8 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_invoice_tree" />
         <field name="arch" type="xml">
-            <field name="amount_total_signed" position="after">
-                <field name="total_faturado" sum="Total Faturado" />
+            <field name="amount_total_signed" position="before">
+                <field name="total_faturado" sum= "Total Faturado" />
                 <field name="amount_tax_withholding" />
             </field>
         </field>
