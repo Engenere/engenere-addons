@@ -13,6 +13,7 @@ class AccountMove(models.Model):
         string="Faturamento",
         help="Exibe o total faturado bruto, sem descontar as retenções",
         compute="_compute_total_faturado",
+        store=True,
     )
 
     def _compute_total_faturado(self):
