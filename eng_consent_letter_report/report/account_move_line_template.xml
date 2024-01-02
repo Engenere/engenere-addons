@@ -37,7 +37,7 @@
                         <p style="font-size: 20px;">Endereço: <span t-field="docs[0].partner_id.street"/></p>
                         <p style="font-size: 20px;">Bairro: <span t-field="docs[0].partner_id.district"/></p>
                         <p style="font-size: 20px;">CEP: <span t-field="docs[0].partner_id.zip"/></p>
-                        <p style="font-size: 20px;">CNPJ: <span t-field="docs[0].partner_id.vat"/></p>
+                        <p style="font-size: 20px;">CNPJ: <span t-field="docs[0].partner_id.cnpj_cpf"/></p>
                     <p style="font-size: 25px;">Por ser verdade, firmo o presente.</p>
                 </div>
             </t>
