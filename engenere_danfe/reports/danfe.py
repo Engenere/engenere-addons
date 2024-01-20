@@ -497,7 +497,7 @@ class danfe(object):
         elem_retirada = oXML.find(".//{http://www.portalfiscal.inf.br/nfe}retirada")
         self.canvas.setFont("NimbusSanL-Bold", 7)
 
-        if len(elem_entrega):
+        if elem_entrega is not None and len(elem_entrega):
             elem = elem_entrega
             self.string(
                 self.nLeft + 1, self.nlin + 1,
