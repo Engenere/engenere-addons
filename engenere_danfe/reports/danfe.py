@@ -503,7 +503,7 @@ class danfe(object):
                 self.nLeft + 1, self.nlin + 1,
                 "INFORMAÇÕES DO LOCAL DE ENTREGA"
             )
-        elif is not None and len(elem_retirada):
+        elif elem_retirada is not None and len(elem_retirada):
             elem = elem_retirada
             self.string(
                 self.nLeft + 1, self.nlin + 1, "INFORMAÇÕES DO LOCAL DE RETIRADA"
