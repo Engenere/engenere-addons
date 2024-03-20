@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "author": "Engenere",
     "maintainers": ["antoniospneto", "felipemotter"],
-    "website": "https://github.com/Engenere/engenere-addons",
+    "website": "https://engenere.one",
     "version": "14.0.0.0.0",
     "development_status": "Beta",
     "depends": [
