@@ -1,8 +1,10 @@
-# Copyright (C) 2023 Antônio S. P. Neto <neto@engene.one> - Engenere LTDA (https://engenere.one).
-# Copyright (C) 2023 Marcel Savegnago <marcel.savegnago@escodoo.com.br> - Escodoo (https://www.escodoo.com.br).
+# Copyright (C) 2023 Antônio S. P. Neto <neto@engene.one> -
+# Engenere LTDA (https://engenere.one).
+# Copyright (C) 2023 Marcel Savegnago <marcel.savegnago@escodoo.com.br> -
+# Escodoo (https://www.escodoo.com.br).
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, models, fields
+from odoo import fields, models
 
 
 class Document(models.Model):
@@ -42,9 +44,9 @@ class Document(models.Model):
 
     def action_open_nfse_paulistana(self):
         return {
-            'type': 'ir.actions.act_url',
-            'url': self.url_nfse_paulistana,
-            'target': 'new',
+            "type": "ir.actions.act_url",
+            "url": self.url_nfse_paulistana,
+            "target": "new",
         }
 
     def _compute_is_nfse_paulistana(self):
