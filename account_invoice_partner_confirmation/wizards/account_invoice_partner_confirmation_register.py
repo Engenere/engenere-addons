@@ -1,7 +1,6 @@
 # Copyright 2022 Engenere
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from email.policy import default
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
@@ -53,7 +52,8 @@ class AccountInvoicePartnerConfirmationRegister(models.TransientModel):
             if self._context.get("active_model") != "account.move":
                 raise UserError(
                     _(
-                        "The register partner confirmation wizard should only be called on account.move records."
+                        "The register partner confirmation wizard should only be called "
+                        "on account.move records."
                     )
                 )
 
@@ -66,8 +66,8 @@ class AccountInvoicePartnerConfirmationRegister(models.TransientModel):
                 if invoice.move_type != "out_invoice":
                     raise UserError(
                         _(
-                            "You cannot select invoices with move type different of 'out_invoice'.\n\nInvoice: "
-                            + invoice.name
+                            "You cannot select invoices with move type different"
+                            "of 'out_invoice'.\n\nInvoice: " + invoice.name
                         )
                     )
 
@@ -82,7 +82,8 @@ class AccountInvoicePartnerConfirmationRegister(models.TransientModel):
                 if invoice.part_confirm_id:
                     raise UserError(
                         _(
-                            "You cannot select invoices for which the partner has already confirmed receipt of goods.\n\nInvoice: "
+                            "You cannot select invoices for which the partner "
+                            "has already confirmed receipt of goods.\n\nInvoice: "
                             + invoice.name
                         )
                     )

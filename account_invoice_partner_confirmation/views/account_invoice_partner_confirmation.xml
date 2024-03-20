@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2022 Engenere
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
-
 <odoo>
     <record model="ir.ui.view" id="account_invoice_partner_confirmation_form_view">
         <field name="name">account.invoice.partner.confirmation.form</field>
@@ -10,33 +9,36 @@
             <form create="false" delete="false">
                 <header>
                     <field
-                        name="state"
-                        widget="statusbar"
-                        statusbar_colors='{"with_pendencies":"red","confirmed":"blue"}'
-                        options="{'clickable': 1}"
-                    />
+            name="state"
+            widget="statusbar"
+            statusbar_colors='{"with_pendencies":"red","confirmed":"blue"}'
+            options="{'clickable': 1}"
+          />
                 </header>
                 <sheet>
                     <div class="oe_title">
                         <h1>
-                            <field name="name"/>
+                            <field name="name" />
                         </h1>
                     </div>
                     <group>
                         <group>
                             <field name="confirmation_date" />
-                            <field name="invoice_id"/>
+                            <field name="invoice_id" />
                             <field name="partner_id" />
-                            <field name="related_file_ids" widget="many2many_binary"/>
+                            <field name="related_file_ids" widget="many2many_binary" />
                         </group>
                         <group>
-                            <field name="vehicle_id"/>
-                            <field name="receipt_person"/>
-                            <field name="responsible_employee_ids" widget="many2many_tags"/>
+                            <field name="vehicle_id" />
+                            <field name="receipt_person" />
+                            <field
+                name="responsible_employee_ids"
+                widget="many2many_tags"
+              />
                         </group>
                     </group>
                     <group name="name">
-                        <field name="observations" string="Observations"/>
+                        <field name="observations" string="Observations" />
                     </group>
                 </sheet>
                 <div class="o_attachment_preview" />

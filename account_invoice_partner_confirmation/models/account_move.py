@@ -67,8 +67,10 @@ class AccountMove(models.Model):
             record.part_confirm_vehicle_id = record.part_confirm_id.vehicle_id
 
     def action_register_partner_confirmation(self):
-        """Open the account.invoice.partner.confirmation.register wizard to confirm the delivery to the partner.
-        :return: An action opening the account.invoice.partner.confirmation.register wizard.
+        """Open the account.invoice.partner.confirmation.register
+        wizard to confirm the delivery to the partner.
+        :return: An action opening the
+        account.invoice.partner.confirmation.register wizard.
         """
         return {
             "name": _("Register Partner Confirmation"),
