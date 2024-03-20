@@ -1,13 +1,14 @@
 # Copyright 2023 Engenere.one
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import fields, api, models
+from odoo import api, models
 
 
 class Partner(models.Model):
     """
     Estende o modelo de parceiro para desativar a validação de CNPJ/IE
     """
+
     _inherit = "res.partner"
 
     @api.constrains("cnpj_cpf", "inscr_est")
