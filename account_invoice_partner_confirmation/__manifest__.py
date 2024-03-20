@@ -4,11 +4,13 @@
 {
     "name": "Account Invoice Partner Confirmation",
     "summary": """
-        This module is for companies that need to control the receipt of goods and invoices by partners.""",
+        This module is for companies that need to control
+        the receipt of goods and invoices by partners.""",
     "version": "14.0.0.0.0",
     "author": "Engenere,Odoo Community Association (OCA)",
-    "maintainers": ["felipemotter", "netosjb"],
-    "website": "engenere.one",
+    "maintainers": ["felipemotter", "antoniospneto"],
+    "website": "https://engenere.one",
+    "license": "AGPL-3",
     "depends": ["mail", "fleet", "hr", "account"],
     "data": [
         "wizards/account_invoice_partner_confirmation_register.xml",

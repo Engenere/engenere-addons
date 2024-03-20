@@ -1,62 +1,60 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2022 Engenere
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
-
 <odoo>
 
     <record model="ir.ui.view" id="account_move_form_view_invoice_partner_confirmation">
-        <field name="name">account.move.form (in account_invoice_partner_confirmation)</field>
+        <field
+      name="name"
+    >account.move.form (in account_invoice_partner_confirmation)</field>
         <field name="model">account.move</field>
-        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="inherit_id" ref="account.view_move_form" />
         <field name="arch" type="xml">
             <button name="action_register_payment" position="after">
                 <button
-                    name="action_register_partner_confirmation"
-                    string="Register Partner Confirmation"
-                    help="Confirm receipt of the goods by the customer"
-                    id="account_invoice_partner_confirmation_btn"
-                    type="object"
-                    class="oe_highlight btn-success"
-                    attrs="{'invisible': ['|', '|', ('state', '!=', 'posted'), ('move_type', '!=', 'out_invoice'), ('part_confirm_id', '!=', [])]}"
-                    groups="account.group_account_invoice"
-                />
+          name="action_register_partner_confirmation"
+          string="Register Partner Confirmation"
+          help="Confirm receipt of the goods by the customer"
+          id="account_invoice_partner_confirmation_btn"
+          type="object"
+          class="oe_highlight btn-success"
+          attrs="{'invisible': ['|', '|', ('state', '!=', 'posted'), ('move_type', '!=', 'out_invoice'), ('part_confirm_id', '!=', [])]}"
+          groups="account.group_account_invoice"
+        />
                 <button
-                    name="action_cancel_partner_confirmation"
-                    string="Cancel Partner Confirmation"
-                    help="Cancel receipt of the goods by the customer"
-                    id="account_invoice_partner_confirmation_cancel_btn"
-                    type="object"
-                    class="btn-secundary"
-                    attrs="{'invisible': ['|', '|', ('state', '!=', 'posted'), ('move_type', '!=', 'out_invoice'), ('part_confirm_id', '=', [])]}"
-                    groups="account.group_account_invoice"
-                    confirm="Are you sure that you want to cancel the partner confirmation?"
-                />
+          name="action_cancel_partner_confirmation"
+          string="Cancel Partner Confirmation"
+          help="Cancel receipt of the goods by the customer"
+          id="account_invoice_partner_confirmation_cancel_btn"
+          type="object"
+          class="btn-secundary"
+          attrs="{'invisible': ['|', '|', ('state', '!=', 'posted'), ('move_type', '!=', 'out_invoice'), ('part_confirm_id', '=', [])]}"
+          groups="account.group_account_invoice"
+          confirm="Are you sure that you want to cancel the partner confirmation?"
+        />
             </button>
             <div name="journal_div" position="after">
                 <field
-                    name="part_confirm_date"
-                    string="Partner Confirmation"
-                    attrs="{'invisible': [('part_confirm_date', '=', False)]}"
-                />
+          name="part_confirm_date"
+          string="Partner Confirmation"
+          attrs="{'invisible': [('part_confirm_date', '=', False)]}"
+        />
             </div>
             <group name="accounting_info_group" position="after">
                 <group
-                    id="partner_confirmation"
-                    string="Partner Confirmation"
-                    name="partner_confirmation"
-                    attrs="{'invisible': ['|', ('state', '!=', 'posted'), ('move_type', '!=', 'out_invoice')]}"
-                >
-                    <field name="part_confirm_id" invisible="1"/>
+          id="partner_confirmation"
+          string="Partner Confirmation"
+          name="partner_confirmation"
+          attrs="{'invisible': ['|', ('state', '!=', 'posted'), ('move_type', '!=', 'out_invoice')]}"
+        >
+                    <field name="part_confirm_id" invisible="1" />
                     <field name="part_conf_one_id" />
                     <field name="part_confirm_date" />
+                    <field name="part_confirm_state" widget="badge" />
                     <field
-                        name="part_confirm_state"
-                        widget="badge"
-                    />
-                    <field
-                        name="part_confirm_responsible_employee_ids"
-                        widget="many2many_tags"
-                    />
+            name="part_confirm_responsible_employee_ids"
+            widget="many2many_tags"
+          />
                     <field name="part_confirm_vehicle_id" />
                 </group>
             </group>
