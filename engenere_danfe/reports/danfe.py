@@ -1,28 +1,25 @@
-# -*- coding: utf-8 -*-
 # © 2017 Edson Bernardino, ITK Soft
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 # Classe para geração de PDF da DANFE a partir de xml etree.fromstring
 
+import math
 import os
+from datetime import datetime, timedelta
 from io import BytesIO
 from textwrap import wrap
-import math
-
-from reportlab.lib import utils
-from reportlab.pdfgen import canvas
-from reportlab.lib.units import mm, cm
-from reportlab.lib.pagesizes import A4
-from reportlab.lib.colors import black, gray
-from reportlab.graphics.barcode import code128
-from reportlab.lib.styles import getSampleStyleSheet
-from reportlab.lib.enums import TA_CENTER
-from reportlab.platypus import Paragraph, Image
-from reportlab.lib.styles import ParagraphStyle
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
 
 import pytz
-from datetime import datetime, timedelta
+from reportlab.graphics.barcode import code128
+from reportlab.lib import utils
+from reportlab.lib.colors import black, gray
+from reportlab.lib.enums import TA_CENTER
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib.units import cm, mm
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.pdfgen import canvas
+from reportlab.platypus import Image, Paragraph
 
 
 def chunks(cString, nLen):
@@ -83,7 +80,12 @@ def getdateByTimezone(cDateUTC, timezone=None):
 
 def format_number(cNumber):
     if cNumber:
-        return ("{:,.2f}".format(float(cNumber))).replace(".", "X").replace(",", ".").replace("X", ",")
+        return (
+            ("{:,.2f}".format(float(cNumber)))
+            .replace(".", "X")
+            .replace(",", ".")
+            .replace("X", ",")
+        )
     return ""
 
 
@@ -91,7 +93,7 @@ def tagtext(oNode=None, cTag=None):
     try:
         xpath = ".//{http://www.portalfiscal.inf.br/nfe}%s" % (cTag)
         cText = oNode.find(xpath).text
-    except:
+    except Exception:
         cText = ""
     return cText
 
@@ -110,7 +112,7 @@ def get_image(path, width=1 * cm):
     return Image(path, width=width, height=(width * aspect))
 
 
-class danfe(object):
+class Danfe(object):
     def __init__(
         self,
         sizepage=A4,
@@ -171,7 +173,7 @@ class danfe(object):
                 list_desc = []
                 list_cod_prod = []
 
-                for nId, item in enumerate(el_det):
+                for _nId, item in enumerate(el_det):
                     el_prod = item.find(".//{http://www.portalfiscal.inf.br/nfe}prod")
                     infAdProd = item.find(
                         ".//{http://www.portalfiscal.inf.br/nfe}infAdProd"
@@ -277,7 +279,7 @@ class danfe(object):
         )
         self.canvas.setFont("NimbusSanL-Bold", 8)
         cNF = tagtext(oNode=elem_ide, cTag="nNF")
-        cNF = "{0:011,}".format(int(cNF)).replace(",", ".")
+        cNF = "{:011,}".format(int(cNF)).replace(",", ".")
         self.stringcenter(self.nLeft + 100, self.nlin + 25, "Nº %s" % (cNF))
 
         self.stringcenter(
@@ -500,8 +502,7 @@ class danfe(object):
         if elem_entrega is not None and len(elem_entrega):
             elem = elem_entrega
             self.string(
-                self.nLeft + 1, self.nlin + 1,
-                "INFORMAÇÕES DO LOCAL DE ENTREGA"
+                self.nLeft + 1, self.nlin + 1, "INFORMAÇÕES DO LOCAL DE ENTREGA"
             )
         elif elem_retirada is not None and len(elem_retirada):
             elem = elem_retirada
@@ -1072,7 +1073,7 @@ obsCont[@xCampo='NomeVendedor']"
         # Conteúdo campos
         self.canvas.setFont("NimbusSanL-Bold", 8)
         cNF = tagtext(oNode=el_ide, cTag="nNF")
-        cNF = "{0:011,}".format(int(cNF)).replace(",", ".")
+        cNF = "{:011,}".format(int(cNF)).replace(",", ".")
         self.string(self.width - self.nRight - nW + 2, self.nlin + 8, "Nº %s" % (cNF))
         self.string(
             self.width - self.nRight - nW + 2,

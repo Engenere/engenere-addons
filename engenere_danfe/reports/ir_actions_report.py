@@ -1,14 +1,17 @@
 # Copyright 2023 Engenere.one
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from .danfe import danfe
-from odoo import models
-from odoo.exceptions import UserError
-import pytz
 import base64
 import logging
-from lxml import etree
 from io import BytesIO
+
+import pytz
 from erpbrasil.edoc.pdf import base
+from lxml import etree
+
+from odoo import _, models
+from odoo.exceptions import UserError
+
+from .danfe import Danfe
 
 _logger = logging.getLogger(__name__)
 
@@ -24,15 +27,18 @@ class IrActionsReport(models.Model):
 
     def _render_qweb_pdf(self, res_ids, data=None):
 
-        if self.report_name not in ["engenere_danfe.main_template_danfe", "engenere_danfe.main_template_danfe_oca"]:
+        if self.report_name not in [
+            "engenere_danfe.main_template_danfe",
+            "engenere_danfe.main_template_danfe_oca",
+        ]:
             return super(IrActionsReport, self)._render_qweb_pdf(res_ids, data=data)
 
         nfe = self.env["account.move"].search([("id", "in", res_ids)])
 
         if nfe.document_type != "55":
-            raise UserError("You can only print a danfe of a NFe(55).")
+            raise UserError(_("You can only print a danfe of a NFe(55)."))
         if nfe.state != "posted":
-            raise UserError("You can only print a posted NFe.")
+            raise UserError(_("You can only print a posted NFe."))
 
         if self.report_name == "engenere_danfe.main_template_danfe_oca":
             return self.print_danfe_oca(nfe)
@@ -44,7 +50,7 @@ class IrActionsReport(models.Model):
             nfe_xml = base64.b64decode(nfe.send_file_id.datas)
 
         if not nfe_xml:
-            raise UserError("No xml file was found.")
+            raise UserError(_("No xml file was found."))
 
         logo = False
         if nfe.issuer == "company" and nfe.company_id.logo:
@@ -62,7 +68,7 @@ class IrActionsReport(models.Model):
         timezone = pytz.timezone(self.env.context.get("tz") or "UTC")
 
         xml_element = etree.fromstring(nfe_xml)
-        oDanfe = danfe(
+        oDanfe = Danfe(
             list_xml=[xml_element],
             logo=tmpLogo,
             timezone=timezone,
