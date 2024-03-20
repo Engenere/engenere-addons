@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="view_account_invoice_tree" model="ir.ui.view">
         <field name="name">account.move.invoice.tree</field>
         <field name="model">account.move</field>
-        <field name="inherit_id" ref="account.view_invoice_tree"/>
+        <field name="inherit_id" ref="account.view_invoice_tree" />
         <field name="arch" type="xml">
                 <field name="invoice_date_due" position="attributes">
-                    <attribute name="widget"></attribute>
+                    <attribute name="widget" />
                 </field>
         </field>
     </record>
