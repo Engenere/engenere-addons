@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import fields, models
 
 
 class Partner(models.Model):
@@ -8,5 +8,5 @@ class Partner(models.Model):
         string="Punctuality Discount (%)",
         help="This discount percentage will be used instead of the default for "
         "sales orders, customer invoices. The discount is granted if the invoice "
-        "is paid by the due date."
+        "is paid by the due date.",
     )
