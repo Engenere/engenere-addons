@@ -3,11 +3,14 @@
 
 {
     "name": "Sale Order General Cliente Order Ref",
-    "summary": "Take the General Client Order Ref on Sale Order to Partner Order in Sale Order Line.",
+    "summary": """
+    Take the General Client Order Ref on
+    Sale Order to Partner Order in Sale Order Line.
+    """,
     "version": "14.0.0.0.0",
     "development_status": "Alpha",
     "category": "Sales",
-    "website": "https://github.com/Engenere/engenere-addons",
+    "website": "https://engenere.one",
     "author": "Engenere",
     "license": "AGPL-3",
     "application": False,
