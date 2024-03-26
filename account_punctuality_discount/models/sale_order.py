@@ -1,11 +1,12 @@
-from odoo import models, fields, api
+from odoo import api, fields, models
+
 
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     punctuality_discount = fields.Float(
         string="Punctuality Discount (%)",
-        help="The discount is granted if the invoice is paid by the due date."
+        help="The discount is granted if the invoice is paid by the due date.",
     )
 
     @api.onchange("partner_id")

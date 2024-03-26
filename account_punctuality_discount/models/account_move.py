@@ -1,13 +1,13 @@
-from odoo import models, fields, api
-
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+
 
 class AccountMove(models.Model):
     _inherit = "account.move"
 
     invoice_punctuality_discount = fields.Float(
         string="Punctuality Discount (%)",
-        help="The discount is granted if the invoice is paid by the due date."
+        help="The discount is granted if the invoice is paid by the due date.",
     )
 
     @api.onchange("partner_id")
@@ -20,6 +20,4 @@ class AccountMove(models.Model):
     def _check_punctuality_discount(self):
         for inv in self:
             if not 0 <= inv.invoice_punctuality_discount <= 100:
-                raise UserError(
-                    "Punctuality discount must be between 0% and 100%!"
-                )
+                raise UserError(_("Punctuality discount must be between 0% and 100%!"))

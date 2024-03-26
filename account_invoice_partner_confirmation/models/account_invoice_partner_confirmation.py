@@ -1,14 +1,14 @@
 # Copyright 2022 Engenere
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import fields, models
 
 
 class AccountInvoicePartnerConfirmation(models.Model):
 
     _name = "account.invoice.partner.confirmation"
     _inherit = ["mail.thread", "mail.activity.mixin"]
-    _description = "Receipt of goods from the partners in account invoices."
+    _description = "Receipt of goods from the partners in account invoices"
     _sql_constraints = [
         (
             "partner_confirmation_invoice_id_unique",
@@ -31,7 +31,10 @@ class AccountInvoicePartnerConfirmation(models.Model):
     )
 
     partner_id = fields.Many2one(
-        "res.partner", string="Partner", related="invoice_id.partner_id", readonly=True
+        "res.partner",
+        string="Partner",
+        related="invoice_id.partner_id",
+        readonly=True,
     )
 
     state = fields.Selection(

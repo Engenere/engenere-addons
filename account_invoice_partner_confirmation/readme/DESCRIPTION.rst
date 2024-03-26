@@ -1,4 +1,4 @@
-This module is for companies that need to control the receipt of goods and invoices by partners.
+This module is for firms managing partner goods and invoice receipts.
 
 With it, it is possible to link the delivery of the goods and the invoice to:
 - Date the partner confirmed receipt

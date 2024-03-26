@@ -9,7 +9,7 @@
     "author": "Engenere, Escodoo, Odoo Community Association (OCA)",
     "category": "Localization",
     "license": "AGPL-3",
-    "website": "https://www.engenere.one",
+    "website": "https://engenere.one",
     "depends": [
         "l10n_br_nfse_paulistana",
         "l10n_br_account",

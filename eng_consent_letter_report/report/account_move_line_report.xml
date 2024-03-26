@@ -4,10 +4,14 @@
         <field name="name">Relatório de Carta de Anuência</field>
         <field name="model">account.move.line</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">eng_consent_letter_report.report_account_move_line</field>
-        <field name="report_file">account_move_line_template.report_account_move_line</field>
+        <field
+      name="report_name"
+    >eng_consent_letter_report.report_account_move_line</field>
+        <field
+      name="report_file"
+    >account_move_line_template.report_account_move_line</field>
         <field name="print_report_name">'Relatório de Carta de Anuência'</field>
-        <field name="paperformat_id" ref="base.paperformat_euro"/>
+        <field name="paperformat_id" ref="base.paperformat_euro" />
         <field name="binding_type">report</field>
     </record>
 </odoo>

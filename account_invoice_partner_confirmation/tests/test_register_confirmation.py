@@ -1,9 +1,11 @@
 # Copyright 2022 Engenere
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase
-from odoo.exceptions import UserError
 from datetime import date
+
+from odoo.exceptions import UserError
+from odoo.tests.common import TransactionCase
+
 
 class TestRegisterConfirmation(TransactionCase):
     def setUp(self):
@@ -23,17 +25,16 @@ class TestRegisterConfirmation(TransactionCase):
         )
         user.partner_id.email = "accountman@test.com"
 
-        # Shaclsdow the current environment/cursor with one having the report user.
+        # Shadow the current environment/cursor
+        # with one having the report user.
         # This is mandatory to test access rights.
         self.env = self.env(user=user)
         self.cr = self.env.cr
 
         self.partner_confirm_obj = self.env["account.invoice.partner.confirmation"]
-
         self.part_confirm_registe_model = self.env[
             "account.invoice.partner.confirmation.register"
         ]
-
         self.account_move_model = self.env["account.move"]
 
         self.journal_sale = self.env["account.journal"].create(
@@ -62,29 +63,13 @@ class TestRegisterConfirmation(TransactionCase):
         )
 
         self.brand = self.env["fleet.vehicle.model.brand"].create(
-            {
-                "name": "Brand Vehicle",
-            }
+            {"name": "Brand Vehicle"}
         )
-
         self.model = self.env["fleet.vehicle.model"].create(
-            {
-                "brand_id": self.brand.id,
-                "name": "Test1",
-            }
+            {"brand_id": self.brand.id, "name": "Test1"}
         )
-
-        self.vehicle = self.env["fleet.vehicle"].create(
-            {
-                "model_id": self.model.id,
-            }
-        )
-
-        self.employee = self.env["hr.employee"].create(
-            {
-                "name": "Test Employee",
-            }
-        )
+        self.vehicle = self.env["fleet.vehicle"].create({"model_id": self.model.id})
+        self.employee = self.env["hr.employee"].create({"name": "Test Employee"})
 
     def create_invoice(self, posted=True, move_type="out_invoice"):
         invoice = self.account_move_model.create(
@@ -95,11 +80,7 @@ class TestRegisterConfirmation(TransactionCase):
                     (
                         0,
                         0,
-                        {
-                            "name": "Test line",
-                            "quantity": 1.0,
-                            "price_unit": 100.00,
-                        },
+                        {"name": "Test line", "quantity": 1.0, "price_unit": 100.00},
                     ),
                 ],
             }
@@ -108,16 +89,12 @@ class TestRegisterConfirmation(TransactionCase):
             invoice.action_post()
         return invoice
 
-    def create_register_partner_confirm_wizard(
-        self, invoice_ids, confirm_date=date.today()
-    ):
+    def create_register_partner_confirm_wizard(self, invoice_ids, confirm_date=None):
+        if confirm_date is None:
+            confirm_date = date.today()
         wizard = self.part_confirm_registe_model.with_context(
             active_ids=invoice_ids, active_model="account.move"
-        ).create(
-            {
-                "confirmation_date": confirm_date,
-            }
-        )
+        ).create({"confirmation_date": confirm_date})
         return wizard
 
     def test_basic_partner_confir_and_error_confirmed_already(self):

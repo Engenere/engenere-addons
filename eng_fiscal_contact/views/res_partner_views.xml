@@ -1,16 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="view_partner_form_inherit" model="ir.ui.view">
         <field name="name">eng_fiscal_contact.view_partner_form_inherit</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="l10n_br_base.l10n_br_base_partner_form"/>
+        <field name="inherit_id" ref="l10n_br_base.l10n_br_base_partner_form" />
         <field name="arch" type="xml">
             <xpath expr="//group[@name='other_infos']" position="after">
                 <group string="Tax Contacts" name="fiscal_contacts">
                     <field name="fiscal_contact_ids">
                         <tree>
-                            <field name="name"/>
-                            <field name="email"/>
+                            <field name="name" />
+                            <field name="email" />
                         </tree>
                     </field>
                 </group>
