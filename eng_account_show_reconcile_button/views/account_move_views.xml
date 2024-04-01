@@ -5,7 +5,9 @@
         <field name="inherit_id" ref="account.view_move_form" />
         <field name="arch" type="xml">
             <button name="open_reconcile_view" position="attributes">
-                <attribute name="attrs">{'invisible': ['|', ('move_type', '!=', 'entry'), ('id', '=', False)]}</attribute>
+                <attribute
+          name="attrs"
+        >{'invisible': ['|', ('move_type', '!=', 'entry'), ('id', '=', False)]}</attribute>
             </button>
         </field>
     </record>
