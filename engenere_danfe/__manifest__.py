@@ -11,7 +11,8 @@
     "website": "https://engenere.one",
     "depends": [
         "l10n_br_account",
+        "l10n_br_account_nfe",
     ],
-    "data": ["reports/danfe_report.xml"],
+    "data": [],
     "demo": [],
 }

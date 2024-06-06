@@ -29,7 +29,7 @@ class L10nBrFiscalDocument(models.Model):
         if not self.filtered(filter_processador_edoc_nfe):
             return super().make_pdf()
 
-        report = self.env.ref("engenere_danfe.report_engenere_danfe")
+        report = self.env.ref("l10n_br_account_nfe.report_danfe_account")
         pdf_data = report._render_qweb_pdf(self.move_ids.ids)  # Gera o PDF
 
         self.file_report_id = self.env["ir.attachment"].create(
