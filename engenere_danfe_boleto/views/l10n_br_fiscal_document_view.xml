@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Engenere
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_print_boleto" model="ir.ui.view">
+        <field name="name">account.move.cnab.view</field>
+        <field name="model">l10n_br_fiscal.document</field>
+        <field name="inherit_id" ref="l10n_br_fiscal.document_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <field name="payment_method_code" invisible="1" />
+                <button
+          name="view_boleto_pdf"
+          type="object"
+          string="Print Boleto"
+          class="btn-primary"
+          attrs="{'invisible': [('payment_method_code', 'not in', ('240', '400', '500'))]}"
+        />
+        />
+                <button
+          name="generate_combined_pdf"
+          type="object"
+          string="Issue and Print"
+          class="btn-primary"
+          attrs="{'invisible': [('payment_method_code', 'not in', ('240', '400', '500'))]}"
+        />
+        />
+            </xpath>
+        </field>
+    </record>
+</odoo>
