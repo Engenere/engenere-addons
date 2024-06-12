@@ -1,0 +1,70 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* engenere_danfe_boleto
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-19 11:37+0000\n"
+"PO-Revision-Date: 2024-06-19 11:37+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: engenere_danfe_boleto
+#: model:ir.model.fields,field_description:engenere_danfe_boleto.field_l10n_br_fiscal_document__payment_method_code
+msgid "Code (Do Not Modify)"
+msgstr "Código (Não Modifique)"
+
+#. module: engenere_danfe_boleto
+#: model:ir.model.fields,field_description:engenere_danfe_boleto.field_account_move__display_name
+#: model:ir.model.fields,field_description:engenere_danfe_boleto.field_l10n_br_fiscal_document__display_name
+msgid "Display Name"
+msgstr "Nome exibido"
+
+#. module: engenere_danfe_boleto
+#: model:ir.model,name:engenere_danfe_boleto.model_l10n_br_fiscal_document
+msgid "Fiscal Document"
+msgstr "Documento Fiscal"
+
+#. module: engenere_danfe_boleto
+#: model:ir.model.fields,field_description:engenere_danfe_boleto.field_account_move__id
+#: model:ir.model.fields,field_description:engenere_danfe_boleto.field_l10n_br_fiscal_document__id
+msgid "ID"
+msgstr ""
+
+#. module: engenere_danfe_boleto
+#: model_terms:ir.ui.view,arch_db:engenere_danfe_boleto.view_move_danfe_boleto_form
+#: model_terms:ir.ui.view,arch_db:engenere_danfe_boleto.view_print_boleto
+msgid "Issue and Print"
+msgstr "Emitir e Imprimir"
+
+#. module: engenere_danfe_boleto
+#: model:ir.model,name:engenere_danfe_boleto.model_account_move
+msgid "Journal Entry"
+msgstr "Lançamento de Diário"
+
+#. module: engenere_danfe_boleto
+#: model:ir.model.fields,field_description:engenere_danfe_boleto.field_account_move____last_update
+#: model:ir.model.fields,field_description:engenere_danfe_boleto.field_l10n_br_fiscal_document____last_update
+msgid "Last Modified on"
+msgstr "Última modificação em"
+
+#. module: engenere_danfe_boleto
+#: model_terms:ir.ui.view,arch_db:engenere_danfe_boleto.view_print_boleto
+msgid "Print Boleto"
+msgstr "Imprimir boleto"
+
+#. module: engenere_danfe_boleto
+#: model:ir.model.fields,help:engenere_danfe_boleto.field_l10n_br_fiscal_document__payment_method_code
+msgid ""
+"This code is used in the code of the Odoo module that handles this payment "
+"method. Therefore, if you change it, the generation of the payment file may "
+"fail."
+msgstr ""
+"Este código é usado no código do módulo Odoo que trata desta forma de "
+"pagamento. Portanto, se você alterá-lo, a geração do arquivo poderá falhar."

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Engenere
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_move_danfe_boleto_form" model="ir.ui.view">
+        <field name="name">account.move.boleto.danfe.view</field>
+        <field name="model">account.move</field>
+        <field name="priority">99</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header/button[@name='button_draft']" position="after">
+                <button
+          name="generate_combined_pdf"
+          type="object"
+          string="Issue and Print"
+          class="btn-primary"
+          attrs="{'invisible': [('payment_method_code', 'not in', ('240', '400', '500'))]}"
+        />
+            </xpath>
+            <xpath expr="//sheet" position="before">
+                <div
+          class="alert alert-danger"
+          role="alert"
+          attrs="{'invisible': [('xml_error_message', '=', False)]}"
+        >
+                    <strong>XML validation errors:</strong>
+                    <field name="xml_error_message" readonly="1" />
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
