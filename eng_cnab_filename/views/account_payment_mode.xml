@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="eng_cnab_filename_payment_mode_form" model="ir.ui.view">
+        <field name="name">eng_cnab_filename.payment_mode.form</field>
+        <field name="model">account.payment.mode</field>
+        <field name="priority">99</field>
+        <field
+      name="inherit_id"
+      ref="l10n_br_account_payment_order.l10n_br_account_payment_mode_form"
+    />
+        <field name="arch" type="xml">
+            <field name="cnab_sequence_id" position="after">
+                <field name="filename_sequence_id" />
+            </field>
+        </field>
+    </record>
+</odoo>
