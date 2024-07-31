@@ -15,15 +15,20 @@ class AccountMove(models.Model):
         if self.fiscal_tax_engine_disabled:
             # então força a base manual e os valores dos impostos:
             for tax_item in balance_taxes_res["taxes"]:
-                if not tax_item.get("fiscal_tax_id") and not isinstance(
-                    tax_item["fiscal_tax_id"], models.NewId
-                ):
+                if isinstance(tax_item["fiscal_tax_id"], models.NewId):
+                    tax_domain = (
+                        self.env["l10n_br_fiscal.tax"]
+                        .browse(tax_item["fiscal_tax_id"].origin)
+                        .tax_domain
+                    )
+                elif isinstance(tax_item["fiscal_tax_id"], int):
+                    tax_domain = (
+                        self.env["l10n_br_fiscal.tax"]
+                        .browse(tax_item["fiscal_tax_id"])
+                        .tax_domain
+                    )
+                else:
                     continue
-                tax_domain = (
-                    self.env["l10n_br_fiscal.tax"]
-                    .browse(tax_item["fiscal_tax_id"].origin)
-                    .tax_domain
-                )
                 tax_item["base"] = getattr(base_line, "%s_base" % (tax_domain,))
                 tax_item["amount"] = getattr(base_line, "%s_value" % (tax_domain,))
         return balance_taxes_res
