@@ -13,10 +13,10 @@ class FiscalDocumentLineMixinMethods(models.AbstractModel):
             return
         super()._remove_all_fiscal_tax_ids()
 
-    def _apply_tax_fields(self, compute_result):
+    def _prepare_tax_fields(self, compute_result):
         if self._is_fiscal_tax_engine_disabled():
-            return
-        super()._apply_tax_fields(compute_result)
+            return {}
+        return super()._prepare_tax_fields(compute_result)
 
     def _process_fiscal_mapping(self, mapping_result):
         if self._is_fiscal_tax_engine_disabled():
@@ -31,12 +31,12 @@ class FiscalDocumentLineMixinMethods(models.AbstractModel):
             hasattr(self, "document_id") and self.document_id.fiscal_tax_engine_disabled
         )
 
-    def _update_taxes(self):
-        super()._update_taxes()
+    def _update_fiscal_taxes(self):
+        super()._update_fiscal_taxes()
         if self._is_fiscal_tax_engine_disabled():
-            self._update_taxes_when_disabled()
+            self._update_fiscal_taxes_when_disabled()
 
-    def _update_taxes_when_disabled(self):
+    def _update_fiscal_taxes_when_disabled(self):
         tax_groups = self.env["l10n_br_fiscal.tax.group"].search([])
 
         for line in self:
@@ -55,6 +55,9 @@ class FiscalDocumentLineMixinMethods(models.AbstractModel):
                     if group.tax_withholding:
                         amount_tax_withholding += tax_value
 
-            line.amount_tax_included = amount_tax_included
-            line.amount_tax_not_included = amount_tax_not_included
-            line.amount_tax_withholding = amount_tax_withholding
+            to_update = {
+                "amount_tax_included": amount_tax_included,
+                "amount_tax_not_included": amount_tax_not_included,
+                "amount_tax_withholding": amount_tax_withholding,
+            }
+            line.write(to_update)
