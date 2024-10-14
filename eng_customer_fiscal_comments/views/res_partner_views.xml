@@ -1,0 +1,15 @@
+<odoo>
+    <record id="eng_customer_fiscal_comments_view" model="ir.ui.view">
+        <field name="name">res.partner.property.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath
+        expr="//field[@name='property_account_position_id']"
+        position="after"
+      >
+                <field name="fiscal_comments" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
