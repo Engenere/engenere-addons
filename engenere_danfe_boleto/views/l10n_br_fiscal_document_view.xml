@@ -9,20 +9,21 @@
         <field name="arch" type="xml">
             <xpath expr="//header" position="inside">
                 <field name="payment_method_code" invisible="1" />
+                <field name="state" invisible="1" />
                 <button
           name="view_boleto_pdf"
           type="object"
           string="Print Boleto"
           class="btn-primary"
-          attrs="{'invisible': [('payment_method_code', 'not in', ('240', '400', '500'))]}"
+          attrs="{'invisible': ['|', ('state', '!=', 'posted'), ('payment_method_code', 'not in', ('240', '400', '500'))]}"
         />
         />
                 <button
           name="generate_combined_pdf"
           type="object"
-          string="Issue and Print"
+          string="Print PDF + DANFE"
           class="btn-primary"
-          attrs="{'invisible': [('payment_method_code', 'not in', ('240', '400', '500'))]}"
+          attrs="{'invisible': ['|', ('state', '!=', 'posted'), ('payment_method_code', 'not in', ('240', '400', '500'))]}"
         />
         />
             </xpath>

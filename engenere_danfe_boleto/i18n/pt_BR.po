@@ -37,11 +37,6 @@ msgstr "Documento Fiscal"
 msgid "ID"
 msgstr ""
 
-#. module: engenere_danfe_boleto
-#: model_terms:ir.ui.view,arch_db:engenere_danfe_boleto.view_move_danfe_boleto_form
-#: model_terms:ir.ui.view,arch_db:engenere_danfe_boleto.view_print_boleto
-msgid "Issue and Print"
-msgstr "Emitir e Imprimir"
 
 #. module: engenere_danfe_boleto
 #: model:ir.model,name:engenere_danfe_boleto.model_account_move
@@ -55,9 +50,26 @@ msgid "Last Modified on"
 msgstr "Última modificação em"
 
 #. module: engenere_danfe_boleto
+#: code:addons/engenere_danfe_boleto/models/l10n_br_fiscal_document.py:0
+#, python-format
+msgid "PDF can only be generated if the document status is authorized."
+msgstr "O PDF só pode ser gerado se o estado do documento estiver autorizado."
+
+#. module: engenere_danfe_boleto
+#: code:addons/engenere_danfe_boleto/models/l10n_br_fiscal_document.py:0
+#, python-format
+msgid "PDF can only be generated if the document status is posted."
+msgstr "O PDF só pode ser gerado após a postagem do documento."
+
+#. module: engenere_danfe_boleto
 #: model_terms:ir.ui.view,arch_db:engenere_danfe_boleto.view_print_boleto
 msgid "Print Boleto"
 msgstr "Imprimir boleto"
+
+#. module: engenere_danfe_boleto
+#: model_terms:ir.ui.view,arch_db:engenere_danfe_boleto.view_print_boleto
+msgid "Print PDF + DANFE"
+msgstr "Imprimir PDF + DANFE"
 
 #. module: engenere_danfe_boleto
 #: model:ir.model.fields,help:engenere_danfe_boleto.field_l10n_br_fiscal_document__payment_method_code
