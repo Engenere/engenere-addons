@@ -18,6 +18,6 @@
         "views/res_partner_view.xml",
         "views/sale_order_view.xml",
         "views/account_move_view.xml",
-        "views/account_payment_mode_view.xml",
+        "views/l10n_br_cnab_config_view.xml",
     ],
 }
