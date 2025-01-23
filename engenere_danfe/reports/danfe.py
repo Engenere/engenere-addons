@@ -29,14 +29,11 @@ def chunks(cString, nLen):
 
 def format_cnpj_cpf(value):
     if len(value) < 12:  # CPF
-        cValue = "%s.%s.%s-%s" % (value[:-8], value[-8:-5], value[-5:-2], value[-2:])
+        cValue = f"{value[:-8]}.{value[-8:-5]}.{value[-5:-2]}-{value[-2:]}"
     else:
-        cValue = "%s.%s.%s/%s-%s" % (
-            value[:-12],
-            value[-12:-9],
-            value[-9:-6],
-            value[-6:-2],
-            value[-2:],
+        cValue = (
+            f"{value[:-12]}.{value[-12:-9]}."
+            f"{value[-9:-6]}/{value[-6:-2]}-{value[-2:]}"
         )
     return cValue
 
@@ -81,7 +78,7 @@ def getdateByTimezone(cDateUTC, timezone=None):
 def format_number(cNumber):
     if cNumber:
         return (
-            ("{:,.2f}".format(float(cNumber)))
+            (f"{float(cNumber):,.2f}")
             .replace(".", "X")
             .replace(",", ".")
             .replace("X", ",")
@@ -112,7 +109,7 @@ def get_image(path, width=1 * cm):
     return Image(path, width=width, height=(width * aspect))
 
 
-class Danfe(object):
+class Danfe:
     def __init__(
         self,
         sizepage=A4,
@@ -279,7 +276,7 @@ class Danfe(object):
         )
         self.canvas.setFont("NimbusSanL-Bold", 8)
         cNF = tagtext(oNode=elem_ide, cTag="nNF")
-        cNF = "{:011,}".format(int(cNF)).replace(",", ".")
+        cNF = f"{int(cNF):011,}".replace(",", ".")
         self.stringcenter(self.nLeft + 100, self.nlin + 25, "Nº %s" % (cNF))
 
         self.stringcenter(
@@ -287,7 +284,7 @@ class Danfe(object):
             self.nlin + 29,
             "SÉRIE %s" % (tagtext(oNode=elem_ide, cTag="serie")),
         )
-        cPag = "Página %s de %s" % (str(self.Page), str(self.NrPages))
+        cPag = f"Página {self.Page} de {self.NrPages}"
         self.stringcenter(self.nLeft + 100, self.nlin + 32, cPag)
         self.canvas.setFont("NimbusSanL-Regu", 6)
         self.string(self.nLeft + 86, self.nlin + 8, "Documento Auxiliar da")
@@ -469,10 +466,10 @@ class Danfe(object):
         self.string(nMr - 24, self.nlin + 7.7, cDt + " " + cHr)
         cDt, cHr = getdateByTimezone(tagtext(oNode=elem_ide, cTag="dhSaiEnt"), timezone)
         self.string(nMr - 24, self.nlin + 14.3, cDt + " " + cHr)  # Dt saída
-        cEnd = "%s, %s %s" % (
-            tagtext(oNode=elem_dest, cTag="xLgr"),
-            tagtext(oNode=elem_dest, cTag="nro"),
-            tagtext(oNode=elem_dest, cTag="xCpl"),
+        cEnd = (
+            f"{tagtext(oNode=elem_dest, cTag='xLgr')}, "
+            f"{tagtext(oNode=elem_dest, cTag='nro')} "
+            f"{tagtext(oNode=elem_dest, cTag='xCpl')}"
         )
         if len(cEnd) > 52:
             self.canvas.setFont("NimbusSanL-Regu", 6)
@@ -546,10 +543,10 @@ class Danfe(object):
             cnpj_cpf = format_cnpj_cpf(tagtext(oNode=elem, cTag="CPF"))
         self.string(nMr - 69, self.nlin + 7.5, cnpj_cpf)
         self.string(nMr - 24, self.nlin + 7.5, tagtext(oNode=elem, cTag="IE"))
-        cEnd = "%s, %s %s" % (
-            tagtext(oNode=elem, cTag="xLgr"),
-            tagtext(oNode=elem, cTag="nro"),
-            tagtext(oNode=elem, cTag="xCpl"),
+        cEnd = (
+            f"{tagtext(oNode=elem, cTag='xLgr')}, "
+            f"{tagtext(oNode=elem, cTag='nro')} "
+            f"{tagtext(oNode=elem, cTag='xCpl')}"
         )
         self.string(self.nLeft + 1, self.nlin + 14.3, cEnd)
         self.string(nMr - 89, self.nlin + 14.3, tagtext(oNode=elem, cTag="xBairro"))
@@ -1073,7 +1070,7 @@ obsCont[@xCampo='NomeVendedor']"
         # Conteúdo campos
         self.canvas.setFont("NimbusSanL-Bold", 8)
         cNF = tagtext(oNode=el_ide, cTag="nNF")
-        cNF = "{:011,}".format(int(cNF)).replace(",", ".")
+        cNF = f"{int(cNF):011,}".replace(",", ".")
         self.string(self.width - self.nRight - nW + 2, self.nlin + 8, "Nº %s" % (cNF))
         self.string(
             self.width - self.nRight - nW + 2,
@@ -1100,15 +1097,11 @@ obsCont[@xCampo='NomeVendedor']"
         )
         cEnd += tagtext(oNode=el_dest, cTag="UF")
 
-        cString = """
-        RECEBEMOS DE %s OS PRODUTOS/SERVIÇOS CONSTANTES DA NOTA FISCAL INDICADA
-        ABAIXO. EMISSÃO: %s VALOR TOTAL: %s
-        DESTINATARIO: %s""" % (
-            tagtext(oNode=el_emit, cTag="xNome"),
-            cDt,
-            cTotal,
-            cEnd,
-        )
+        cString = f"""
+        RECEBEMOS DE {tagtext(oNode=el_emit, cTag='xNome')} OS PRODUTOS/SERVIÇOS
+        CONSTANTES DA NOTA FISCAL INDICADA
+        ABAIXO. EMISSÃO: {cDt} VALOR TOTAL: {cTotal}
+        DESTINATARIO: {cEnd}"""
 
         styles = getSampleStyleSheet()
         styleN = styles["Normal"]
@@ -1231,7 +1224,7 @@ obsCont[@xCampo='NomeVendedor']"
         self.vline(200, 14, 54 + ((h + h2) / mm))
 
     def _paragraph(self, text, font, font_size, x, y):
-        ptext = "<font size=%s>%s</font>" % (font_size, text)
+        ptext = f"<font size={font_size}>{text}</font>"
         style = ParagraphStyle(
             name="Normal",
             fontName=font,

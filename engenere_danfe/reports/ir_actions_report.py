@@ -22,19 +22,18 @@ class IrActionsReport(models.Model):
         if self.report_name == "main_template_danfe_account":
             return
 
-        return super(IrActionsReport, self)._render_qweb_html(res_ids, data=data)
+        return super()._render_qweb_html(res_ids, data=data)
 
     def _render_qweb_pdf(self, res_ids, data=None):
-
         if self.report_name not in [
             "main_template_danfe_account",
         ]:
-            return super(IrActionsReport, self)._render_qweb_pdf(res_ids, data=data)
+            return super()._render_qweb_pdf(res_ids, data=data)
 
         nfe = self.env["account.move"].search([("id", "in", res_ids)])
 
         if nfe.company_id.danfe_library != "engenere_danfe":
-            return super(IrActionsReport, self)._render_qweb_pdf(res_ids, data=data)
+            return super()._render_qweb_pdf(res_ids, data=data)
 
         return self._render_danfe(nfe)
 
