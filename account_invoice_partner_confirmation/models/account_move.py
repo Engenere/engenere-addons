@@ -5,7 +5,6 @@ from odoo import _, api, fields, models
 
 
 class AccountMove(models.Model):
-
     _inherit = "account.move"
 
     part_conf_one_id = fields.Many2one(
@@ -85,7 +84,6 @@ class AccountMove(models.Model):
         }
 
     def action_cancel_partner_confirmation(self):
-
         part_conf = self.part_confirm_id
         msg = self.get_delete_partner_conf_message(part_conf)
 
