@@ -5,7 +5,6 @@ from odoo import models
 
 
 class AccountMove(models.Model):
-
     _inherit = "account.move"
 
     def generate_combined_pdf(self):
