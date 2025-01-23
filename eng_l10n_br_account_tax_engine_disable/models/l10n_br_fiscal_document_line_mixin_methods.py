@@ -5,7 +5,6 @@ from odoo import models
 
 
 class FiscalDocumentLineMixinMethods(models.AbstractModel):
-
     _inherit = "l10n_br_fiscal.document.line.mixin.methods"
 
     def _remove_all_fiscal_tax_ids(self):
