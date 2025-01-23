@@ -12,7 +12,7 @@ class AccountMove(models.Model):
 
     @api.onchange("partner_id")
     def _onchange_partner_id(self):
-        res = super(AccountMove, self)._onchange_partner_id()
+        res = super()._onchange_partner_id()
         self.invoice_punctuality_discount = self.partner_id.punctuality_discount
         return res
 
