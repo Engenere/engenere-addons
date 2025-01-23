@@ -5,7 +5,6 @@ from odoo import api, models
 
 
 class AccountMove(models.Model):
-
     _inherit = "account.move"
 
     @api.model
@@ -29,6 +28,6 @@ class AccountMove(models.Model):
                     )
                 else:
                     continue
-                tax_item["base"] = getattr(base_line, "%s_base" % (tax_domain,))
-                tax_item["amount"] = getattr(base_line, "%s_value" % (tax_domain,))
+                tax_item["base"] = getattr(base_line, f"{tax_domain}_base")
+                tax_item["amount"] = getattr(base_line, f"{tax_domain}_value")
         return balance_taxes_res

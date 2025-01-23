@@ -5,7 +5,6 @@ from odoo import fields, models
 
 
 class L10nBrFiscalDocument(models.Model):
-
     _inherit = "l10n_br_fiscal.document"
 
     fiscal_tax_engine_disabled = fields.Boolean(
