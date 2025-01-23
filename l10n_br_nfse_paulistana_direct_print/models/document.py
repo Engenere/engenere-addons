@@ -8,7 +8,6 @@ from odoo import fields, models
 
 
 class Document(models.Model):
-
     _inherit = "l10n_br_fiscal.document"
 
     url_nfse_paulistana = fields.Char(
@@ -25,7 +24,6 @@ class Document(models.Model):
 
     def _compute_url_nfse_paulistana(self):
         for doc in self:
-
             # requeried fields for the url
             nf = doc.document_number
             inscricao = doc.company_inscr_mun
