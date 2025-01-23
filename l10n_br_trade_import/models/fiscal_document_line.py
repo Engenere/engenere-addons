@@ -5,7 +5,6 @@ from odoo import api, fields, models
 
 
 class FiscalDocumentLine(models.Model):
-
     _inherit = "l10n_br_fiscal.document.line"
 
     ##########################
@@ -51,7 +50,8 @@ class FiscalDocumentLine(models.Model):
 
                 for di in import_declarations:
                     addition = di.addition_ids.filtered(
-                        lambda a: a in line.account_line_ids.import_addition_ids
+                        lambda a, line=line: a
+                        in line.account_line_ids.import_addition_ids
                     )
 
                     # Prepare the nfe40_nAdicao dicts
@@ -84,7 +84,8 @@ class FiscalDocumentLine(models.Model):
                         "nfe40_CNPJ": di.third_party_partner_id.cnpj_cpf,
                         "nfe40_UFTerceiro": di.third_party_partner_id.state_id.code,
                         "nfe40_cExportador": di.exporting_partner_id.id,
-                        "nfe40_adi": nfe40_nAdicao_dicts,  # Link to the nfe40_nAdicao records
+                        "nfe40_adi": nfe40_nAdicao_dicts,
+                        # Link to the nfe40_nAdicao records
                     }
 
                     line.nfe40_DI = [(2, d, 0) for d in line.nfe40_DI.ids]
