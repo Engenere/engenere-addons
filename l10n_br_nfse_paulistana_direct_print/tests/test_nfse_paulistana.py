@@ -7,7 +7,7 @@ from odoo.tests import common
 
 class TestNFSePaulistana(common.TransactionCase):
     def setUp(self):
-        super(TestNFSePaulistana, self).setUp()
+        super().setUp()
         self.Document = self.env["l10n_br_fiscal.document"]
 
         # Create a test company

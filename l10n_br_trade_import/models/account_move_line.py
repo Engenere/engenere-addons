@@ -5,7 +5,6 @@ from odoo import fields, models
 
 
 class AccountMoveLine(models.Model):
-
     _inherit = "account.move.line"
 
     import_addition_ids = fields.Many2many(

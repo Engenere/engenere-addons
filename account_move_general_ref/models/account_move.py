@@ -19,7 +19,7 @@ class AccountMove(models.Model):
         avoiding this. If merged, remove this method and add the attribute
         in the field.
         """
-        res = super(AccountMove, self).fields_view_get(
+        res = super().fields_view_get(
             view_id=view_id,
             view_type=view_type,
             toolbar=toolbar,

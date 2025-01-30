@@ -3,7 +3,8 @@
 
 {
     "name": "Account Move General Ref",
-    "summary": "Take the General Ref on Account Move to Partner Order in Account Move Line.",
+    "summary": """Take the General Ref on Account Move
+    to Partner Order in Account Move Line.""",
     "version": "14.0.0.0.0",
     "development_status": "Alpha",
     "category": "Sales",

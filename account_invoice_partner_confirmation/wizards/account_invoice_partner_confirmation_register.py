@@ -6,7 +6,6 @@ from odoo.exceptions import UserError
 
 
 class AccountInvoicePartnerConfirmationRegister(models.TransientModel):
-
     _name = "account.invoice.partner.confirmation.register"
     _description = "Register Partner Confirmation"
 
@@ -48,12 +47,11 @@ class AccountInvoicePartnerConfirmationRegister(models.TransientModel):
         res = super().default_get(fields_list)
 
         if "active_invoices_ids" in fields_list and "active_invoices_ids" not in res:
-
             if self._context.get("active_model") != "account.move":
                 raise UserError(
                     _(
-                        "The register partner confirmation wizard should only be called "
-                        "on account.move records."
+                        "The register partner confirmation wizard should only be called"
+                        " on account.move records."
                     )
                 )
 
@@ -62,7 +60,6 @@ class AccountInvoicePartnerConfirmationRegister(models.TransientModel):
             )
 
             for invoice in invoice_ids:
-
                 if invoice.move_type != "out_invoice":
                     raise UserError(
                         _(
@@ -98,7 +95,6 @@ class AccountInvoicePartnerConfirmationRegister(models.TransientModel):
             wizard.batch_register = len(wizard.active_invoices_ids) - 1
 
     def get_confirmantion_vals(self, invoice_id):
-
         return {
             "name": "Confirmation - " + invoice_id.name,
             "confirmation_date": self.confirmation_date,

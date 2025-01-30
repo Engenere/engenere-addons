@@ -5,7 +5,6 @@ from odoo import fields, models
 
 
 class AccountInvoicePartnerConfirmation(models.Model):
-
     _name = "account.invoice.partner.confirmation"
     _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Receipt of goods from the partners in account invoices"

@@ -22,7 +22,6 @@ def filter_processador_edoc_nfe(record):
 
 
 class L10nBrFiscalDocument(models.Model):
-
     _inherit = "l10n_br_fiscal.document"
 
     def make_pdf(self):
