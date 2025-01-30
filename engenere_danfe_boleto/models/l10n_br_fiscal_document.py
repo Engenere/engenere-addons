@@ -23,7 +23,7 @@ class L10nBrFiscalDocument(models.Model):
         return self.move_ids._target_new_tab(self.move_ids.file_boleto_pdf_id)
 
     def generate_combined_pdf(self):
-        if self.state != "posted":
+        if self.move_ids and self.move_ids.state != "posted":
             raise UserError(
                 _("PDF can only be generated if the document status is posted.")
             )
