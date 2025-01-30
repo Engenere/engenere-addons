@@ -6,7 +6,8 @@ from io import BytesIO
 
 from PyPDF2 import PdfFileMerger
 
-from odoo import fields, models
+from odoo import _, fields, models
+from odoo.exceptions import UserError
 
 
 class L10nBrFiscalDocument(models.Model):
@@ -22,11 +23,14 @@ class L10nBrFiscalDocument(models.Model):
         return self.move_ids._target_new_tab(self.move_ids.file_boleto_pdf_id)
 
     def generate_combined_pdf(self):
-        if self.state == "em_digitacao":
-            self.move_ids.action_post()
-        if self.state == "a_enviar":
-            self.action_document_send()
-
+        if self.state != "posted":
+            raise UserError(
+                _("PDF can only be generated if the document status is posted.")
+            )
+        if self.state_edoc != "autorizada":
+            raise UserError(
+                _("PDF can only be generated if the document status is authorized.")
+            )
         if not self.move_ids.file_boleto_pdf_id:
             return self.move_ids.generate_boleto_pdf()
 
