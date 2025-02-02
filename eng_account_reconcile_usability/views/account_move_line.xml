@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="view_matched_debit_tree" model="ir.ui.view">
         <field name="name">account.partial.reconcile.debit.tree</field>
         <field name="model">account.partial.reconcile</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="debit_move_id" />
-                <field name="max_date" />
-                <field name="amount" sum="Total" />
-                <field name="debit_amount_currency" sum="Total" />
+                <field name="debit_move_id" string="Move" />
+                <field name="max_date" string="Date" />
+                <field name="debit_amount_currency" sum="Total" string="Debit" />
             </tree>
         </field>
     </record>
@@ -18,36 +17,29 @@
         <field name="model">account.partial.reconcile</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="credit_move_id" />
-                <field name="max_date" />
-                <field name="amount" sum="Total" />
-                <field name="credit_amount_currency" sum="Total" />
+                <field name="credit_move_id" string="Move" />
+                <field name="max_date" string="Date" />
+                <field name="credit_amount_currency" sum="Total" string="Credit" />
             </tree>
         </field>
     </record>
 
     <record id="view_move_line_form" model="ir.ui.view">
-        <field
-            name="name"
-        >eng.account.reconcile.usability.account.move.line.form</field>
+        <field name="name">visible matched debits and credits</field>
         <field name="model">account.move.line</field>
         <field name="inherit_id" ref="account.view_move_line_form" />
         <field name="arch" type="xml">
             <field name="matched_debit_ids" position="attributes">
-                <attribute
-                    name="attrs"
-                >{'invisible': [('matched_debit_ids', '=', [])]}</attribute>
-                <attribute
-                    name="context"
-                >{'tree_view_ref': 'account.partial.reconcile.debit.tree'}</attribute>
+                <attribute name="invisible">0</attribute>
+                <attribute name="context">
+                    {'tree_view_ref': 'eng_account_reconcile_usability.view_matched_debit_tree'}
+                </attribute>
             </field>
             <field name="matched_credit_ids" position="attributes">
-                <attribute
-                    name="attrs"
-                >{'invisible': [('matched_credit_ids', '=', [])]}</attribute>
-                <attribute
-                    name="context"
-                >{'tree_view_ref': 'account.partial.reconcile.credit.tree'}</attribute>
+                <attribute name="invisible">0</attribute>
+                <attribute name="context">
+                    {'tree_view_ref': 'eng_account_reconcile_usability.view_matched_credit_tree'}
+                </attribute>
             </field>
         </field>
     </record>
