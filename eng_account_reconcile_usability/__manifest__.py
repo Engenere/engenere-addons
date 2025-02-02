@@ -1,11 +1,11 @@
 {
-    "name": "Visibilidade dos campos debito e credito correspodente",
-    "summary": "Visibilidade dos campos debito correspodente e credito correspodente.",
+    "name": "Debit & Credit Matching Display",
+    "summary": "Exibe os débitos e créditos correspondentes nas linhas do diário.",
     "license": "AGPL-3",
     "author": "Engenere",
-    "maintainers": ["cristianomafrajunior"],
-    "website": "https://engenere.one",
-    "version": "14.0.1.0.0",
+    "maintainers": ["antoniospn", "cristianomafrajunior"],
+    "website": "https://github.com/Engenere/engenere-addons",
+    "version": "16.0.1.0.0",
     "depends": [
         "account",
     ],
