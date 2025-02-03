@@ -8,10 +8,11 @@
     "license": "AGPL-3",
     "author": "Engenere",
     "maintainers": ["cristianomafrajunior"],
-    "website": "https://engenere.one",
-    "version": "14.0.1.0.0",
+    "website": "https://github.com/Engenere/engenere-addons",
+    "version": "16.0.1.0.0",
     "depends": [
         "l10n_br_base",
+        "contacts",
     ],
     "data": [
         "views/res_partner_views.xml",
