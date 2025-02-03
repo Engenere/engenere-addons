@@ -1,0 +1,50 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* eng_customer_fiscal_comments
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-14 20:17+0000\n"
+"PO-Revision-Date: 2024-10-14 20:17+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: eng_customer_fiscal_comments
+#: model:ir.model,name:eng_customer_fiscal_comments.model_res_partner
+msgid "Contact"
+msgstr "Contato"
+
+#. module: eng_customer_fiscal_comments
+#: model:ir.model.fields,field_description:eng_customer_fiscal_comments.field_l10n_br_fiscal_document_mixin_methods__display_name
+#: model:ir.model.fields,field_description:eng_customer_fiscal_comments.field_res_partner__display_name
+msgid "Display Name"
+msgstr "Nome de exibição"
+
+#. module: eng_customer_fiscal_comments
+#: model:ir.model.fields,field_description:eng_customer_fiscal_comments.field_res_partner__fiscal_comments
+#: model:ir.model.fields,field_description:eng_customer_fiscal_comments.field_res_users__fiscal_comments
+msgid "Fiscal Comments"
+msgstr "Comentários Fiscais"
+
+#. module: eng_customer_fiscal_comments
+#: model:ir.model,name:eng_customer_fiscal_comments.model_l10n_br_fiscal_document_mixin_methods
+msgid "Fiscal Document Mixin Methods"
+msgstr ""
+
+#. module: eng_customer_fiscal_comments
+#: model:ir.model.fields,field_description:eng_customer_fiscal_comments.field_l10n_br_fiscal_document_mixin_methods__id
+#: model:ir.model.fields,field_description:eng_customer_fiscal_comments.field_res_partner__id
+msgid "ID"
+msgstr "ID"
+
+#. module: eng_customer_fiscal_comments
+#: model:ir.model.fields,field_description:eng_customer_fiscal_comments.field_l10n_br_fiscal_document_mixin_methods____last_update
+#: model:ir.model.fields,field_description:eng_customer_fiscal_comments.field_res_partner____last_update
+msgid "Last Modified on"
+msgstr "Última atualização em"
