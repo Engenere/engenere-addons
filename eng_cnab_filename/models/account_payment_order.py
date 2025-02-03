@@ -8,7 +8,7 @@ class AccountPaymentOrder(models.Model):
         """
         Sobrescreve a lógica para a criação do nome a partir do sequenciador.
         """
-        sequence = self.payment_mode_id.filename_sequence_id
+        sequence = self.payment_mode_id.cnab_config_id.filename_sequence_id
         if sequence:
             filename = f"{sequence.next_by_id()}.REM"
         else:

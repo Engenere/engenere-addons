@@ -5,7 +5,7 @@
     "author": "Engenere",
     "maintainers": ["antoniospneto"],
     "website": "https://engenere.one",
-    "version": "14.0.1.0.0",
+    "version": "14.0.2.0.0",
     "depends": ["l10n_br_account_payment_order"],
     "data": [
         "views/account_payment_mode.xml",
