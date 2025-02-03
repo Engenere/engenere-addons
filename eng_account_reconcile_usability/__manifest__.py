@@ -3,7 +3,7 @@
     "summary": "Exibe os débitos e créditos correspondentes nas linhas do diário.",
     "license": "AGPL-3",
     "author": "Engenere",
-    "maintainers": ["antoniospn", "cristianomafrajunior"],
+    "maintainers": ["antoniospneto", "cristianomafrajunior"],
     "website": "https://github.com/Engenere/engenere-addons",
     "version": "16.0.1.0.0",
     "depends": [

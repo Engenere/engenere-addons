@@ -17,7 +17,13 @@ Open-source addon suite developed by Engenere.
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[eng_account_reconcile_usability](eng_account_reconcile_usability/) | 16.0.1.0.0 | [![antoniospneto](https://github.com/antoniospneto.png?size=30px)](https://github.com/antoniospneto) [![cristianomafrajunior](https://github.com/cristianomafrajunior.png?size=30px)](https://github.com/cristianomafrajunior) | Exibe os débitos e créditos correspondentes nas linhas do diário.
+[eng_account_show_reconcile_button](eng_account_show_reconcile_button/) | 16.0.1.0.0 | [![antoniospneto](https://github.com/antoniospneto.png?size=30px)](https://github.com/antoniospneto) [![cristianomafrajunior](https://github.com/cristianomafrajunior.png?size=30px)](https://github.com/cristianomafrajunior) | Displays the 'Reconciled Entries' button on journal entries regardless of existing reconciliations.
+[eng_consent_letter_report](eng_consent_letter_report/) | 16.0.1.0.0 | [![cristianomafrajunior](https://github.com/cristianomafrajunior.png?size=30px)](https://github.com/cristianomafrajunior) | Relatório em PDF de carta de Anuência.
 
 [//]: # (end addons)
 
