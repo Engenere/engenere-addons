@@ -5,9 +5,9 @@
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
             <xpath
-        expr="//field[@name='property_account_position_id']"
-        position="after"
-      >
+                expr="//field[@name='property_account_position_id']"
+                position="after"
+            >
                 <field name="fiscal_comments" />
             </xpath>
         </field>

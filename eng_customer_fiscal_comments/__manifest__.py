@@ -8,14 +8,11 @@
     "license": "AGPL-3",
     "author": "Engenere",
     "maintainers": ["cristianomafrajunior"],
-    "website": "https://engenere.one",
+    "website": "https://github.com/Engenere/engenere-addons",
     "category": "Services/Industry",
-    "version": "14.0.1.0.0",
+    "version": "16.0.1.0.0",
     "development_status": "Beta",
-    "depends": [
-        "account",
-        "l10n_br_nfe",
-    ],
+    "depends": ["account", "l10n_br_fiscal"],
     "data": [
         "views/res_partner_views.xml",
     ],

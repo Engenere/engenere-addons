@@ -8,6 +8,6 @@ class DocumentMixinMethods(models.AbstractModel):
         for d in self:
             if d.partner_id:
                 d.manual_fiscal_additional_data = d.partner_id.fiscal_comments
-                super()._document_comment()
             else:
                 d.manual_fiscal_additional_data = False
+        return super()._document_comment()
