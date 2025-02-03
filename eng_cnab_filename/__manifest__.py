@@ -4,8 +4,8 @@
     "license": "AGPL-3",
     "author": "Engenere",
     "maintainers": ["antoniospneto"],
-    "website": "https://engenere.one",
-    "version": "14.0.2.0.0",
+    "website": "https://github.com/Engenere/engenere-addons",
+    "version": "16.0.1.0.0",
     "depends": ["l10n_br_account_payment_order"],
     "data": [
         "views/account_payment_mode.xml",

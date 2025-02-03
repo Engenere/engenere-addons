@@ -1,0 +1,1 @@
+Este módulo permite a utilização dos códigos sequenciais do Odoo para gerar nomes únicos para os arquivos de remessa (CNAB). Essa funcionalidade é essencial para bancos que não aceitam o envio de arquivos com nomes duplicados, garantindo a integridade e a unicidade dos registros.
