@@ -1,4 +1,4 @@
-# Copyright 2024 Engenere.one
+# Copyright 2024 Engenere
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import models
@@ -31,9 +31,10 @@ class FiscalDocumentLineMixinMethods(models.AbstractModel):
         )
 
     def _update_fiscal_taxes(self):
-        super()._update_fiscal_taxes()
+        res = super()._update_fiscal_taxes()
         if self._is_fiscal_tax_engine_disabled():
             self._update_fiscal_taxes_when_disabled()
+        return res
 
     def _update_fiscal_taxes_when_disabled(self):
         tax_groups = self.env["l10n_br_fiscal.tax.group"].search([])
