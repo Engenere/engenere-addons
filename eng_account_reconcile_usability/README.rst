@@ -67,16 +67,16 @@ Authors
 Maintainers
 -----------
 
-.. |maintainer-antoniospn| image:: https://github.com/antoniospn.png?size=40px
-    :target: https://github.com/antoniospn
-    :alt: antoniospn
+.. |maintainer-antoniospneto| image:: https://github.com/antoniospneto.png?size=40px
+    :target: https://github.com/antoniospneto
+    :alt: antoniospneto
 .. |maintainer-cristianomafrajunior| image:: https://github.com/cristianomafrajunior.png?size=40px
     :target: https://github.com/cristianomafrajunior
     :alt: cristianomafrajunior
 
 Current maintainers:
 
-|maintainer-antoniospn| |maintainer-cristianomafrajunior| 
+|maintainer-antoniospneto| |maintainer-cristianomafrajunior| 
 
 This module is part of the `Engenere/engenere-addons <https://github.com/Engenere/engenere-addons/tree/16.0/eng_account_reconcile_usability>`_ project on GitHub.
 
