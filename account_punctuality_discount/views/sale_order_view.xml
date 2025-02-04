@@ -4,10 +4,12 @@
         <field name="name">punctuality_discount.sale.order.form</field>
         <field name="model">sale.order</field>
         <field name="priority">5</field>
-        <field name="inherit_id" ref="l10n_br_sale.l10n_br_sale_order_form" />
+        <field name="inherit_id" ref="sale.view_order_form" />
         <field name="arch" type="xml">
-            <field name="fiscal_position_id" position="before">
-                    <field name="punctuality_discount" />
+            <field name="fiscal_position_id" position="after">
+                    <group>
+                        <field name="punctuality_discount" />
+                    </group>
             </field>
         </field>
     </record>

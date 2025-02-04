@@ -6,14 +6,11 @@
     "category": "Accounting & Finance",
     "license": "AGPL-3",
     "author": "Engenere," "Odoo Community Association (OCA)",
-    "website": "https://engenere.one",
-    "version": "14.0.1.0.0",
+    "maintainers": ["felipemotter"],
+    "website": "https://github.com/Engenere/engenere-addons",
+    "version": "16.0.1.0.0",
     "development_status": "Alpha",
-    "depends": [
-        "l10n_br_sale",
-        "l10n_br_account",
-        "l10n_br_account_payment_order",
-    ],
+    "depends": ["l10n_br_account", "l10n_br_account_payment_order", "sale_management"],
     "data": [
         "views/res_partner_view.xml",
         "views/sale_order_view.xml",
