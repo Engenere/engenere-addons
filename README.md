@@ -23,7 +23,12 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [eng_account_reconcile_usability](eng_account_reconcile_usability/) | 16.0.1.0.0 | [![antoniospneto](https://github.com/antoniospneto.png?size=30px)](https://github.com/antoniospneto) [![cristianomafrajunior](https://github.com/cristianomafrajunior.png?size=30px)](https://github.com/cristianomafrajunior) | Exibe os débitos e créditos correspondentes nas linhas do diário.
 [eng_account_show_reconcile_button](eng_account_show_reconcile_button/) | 16.0.1.0.0 | [![antoniospneto](https://github.com/antoniospneto.png?size=30px)](https://github.com/antoniospneto) [![cristianomafrajunior](https://github.com/cristianomafrajunior.png?size=30px)](https://github.com/cristianomafrajunior) | Displays the 'Reconciled Entries' button on journal entries regardless of existing reconciliations.
+[eng_cnab_filename](eng_cnab_filename/) | 16.0.1.0.0 | [![antoniospneto](https://github.com/antoniospneto.png?size=30px)](https://github.com/antoniospneto) | Geração dos nomes de arquivo de remessa utilizando sequências do Odoo
 [eng_consent_letter_report](eng_consent_letter_report/) | 16.0.1.0.0 | [![cristianomafrajunior](https://github.com/cristianomafrajunior.png?size=30px)](https://github.com/cristianomafrajunior) | Relatório em PDF de carta de Anuência.
+[eng_customer_fiscal_comments](eng_customer_fiscal_comments/) | 16.0.1.0.0 | [![cristianomafrajunior](https://github.com/cristianomafrajunior.png?size=30px)](https://github.com/cristianomafrajunior) | The Customer Fiscal Comments module enables users to add tax-related comments to customer profiles, which are displayed on invoices for better compliance.
+[eng_dummy_br_coa_dependency](eng_dummy_br_coa_dependency/) | 16.0.1.0.0 | [![antoniospneto](https://github.com/antoniospneto.png?size=30px)](https://github.com/antoniospneto) | Força a instalação dos módulos l10n_br_coa_generic e l10n_br_coa_simple,
+[l10n_br_account_document_number_integer](l10n_br_account_document_number_integer/) | 16.0.1.0.0 | [![cristianomafrajunior](https://github.com/cristianomafrajunior.png?size=30px)](https://github.com/cristianomafrajunior) | Creation of the int field for better search organization
+[l10n_br_account_due_date_usability](l10n_br_account_due_date_usability/) | 16.0.1.0.0 | [![cristianomafrajunior](https://github.com/cristianomafrajunior.png?size=30px)](https://github.com/cristianomafrajunior) | Change in the due date format to the standard dd/mm/yyyy
 
 [//]: # (end addons)
 
