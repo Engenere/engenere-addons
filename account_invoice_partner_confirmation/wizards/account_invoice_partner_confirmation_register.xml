@@ -4,12 +4,12 @@
 <odoo>
 
     <record
-    model="ir.ui.view"
-    id="account_invoice_partner_confirmation_register_form_view"
-  >
+        model="ir.ui.view"
+        id="account_invoice_partner_confirmation_register_form_view"
+    >
         <field
-      name="name"
-    >account.invoice.partner.confirmation.register.form (in account_invoice_partner_confirmation)</field>
+            name="name"
+        >account.invoice.partner.confirmation.register.form (in account_invoice_partner_confirmation)</field>
         <field name="model">account.invoice.partner.confirmation.register</field>
         <field name="arch" type="xml">
             <form string="Account Invoice Partner Confirmation Register">
@@ -24,13 +24,13 @@
                     <group>
                         <field name="vehicle_id" />
                         <field
-              name="receipt_person"
-              attrs="{'invisible': [('batch_register', '=', True)]}"
-            />
+                            name="receipt_person"
+                            attrs="{'invisible': [('batch_register', '=', True)]}"
+                        />
                         <field
-              name="responsible_employee_ids"
-              widget="many2many_tags"
-            />
+                            name="responsible_employee_ids"
+                            widget="many2many_tags"
+                        />
                     </group>
                 </group>
                 <group>
@@ -38,11 +38,11 @@
                 </group>
                 <footer>
                     <button
-            name="register_confirmation"
-            string="Confirm"
-            class="btn-primary"
-            type="object"
-          />
+                        name="register_confirmation"
+                        string="Confirm"
+                        class="btn-primary"
+                        type="object"
+                    />
                     <button string="Cancel" class="btn-default" special="cancel" />
                 </footer>
             </form>

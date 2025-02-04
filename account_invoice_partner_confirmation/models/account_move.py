@@ -95,25 +95,37 @@ class AccountMove(models.Model):
         msg = _("The following Partner Confirmation has been cancelled: <br/>")
 
         date = part_conf.confirmation_date.strftime("%d/%m/%Y")
-        msg = _("%s <li>Date: %s </li>") % (msg, date)
+        msg = _("%(msg)s <li>Date: %(date)s </li>") % {"msg": msg, "date": date}
 
         state = part_conf.state
-        msg = _("%s <li>State: %s </li>") % (msg, state)
+        msg = _("%(msg)s <li>State: %(state)s </li>") % {"msg": msg, "state": state}
 
         if part_conf.vehicle_id:
             vehicle = part_conf.vehicle_id.name
-            msg = _("%s <li>Vehicle: %s </li>") % (msg, vehicle)
+            msg = _("%(msg)s <li>Vehicle: %(vehicle)s </li>") % {
+                "msg": msg,
+                "vehicle": vehicle,
+            }
 
         if part_conf.receipt_person:
             receipt_person = part_conf.receipt_person
-            msg = _("%s <li>Receipt Person: %s </li>") % (msg, receipt_person)
+            msg = _("%(msg)s <li>Receipt Person: %(receipt_person)s </li>") % {
+                "msg": msg,
+                "receipt_person": receipt_person,
+            }
 
         if part_conf.responsible_employee_ids:
             employees = ", ".join([e.name for e in part_conf.responsible_employee_ids])
-            msg = _("%s <li>Employees: %s </li>") % (msg, employees)
+            msg = _("%(msg)s <li>Employees: %(employees)s </li>") % {
+                "msg": msg,
+                "employees": employees,
+            }
 
         if part_conf.observations:
             observations = part_conf.observations
-            msg = _("%s <li>Observations: %s </li>") % (msg, observations)
+            msg = _("%(msg)s <li>Observations: %(observations)s </li>") % {
+                "msg": msg,
+                "observations": observations,
+            }
 
         return msg

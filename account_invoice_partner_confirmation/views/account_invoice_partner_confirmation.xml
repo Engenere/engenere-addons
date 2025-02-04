@@ -9,11 +9,11 @@
             <form create="false" delete="false">
                 <header>
                     <field
-            name="state"
-            widget="statusbar"
-            statusbar_colors='{"with_pendencies":"red","confirmed":"blue"}'
-            options="{'clickable': 1}"
-          />
+                        name="state"
+                        widget="statusbar"
+                        statusbar_colors='{"with_pendencies":"red","confirmed":"blue"}'
+                        options="{'clickable': 1}"
+                    />
                 </header>
                 <sheet>
                     <div class="oe_title">
@@ -32,9 +32,9 @@
                             <field name="vehicle_id" />
                             <field name="receipt_person" />
                             <field
-                name="responsible_employee_ids"
-                widget="many2many_tags"
-              />
+                                name="responsible_employee_ids"
+                                widget="many2many_tags"
+                            />
                         </group>
                     </group>
                     <group name="name">

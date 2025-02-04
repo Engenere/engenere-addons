@@ -6,10 +6,10 @@
     "summary": """
         This module is for companies that need to control
         the receipt of goods and invoices by partners.""",
-    "version": "14.0.0.0.0",
+    "version": "16.0.1.0.0",
     "author": "Engenere,Odoo Community Association (OCA)",
     "maintainers": ["felipemotter", "antoniospneto"],
-    "website": "https://engenere.one",
+    "website": "https://github.com/Engenere/engenere-addons",
     "license": "AGPL-3",
     "depends": ["mail", "fleet", "hr", "account"],
     "data": [

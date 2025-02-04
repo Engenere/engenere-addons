@@ -9,21 +9,20 @@ class AccountInvoicePartnerConfirmationRegister(models.TransientModel):
     _name = "account.invoice.partner.confirmation.register"
     _description = "Register Partner Confirmation"
 
-    confirmation_date = fields.Date("Confirmation Date", required=True)
+    confirmation_date = fields.Date(required=True)
 
     state = fields.Selection(
         [
             ("with_pendencies", "With Pendencies"),
             ("confirmed", "Confirmed"),
         ],
-        string="State",
         required=True,
         default="confirmed",
     )
 
     vehicle_id = fields.Many2one("fleet.vehicle", string="Vehicle")
 
-    observations = fields.Text("Observations")
+    observations = fields.Text()
 
     related_file_ids = fields.Many2many(
         comodel_name="ir.attachment",
@@ -31,13 +30,13 @@ class AccountInvoicePartnerConfirmationRegister(models.TransientModel):
         ondelete="cascade",
     )
 
-    receipt_person = fields.Char("Receipt Person")
+    receipt_person = fields.Char()
 
     responsible_employee_ids = fields.Many2many(
         "hr.employee", string="Responsible Employees"
     )
 
-    batch_register = fields.Boolean("Batch Register", compute="_compute_batch_register")
+    batch_register = fields.Boolean(compute="_compute_batch_register")
 
     active_invoices_ids = fields.Many2many("account.move", string="Active Invoices")
 

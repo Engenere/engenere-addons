@@ -18,7 +18,7 @@ class AccountInvoicePartnerConfirmation(models.Model):
 
     name = fields.Char(readonly=True)
 
-    confirmation_date = fields.Date("Confirmation Date", required=True, tracking=True)
+    confirmation_date = fields.Date(required=True, tracking=True)
 
     invoice_id = fields.Many2one(
         comodel_name="account.move",
@@ -41,14 +41,13 @@ class AccountInvoicePartnerConfirmation(models.Model):
             ("with_pendencies", "With Pendencies"),
             ("confirmed", "Confirmed"),
         ],
-        string="State",
         required=True,
         tracking=True,
     )
 
     vehicle_id = fields.Many2one("fleet.vehicle", string="Vehicle", tracking=True)
 
-    observations = fields.Text("Observations", tracking=True)
+    observations = fields.Text(tracking=True)
 
     related_file_ids = fields.Many2many(
         comodel_name="ir.attachment",
@@ -57,7 +56,7 @@ class AccountInvoicePartnerConfirmation(models.Model):
         tracking=True,
     )
 
-    receipt_person = fields.Char("Receipt Person", tracking=True)
+    receipt_person = fields.Char(tracking=True)
 
     responsible_employee_ids = fields.Many2many(
         "hr.employee", string="Responsible Employees", tracking=True

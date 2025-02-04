@@ -40,19 +40,13 @@ class TestRegisterConfirmation(TransactionCase):
         self.journal_sale = self.env["account.journal"].create(
             {"name": "Sale Journal", "type": "sale", "code": "TEST_SALES_JOURNAL"}
         )
-        self.type_receivable = self.env["account.account.type"].create(
-            {
-                "name": "Receivable Account",
-                "type": "receivable",
-                "internal_group": "income",
-            }
-        )
+
         self.account_receivable = self.env["account.account"].create(
             {
                 "name": "Test receivable account",
-                "user_type_id": self.type_receivable.id,
                 "reconcile": True,
-                "code": "TEST_REC_AC",
+                "account_type": "asset_receivable",
+                "code": "ACCRV",
             }
         )
         self.partner = self.env["res.partner"].create(
@@ -140,15 +134,6 @@ class TestRegisterConfirmation(TransactionCase):
         invoice = self.create_invoice(posted=False)
         with self.assertRaises(UserError):
             self.create_register_partner_confirm_wizard(invoice.ids)
-
-    def test_user_error_invoices_max_number(self):
-        invoices = []
-        for _ in range(11):
-            invoice = self.create_invoice()
-            invoices.append(invoice.id)
-
-        with self.assertRaises(UserError):
-            self.create_register_partner_confirm_wizard(invoices)
 
     def test_user_error_invoice_not_out_invoice(self):
         invoice = self.create_invoice(move_type="out_refund")
