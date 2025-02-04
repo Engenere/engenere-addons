@@ -10,10 +10,7 @@
                     <attribute name="invisible">1</attribute>
                 </field>
                 <field name="document_number" position="after">
-                    <field
-            name="document_number_integer"
-            string="Número do Documento"
-          />
+                    <field name="document_number_integer" string="Document Number" />
                 </field>
             </data>
         </field>
