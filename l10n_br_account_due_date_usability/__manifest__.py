@@ -1,11 +1,11 @@
 {
-    "name": "Data de faturamento formato",
-    "summary": "Alteração no formato da data de faturamento para padrão dd/mm/aaaa",
+    "name": "Due Date Format",
+    "summary": "Change in the due date format to the standard dd/mm/yyyy",
     "license": "AGPL-3",
     "author": "Engenere",
     "maintainers": ["cristianomafrajunior"],
-    "website": "https://engenere.one",
-    "version": "14.0.0.0.0",
+    "website": "https://github.com/Engenere/engenere-addons",
+    "version": "16.0.1.0.0",
     "depends": [
         "l10n_br_account",
     ],
