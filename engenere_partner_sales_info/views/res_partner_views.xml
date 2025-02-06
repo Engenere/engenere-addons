@@ -1,0 +1,29 @@
+<odoo>
+    <record id="view_partner_form_sales_info" model="ir.ui.view">
+        <field name="name">res.partner.form.sales.info</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <field name="customer_rank" invisible="True" />
+                <page
+          string="Sales Analysis"
+          name="partner_sales_analysis"
+          attrs="{'invisible': [('customer_rank', '=', 0)]}"
+        >
+                    <group string="Sales Information">
+                        <field name="last_order_date" />
+                        <field name="last_order_status" />
+                        <field name="last_invoice_date" />
+                        <field name="invoice_count" />
+                        <field name="total_invoiced" />
+                        <field name="average_invoiced" />
+                        <field name="average_invoiced_no_discrepancies" />
+                        <field name="average_time_between_invoices" />
+                        <field name="last_invoice_id" />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

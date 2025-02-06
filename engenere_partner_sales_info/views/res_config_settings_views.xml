@@ -1,0 +1,27 @@
+<odoo>
+    <record id="res_config_settings_view_form_inherit" model="ir.ui.view">
+        <field name="name">
+            res.config.settings.view.form.inherit.sales.info
+        </field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <h2>Sales Analysis</h2>
+                <div class="row mt16">
+                    <div class="col-12">
+                        <div class="alert alert-info" role="alert">
+                            Configure the default analysis period for partner
+                            sales information.
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <group string="Analysis Settings">
+                            <field name="partner_sales_info_months" />
+                        </group>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
