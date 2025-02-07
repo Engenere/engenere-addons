@@ -24,6 +24,24 @@
                             <field name="days_since_last_order" />
                             <field name="last_order_id" />
                         </group>
+                        <group string="Quotation Status">
+                            <field
+                name="has_open_quotation"
+                string="Pending Quotation?"
+                widget="boolean_checkbox"
+                class="oe_inline"
+              />
+                            <field
+                name="last_open_quotation_date"
+                string="Last Quotation Date"
+                attrs="{'invisible': [('has_open_quotation', '=', False)]}"
+              />
+                            <field
+                name="last_open_quotation_id"
+                string="Open Quotation"
+                attrs="{'invisible': [('has_open_quotation', '=', False)]}"
+              />
+                        </group>
                         <group string="Invoice Information">
                             <field name="last_invoice_date" />
                             <field name="invoice_count" />
@@ -34,9 +52,9 @@
                             <field name="days_since_last_invoice" />
                             <field name="last_invoice_id" />
                         </group>
-                    </group>
-                    <group>
-                        <field name="analysis_message" nolabel="1" />
+                        <group>
+                            <field name="analysis_message" nolabel="1" />
+                        </group>
                     </group>
                 </page>
             </xpath>
