@@ -6,7 +6,7 @@
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="base.res_config_settings_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//div[hasclass('settings')]" position="inside">
+            <xpath expr="//div[@name='invoicing_setting_container']" position="after">
                 <h2>Sales Analysis</h2>
                 <div class="row mt16">
                     <div class="col-12">
