@@ -102,6 +102,55 @@ class ResPartner(models.Model):
         sanitize=False,
         translate=True,
     )
+    has_open_quotation = fields.Boolean(
+        string="Open Quotation Exists",
+        compute="_compute_open_quotation_info",
+        help="Indicates if there are any draft/sent quotations for this customer",
+    )
+    last_open_quotation_id = fields.Many2one(
+        "sale.order",
+        string="Last Open Quotation",
+        compute="_compute_open_quotation_info",
+        help="Reference to the most recent open quotation",
+    )
+    last_open_quotation_date = fields.Datetime(
+        string="Last Quotation Date",
+        related="last_open_quotation_id.date_order",
+        store=False,
+        help="Date of the most recent draft/sent quotation",
+    )
+
+    def _compute_open_quotation_info(self):
+        """Calcula cotações em aberto com referência direta"""
+        self.update({"has_open_quotation": False, "last_open_quotation_id": False})
+        customer_partners = self.filtered(lambda p: p.customer_rank > 0)
+        if not customer_partners:
+            return
+
+        # Busca todas as cotações abertas ordenadas por data
+        open_quotations = self.env["sale.order"].search(
+            [
+                ("partner_id", "in", customer_partners.ids),
+                ("state", "in", ["draft", "sent"]),
+            ],
+            order="date_order DESC, id DESC",
+        )
+
+        # Mapeia última cotação por partner
+        partner_quotations = {}
+        for quot in open_quotations:
+            if quot.partner_id.id not in partner_quotations:
+                partner_quotations[quot.partner_id.id] = quot.id
+
+        # Atribui valores
+        for partner in customer_partners:
+            if partner.id in partner_quotations:
+                partner.update(
+                    {
+                        "has_open_quotation": True,
+                        "last_open_quotation_id": partner_quotations[partner.id],
+                    }
+                )
 
     def _compute_analysis_message(self):
         """Compute the HTML message for analysis."""
@@ -256,7 +305,7 @@ class ResPartner(models.Model):
         sale_orders = self.env["sale.order"].search(
             [
                 ("partner_id", "in", customer_partners.ids),
-                ("state", "!=", "cancel"),
+                ("state", "in", ["sale", "done"]),
                 ("date_order", ">=", start_date),
             ]
         )
