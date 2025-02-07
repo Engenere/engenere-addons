@@ -1,5 +1,3 @@
-# test_partner_sales_info.py
-# -*- coding: utf-8 -*-
 from dateutil.relativedelta import relativedelta
 
 from odoo import fields
@@ -14,7 +12,7 @@ class TestPartnerSalesInfo(common.TransactionCase):
         self.invoice_model = self.env["account.move"]
         self.config_param = self.env["ir.config_parameter"].sudo()
 
-        # Criar contas contábeis necessárias
+        # Create required accounts
         self.account_receivable = self.env["account.account"].create(
             {
                 "name": "Test Receivable Account",
@@ -34,7 +32,7 @@ class TestPartnerSalesInfo(common.TransactionCase):
             }
         )
 
-        # Configurar diário de vendas
+        # Create sale journal
         self.sale_journal = self.env["account.journal"].create(
             {
                 "name": "Test Sale Journal",
@@ -45,7 +43,7 @@ class TestPartnerSalesInfo(common.TransactionCase):
             }
         )
 
-        # Configurar parceiro com conta a receber
+        # Create customer partner
         self.customer_partner = self.partner_model.create(
             {
                 "name": "Test Customer",
@@ -54,7 +52,7 @@ class TestPartnerSalesInfo(common.TransactionCase):
             }
         )
 
-        # Configurar parâmetro de meses de análise
+        # Set default analysis months
         self.config_param.set_param(
             "engenere_partner_sales_info.default_analysis_months", 12
         )
@@ -81,6 +79,8 @@ class TestPartnerSalesInfo(common.TransactionCase):
         self.customer_partner._compute_sales_info()
         self.assertEqual(self.customer_partner.last_order_date, so.date_order.date())
         self.assertEqual(self.customer_partner.last_order_status, so.state)
+        # Check last_order_id as well
+        self.assertEqual(self.customer_partner.last_order_id, so)
 
     def test_with_invoices(self):
         self._create_invoice(self.customer_partner, 100, days_diff=10)
@@ -97,16 +97,41 @@ class TestPartnerSalesInfo(common.TransactionCase):
         self._create_invoice(self.customer_partner, 110, days_diff=8)
         self._create_invoice(self.customer_partner, 120, days_diff=4)
         self._create_invoice(self.customer_partner, 10000, days_diff=1)
-
         self.customer_partner._compute_sales_info()
         self.assertEqual(self.customer_partner.invoice_count, 4)
+
         total_expected = 100 + 110 + 120 + 10000
         self.assertAlmostEqual(self.customer_partner.total_invoiced, total_expected)
         self.assertTrue(
-            self.customer_partner.average_invoiced > 100
-            and self.customer_partner.average_invoiced < total_expected
+            100 < self.customer_partner.average_invoiced < total_expected,
+            "Average invoiced should be between normal invoice amounts and total.",
         )
-        self.assertTrue(self.customer_partner.average_invoiced_no_discrepancies < 1000)
+        self.assertTrue(
+            self.customer_partner.average_invoiced_no_discrepancies < 1000,
+            "Filtered average should exclude the large outlier.",
+        )
+
+    def test_days_since_last_invoice(self):
+        # First invoice, 10 days ago
+        self._create_invoice(self.customer_partner, 150, days_diff=10)
+        self.customer_partner._compute_sales_info()
+        self.assertEqual(
+            self.customer_partner.days_since_last_invoice,
+            10,
+            "days_since_last_invoice should match the 10 days old invoice",
+        )
+
+        # Newer invoice, 3 days ago
+        inv2 = self._create_invoice(self.customer_partner, 300, days_diff=3)
+        self.customer_partner._compute_sales_info()
+        self.assertEqual(
+            self.customer_partner.days_since_last_invoice,
+            3,
+            "days_since_last_invoice should be updated to match the newer invoice",
+        )
+
+        self.assertEqual(self.customer_partner.last_invoice_id, inv2)
+        self.assertEqual(self.customer_partner.last_invoice_date, inv2.invoice_date)
 
     def _create_invoice(self, partner, amount, days_diff=0):
         inv_date = fields.Date.today() - relativedelta(days=days_diff)

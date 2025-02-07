@@ -5,22 +5,28 @@
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
             <xpath expr="//page[@name='internal_notes']" position="after">
-                <field name="customer_rank" invisible="True" />
+                <field name="customer_rank" invisible="1" />
                 <page
-          string="Sales Analysis"
           name="partner_sales_analysis"
-          attrs="{'invisible': [('customer_rank', '=', 0)]}"
+          string="Sales Analysis"
+          attrs="{'invisible': [('customer_rank','=',0)]}"
         >
-                    <group string="Sales Information">
-                        <field name="last_order_date" />
-                        <field name="last_order_status" />
-                        <field name="last_invoice_date" />
-                        <field name="invoice_count" />
-                        <field name="total_invoiced" />
-                        <field name="average_invoiced" />
-                        <field name="average_invoiced_no_discrepancies" />
-                        <field name="average_time_between_invoices" />
-                        <field name="last_invoice_id" />
+                    <group>
+                        <group string="Order Information">
+                            <field name="last_order_date" />
+                            <field name="last_order_status" />
+                            <field name="last_order_id" />
+                        </group>
+                        <group string="Invoice Information">
+                            <field name="last_invoice_date" />
+                            <field name="invoice_count" />
+                            <field name="total_invoiced" />
+                            <field name="average_invoiced" />
+                            <field name="average_invoiced_no_discrepancies" />
+                            <field name="average_time_between_invoices" />
+                            <field name="days_since_last_invoice" />
+                            <field name="last_invoice_id" />
+                        </group>
                     </group>
                 </page>
             </xpath>
