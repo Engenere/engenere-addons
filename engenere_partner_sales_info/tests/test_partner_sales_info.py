@@ -1,10 +1,13 @@
 from dateutil.relativedelta import relativedelta
 
 from odoo import fields
-from odoo.tests import common
+from odoo.tests import tagged
+
+from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 
-class TestPartnerSalesInfo(common.TransactionCase):
+@tagged("post_install", "-at_install")
+class TestPartnerSalesInfo(AccountTestInvoicingCommon):
     def setUp(self):
         super().setUp()
         self.partner_model = self.env["res.partner"]
@@ -12,38 +15,9 @@ class TestPartnerSalesInfo(common.TransactionCase):
         self.invoice_model = self.env["account.move"]
         self.config_param = self.env["ir.config_parameter"].sudo()
 
-        # Create required accounts
-        self.account_receivable = self.env["account.account"].create(
-            {
-                "name": "Test Receivable Account",
-                "code": "TREC",
-                "user_type_id": self.env.ref("account.data_account_type_receivable").id,
-                "reconcile": True,
-                "company_id": self.env.company.id,
-            }
-        )
-
-        self.account_income = self.env["account.account"].create(
-            {
-                "name": "Test Income Account",
-                "code": "TIN",
-                "user_type_id": self.env.ref("account.data_account_type_revenue").id,
-                "company_id": self.env.company.id,
-            }
-        )
-
-        # Create sale journal
-        self.sale_journal = self.env["account.journal"].create(
-            {
-                "name": "Test Sale Journal",
-                "type": "sale",
-                "code": "TSJ",
-                "company_id": self.env.company.id,
-                "default_account_id": self.account_income.id,
-            }
-        )
-
-        # Create customer partner
+        self.account_receivable = self.company_data["default_account_receivable"]
+        self.account_income = self.company_data["default_account_revenue"]
+        self.sale_journal = self.company_data["default_journal_sale"]
         self.customer_partner = self.partner_model.create(
             {
                 "name": "Test Customer",
@@ -52,7 +26,7 @@ class TestPartnerSalesInfo(common.TransactionCase):
             }
         )
 
-        # Set default analysis months
+        # Define meses de análise
         self.config_param.set_param(
             "engenere_partner_sales_info.default_analysis_months", 12
         )
