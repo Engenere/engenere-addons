@@ -1,13 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#   * engenere_partner_sales_info
+# 	* engenere_partner_sales_info
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-07 01:33+0000\n"
-"PO-Revision-Date: 2025-02-07 01:33+0000\n"
+"POT-Creation-Date: 2025-02-07 01:56+0000\n"
+"PO-Revision-Date: 2025-02-07 01:56+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -64,14 +64,16 @@ msgstr "Número médio de dias entre faturas"
 #. module: engenere_partner_sales_info
 #: model:ir.model,name:engenere_partner_sales_info.model_res_config_settings
 msgid "Config Settings"
-msgstr "Configurações"
+msgstr "Definições de Configuração"
 
 #. module: engenere_partner_sales_info
 #: model_terms:ir.ui.view,arch_db:engenere_partner_sales_info.res_config_settings_view_form_inherit
 msgid ""
 "Configure the default analysis period for partner\n"
 "                            sales information."
-msgstr "Configure o período de análise padrão para as informações de vendas do parceiro."
+msgstr ""
+"Configure o período de análise padrão para as informações de vendas do "
+"parceiro."
 
 #. module: engenere_partner_sales_info
 #: model:ir.model,name:engenere_partner_sales_info.model_res_partner
@@ -100,7 +102,7 @@ msgstr "Dias desde a Última Fatura"
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_config_settings__display_name
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_partner__display_name
 msgid "Display Name"
-msgstr "Nome Exibido"
+msgstr "Nome exibido"
 
 #. module: engenere_partner_sales_info
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_config_settings__id
@@ -177,6 +179,11 @@ msgstr "Número de dias desde a fatura mais recente"
 #: model_terms:ir.ui.view,arch_db:engenere_partner_sales_info.view_partner_form_sales_info
 msgid "Order Information"
 msgstr "Informações de Pedido"
+
+#. module: engenere_partner_sales_info
+#: model:res.groups,name:engenere_partner_sales_info.group_partner_sales_analysis
+msgid "Partner Sales Analysis"
+msgstr "Análise de Vendas do Parceiro"
 
 #. module: engenere_partner_sales_info
 #: model_terms:ir.ui.view,arch_db:engenere_partner_sales_info.res_config_settings_view_form_inherit

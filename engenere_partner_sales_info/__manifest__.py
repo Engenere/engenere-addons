@@ -8,6 +8,7 @@
     "website": "https://engenere.one",
     "depends": ["sale", "account"],
     "data": [
+        "security/partner_sales_analysis_security.xml",
         "views/res_partner_views.xml",
         "views/res_config_settings_views.xml",
     ],
