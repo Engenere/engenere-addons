@@ -14,9 +14,9 @@
         >
                     <group>
                         <group string="Order Information">
-                            <field name="last_order_id" />
                             <field name="last_order_date" />
                             <field name="last_order_status" />
+                            <field name="last_order_id" />
                         </group>
                         <group string="Invoice Information">
                             <field name="last_invoice_date" />
