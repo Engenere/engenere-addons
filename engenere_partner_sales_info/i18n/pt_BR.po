@@ -6,14 +6,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-07 01:56+0000\n"
-"PO-Revision-Date: 2025-02-07 01:56+0000\n"
+"POT-Creation-Date: 2025-02-07 17:35+0000\n"
+"PO-Revision-Date: 2025-02-07 17:35+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: engenere_partner_sales_info
+#: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_partner__analysis_message
+#: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_users__analysis_message
+msgid "Analysis Message"
+msgstr "Mensagem de Análise"
 
 #. module: engenere_partner_sales_info
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_config_settings__partner_sales_info_months
@@ -24,6 +30,13 @@ msgstr "Período de Análise (Meses)"
 #: model_terms:ir.ui.view,arch_db:engenere_partner_sales_info.res_config_settings_view_form_inherit
 msgid "Analysis Settings"
 msgstr "Configurações de Análise"
+
+#. module: engenere_partner_sales_info
+#: code:addons/engenere_partner_sales_info/models/res_partner.py:0
+#, python-format
+msgid ""
+"Analysis period: %(months)d months. Note: bonus amounts are not excluded."
+msgstr "Período de análise: %(months)d meses. Nota: os valores bonificados não são excluídos."
 
 #. module: engenere_partner_sales_info
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_partner__average_invoiced
@@ -38,10 +51,28 @@ msgid "Average Invoiced (No Discrepancies)"
 msgstr "Média Faturada (Sem Discrepâncias)"
 
 #. module: engenere_partner_sales_info
+#: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_partner__average_ordered
+#: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_users__average_ordered
+msgid "Average Ordered"
+msgstr "Média de Pedidos"
+
+#. module: engenere_partner_sales_info
+#: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_partner__average_ordered_no_discrepancies
+#: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_users__average_ordered_no_discrepancies
+msgid "Average Ordered (No Discrepancies)"
+msgstr "Média de Pedidos (Sem Discrepâncias)"
+
+#. module: engenere_partner_sales_info
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_partner__average_time_between_invoices
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_users__average_time_between_invoices
 msgid "Average Time Between Invoices (Days)"
 msgstr "Tempo Médio Entre Faturas (Dias)"
+
+#. module: engenere_partner_sales_info
+#: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_partner__average_time_between_orders
+#: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_users__average_time_between_orders
+msgid "Average Time Between Orders (Days)"
+msgstr "Tempo Médio Entre Pedidos (Dias)"
 
 #. module: engenere_partner_sales_info
 #: model:ir.model.fields,help:engenere_partner_sales_info.field_res_partner__average_invoiced_no_discrepancies
@@ -60,6 +91,24 @@ msgstr "Valor médio da fatura para este cliente"
 #: model:ir.model.fields,help:engenere_partner_sales_info.field_res_users__average_time_between_invoices
 msgid "Average number of days between invoices"
 msgstr "Número médio de dias entre faturas"
+
+#. module: engenere_partner_sales_info
+#: model:ir.model.fields,help:engenere_partner_sales_info.field_res_partner__average_time_between_orders
+#: model:ir.model.fields,help:engenere_partner_sales_info.field_res_users__average_time_between_orders
+msgid "Average number of days between sale orders"
+msgstr "Número médio de dias entre pedidos de venda"
+
+#. module: engenere_partner_sales_info
+#: model:ir.model.fields,help:engenere_partner_sales_info.field_res_partner__average_ordered_no_discrepancies
+#: model:ir.model.fields,help:engenere_partner_sales_info.field_res_users__average_ordered_no_discrepancies
+msgid "Average order amount excluding outliers"
+msgstr "Valor médio do pedido excluindo valores atípicos"
+
+#. module: engenere_partner_sales_info
+#: model:ir.model.fields,help:engenere_partner_sales_info.field_res_partner__average_ordered
+#: model:ir.model.fields,help:engenere_partner_sales_info.field_res_users__average_ordered
+msgid "Average sale order amount for this customer"
+msgstr "Valor médio do pedido de venda para este cliente"
 
 #. module: engenere_partner_sales_info
 #: model:ir.model,name:engenere_partner_sales_info.model_res_config_settings
@@ -99,6 +148,12 @@ msgid "Days Since Last Invoice"
 msgstr "Dias desde a Última Fatura"
 
 #. module: engenere_partner_sales_info
+#: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_partner__days_since_last_order
+#: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_users__days_since_last_order
+msgid "Days Since Last Order"
+msgstr "Dias desde o Último Pedido"
+
+#. module: engenere_partner_sales_info
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_config_settings__display_name
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_partner__display_name
 msgid "Display Name"
@@ -131,7 +186,7 @@ msgstr "Data da Última Fatura"
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_config_settings____last_update
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_partner____last_update
 msgid "Last Modified on"
-msgstr "Última modificação em"
+msgstr "Última Modificação em"
 
 #. module: engenere_partner_sales_info
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_partner__last_order_id
@@ -170,10 +225,22 @@ msgid "Number of Invoices"
 msgstr "Número de Faturas"
 
 #. module: engenere_partner_sales_info
+#: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_partner__order_count
+#: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_users__order_count
+msgid "Number of Orders"
+msgstr "Número de Pedidos"
+
+#. module: engenere_partner_sales_info
 #: model:ir.model.fields,help:engenere_partner_sales_info.field_res_partner__days_since_last_invoice
 #: model:ir.model.fields,help:engenere_partner_sales_info.field_res_users__days_since_last_invoice
-msgid "Number of days since the most recent invoice"
-msgstr "Número de dias desde a fatura mais recente"
+msgid "Total number of invoices for this customer"
+msgstr "Número total de faturas para este cliente"
+
+#. module: engenere_partner_sales_info
+#: model:ir.model.fields,help:engenere_partner_sales_info.field_res_partner__days_since_last_order
+#: model:ir.model.fields,help:engenere_partner_sales_info.field_res_users__days_since_last_order
+msgid "Number of days since the most recent sale order"
+msgstr "Número de dias desde o último pedido de venda"
 
 #. module: engenere_partner_sales_info
 #: model_terms:ir.ui.view,arch_db:engenere_partner_sales_info.view_partner_form_sales_info
@@ -192,6 +259,12 @@ msgid "Sales Analysis"
 msgstr "Análise de Vendas"
 
 #. module: engenere_partner_sales_info
+#: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_config_settings__smart_search
+#: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_partner__smart_search
+msgid "Smart Search"
+msgstr "Busca Inteligente"
+
+#. module: engenere_partner_sales_info
 #: model:ir.model.fields,help:engenere_partner_sales_info.field_res_partner__last_order_status
 #: model:ir.model.fields,help:engenere_partner_sales_info.field_res_users__last_order_status
 msgid "Status of the customer's most recent sale order"
@@ -204,13 +277,25 @@ msgid "Sum of all invoice amounts for this customer"
 msgstr "Soma de todos os valores de fatura para este cliente"
 
 #. module: engenere_partner_sales_info
+#: model:ir.model.fields,help:engenere_partner_sales_info.field_res_partner__total_ordered
+#: model:ir.model.fields,help:engenere_partner_sales_info.field_res_users__total_ordered
+msgid "Sum of all sale order amounts for this customer"
+msgstr "Soma de todos os valores dos pedidos de venda para este cliente"
+
+#. module: engenere_partner_sales_info
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_partner__total_invoiced
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_users__total_invoiced
 msgid "Total Invoiced"
 msgstr "Total Faturado"
 
 #. module: engenere_partner_sales_info
-#: model:ir.model.fields,help:engenere_partner_sales_info.field_res_partner__invoice_count
-#: model:ir.model.fields,help:engenere_partner_sales_info.field_res_users__invoice_count
-msgid "Total number of invoices for this customer"
-msgstr "Número total de faturas para este cliente"
+#: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_partner__total_ordered
+#: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_users__total_ordered
+msgid "Total Ordered"
+msgstr "Total de Pedidos"
+
+#. module: engenere_partner_sales_info
+#: model:ir.model.fields,help:engenere_partner_sales_info.field_res_partner__order_count
+#: model:ir.model.fields,help:engenere_partner_sales_info.field_res_users__order_count
+msgid "Total number of sale orders for this customer"
+msgstr "Número total de pedidos de venda para este cliente"
