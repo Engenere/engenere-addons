@@ -123,176 +123,199 @@ class ResPartner(models.Model):
         for partner in self:
             partner.analysis_message = message
 
-    def _compute_sales_info(self):
-        """Compute stats for sale orders and invoices."""
+    def _get_analysis_months(self):
+        """Retorna o número de meses configurados para análise."""
         config_param = self.env["ir.config_parameter"].sudo()
-        months = config_param.get_param(
-            "engenere_partner_sales_info.default_analysis_months", 24
+        return int(
+            config_param.get_param(
+                "engenere_partner_sales_info.default_analysis_months", 24
+            )
         )
-        analysis_months = int(months)
-        start_date = fields.Date.context_today(self) - relativedelta(
-            months=analysis_months
-        )
-        partners = self.filtered(lambda p: p.customer_rank > 0)
-        partner_ids = partners.ids
 
-        # Sale Orders
+    def _get_start_date(self, analysis_months):
+        """Calcula a data de início com base nos meses de análise."""
+        return fields.Date.context_today(self) - relativedelta(months=analysis_months)
+
+    def _group_records_by_partner(self, records):
+        """Agrupa registros por partner_id."""
+        grouped = defaultdict(list)
+        for record in records:
+            grouped[record.partner_id.id].append(record)
+        return grouped
+
+    def _compute_record_stats(self, records, date_extractor, amount_extractor):
+        """Calcula estatísticas comuns para uma lista de registros."""
+        if not records:
+            return None
+
+        sorted_records = sorted(records, key=lambda r: date_extractor(r))
+        dates = [date_extractor(r) for r in sorted_records]
+        amounts = [amount_extractor(r) for r in sorted_records]
+        count = len(sorted_records)
+        total = sum(amounts)
+        average = total / count if count else 0
+
+        avg_no_outliers = average
+        if count >= 3:
+            mean = average
+            variance = sum((x - mean) ** 2 for x in amounts) / count
+            std_dev = math.sqrt(variance)
+            filtered = [
+                x
+                for x in amounts
+                if (mean - 1.5 * std_dev) <= x <= (mean + 1.5 * std_dev)
+            ]
+            avg_no_outliers = sum(filtered) / len(filtered) if filtered else mean
+
+        avg_time_between = 0.0
+        if count >= 2:
+            total_days = sum((dates[i] - dates[i - 1]).days for i in range(1, count))
+            avg_time_between = total_days / (count - 1)
+
+        today = fields.Date.context_today(self)
+        return {
+            "last_record": sorted_records[-1],
+            "last_date": dates[-1] if dates else None,
+            "count": count,
+            "total": total,
+            "average": average,
+            "avg_no_outliers": avg_no_outliers,
+            "avg_time_between": avg_time_between,
+            "days_since_last": (today - dates[-1]).days if dates else 0,
+        }
+
+    def _update_sales_fields(self, stats):
+        """Atualiza campos de vendas com base nas estatísticas."""
+        self.update(
+            {
+                "last_order_id": stats["last_record"].id if stats else False,
+                "last_order_date": stats["last_date"],
+                "last_order_status": stats["last_record"].state if stats else False,
+                "order_count": stats["count"] or 0,
+                "total_ordered": stats["total"] or 0,
+                "average_ordered": stats["average"] or 0,
+                "average_ordered_no_discrepancies": stats["avg_no_outliers"] or 0,
+                "average_time_between_orders": stats["avg_time_between"] or 0,
+                "days_since_last_order": stats["days_since_last"] or 0,
+            }
+        )
+
+    def _update_invoice_fields(self, stats):
+        """Atualiza campos de faturas com base nas estatísticas."""
+        self.update(
+            {
+                "last_invoice_id": stats["last_record"].id if stats else False,
+                "last_invoice_date": stats["last_date"],
+                "invoice_count": stats["count"] or 0,
+                "total_invoiced": stats["total"] or 0,
+                "average_invoiced": stats["average"] or 0,
+                "average_invoiced_no_discrepancies": stats["avg_no_outliers"] or 0,
+                "average_time_between_invoices": stats["avg_time_between"] or 0,
+                "days_since_last_invoice": stats["days_since_last"] or 0,
+            }
+        )
+
+    def _reset_sales_fields(self):
+        """Reseta campos relacionados a vendas."""
+        self.update(
+            {
+                "last_order_id": False,
+                "last_order_date": False,
+                "last_order_status": False,
+                "order_count": 0,
+                "total_ordered": 0,
+                "average_ordered": 0,
+                "average_ordered_no_discrepancies": 0,
+                "average_time_between_orders": 0,
+                "days_since_last_order": 0,
+            }
+        )
+
+    def _reset_invoice_fields(self):
+        """Reseta campos relacionados a faturas."""
+        self.update(
+            {
+                "last_invoice_id": False,
+                "last_invoice_date": False,
+                "invoice_count": 0,
+                "total_invoiced": 0,
+                "average_invoiced": 0,
+                "average_invoiced_no_discrepancies": 0,
+                "average_time_between_invoices": 0,
+                "days_since_last_invoice": 0,
+            }
+        )
+
+    def _compute_sales_info(self):
+        """Calcula principais métricas de vendas e faturas."""
+        analysis_months = self._get_analysis_months()
+        start_date = self._get_start_date(analysis_months)
+        customer_partners = self.filtered(lambda p: p.customer_rank > 0)
+
+        # Processar pedidos de venda
         sale_orders = self.env["sale.order"].search(
             [
-                ("partner_id", "in", partner_ids),
+                ("partner_id", "in", customer_partners.ids),
                 ("state", "!=", "cancel"),
                 ("date_order", ">=", start_date),
             ]
         )
-        from_so = defaultdict(list)
-        for so in sale_orders:
-            from_so[so.partner_id.id].append(so)
+        sales_group = self._group_records_by_partner(sale_orders)
 
-        # Invoices
+        # Processar faturas
         invoices = self.env["account.move"].search(
             [
-                ("partner_id", "in", partner_ids),
+                ("partner_id", "in", customer_partners.ids),
                 ("move_type", "=", "out_invoice"),
                 ("state", "=", "posted"),
                 ("reversed_entry_id", "=", False),
                 ("invoice_date", ">=", start_date),
             ]
         )
-        from_inv = defaultdict(list)
-        for inv in invoices:
-            from_inv[inv.partner_id.id].append(inv)
+        invoices_group = self._group_records_by_partner(invoices)
 
-        for partner in partners:
-            so_list = sorted(from_so.get(partner.id, []), key=lambda x: x.date_order)
-            if so_list:
-                partner.last_order_id = so_list[-1].id
-                partner.last_order_date = so_list[-1].date_order.date()
-                partner.last_order_status = so_list[-1].state
-                count_so = len(so_list)
-                total_so = sum(o.amount_total for o in so_list)
-                avg_so = total_so / count_so if count_so else 0
-                if count_so >= 3:
-                    amounts_so = [o.amount_total for o in so_list]
-                    mean_so = total_so / count_so
-                    var_so = sum((x - mean_so) ** 2 for x in amounts_so) / count_so
-                    std_dev_so = math.sqrt(var_so)
-                    lower_so = mean_so - 1.5 * std_dev_so
-                    upper_so = mean_so + 1.5 * std_dev_so
-                    filtered_so = [x for x in amounts_so if lower_so <= x <= upper_so]
-                    avg_no_disc_so = (
-                        (sum(filtered_so) / len(filtered_so))
-                        if filtered_so
-                        else mean_so
-                    )
-                else:
-                    avg_no_disc_so = avg_so
-
-                avg_time_so = 0
-                if count_so >= 2:
-                    dates_so = [o.date_order.date() for o in so_list]
-                    total_days_so = 0
-                    for idx in range(1, len(dates_so)):
-                        total_days_so += (dates_so[idx] - dates_so[idx - 1]).days
-                    avg_time_so = total_days_so / (count_so - 1)
-
-                partner.order_count = count_so
-                partner.total_ordered = total_so
-                partner.average_ordered = avg_so
-                partner.average_ordered_no_discrepancies = avg_no_disc_so
-                partner.average_time_between_orders = avg_time_so
-                today = fields.Date.context_today(self)
-                partner.days_since_last_order = (
-                    (today - so_list[-1].date_order.date()).days
-                    if so_list[-1].date_order
-                    else 0
-                )
-            else:
-                partner.last_order_id = False
-                partner.last_order_date = False
-                partner.last_order_status = False
-                partner.order_count = 0
-                partner.total_ordered = 0
-                partner.average_ordered = 0
-                partner.average_ordered_no_discrepancies = 0
-                partner.average_time_between_orders = 0
-                partner.days_since_last_order = 0
-
-            inv_list = sorted(
-                from_inv.get(partner.id, []), key=lambda x: x.invoice_date
+        for partner in customer_partners:
+            # Processar vendas
+            so_stats = self._compute_record_stats(
+                sales_group.get(partner.id, []),
+                lambda r: r.date_order.date(),
+                lambda r: r.amount_total,
             )
-            if inv_list:
-                partner.last_invoice_id = inv_list[-1].id
-                partner.last_invoice_date = inv_list[-1].invoice_date
-                count_inv = len(inv_list)
-                total_inv = sum(i.amount_total for i in inv_list)
-                avg_inv = total_inv / count_inv if count_inv else 0
-                if count_inv >= 3:
-                    amounts_inv = [i.amount_total for i in inv_list]
-                    mean_inv = total_inv / count_inv
-                    var_inv = sum((x - mean_inv) ** 2 for x in amounts_inv) / count_inv
-                    std_dev_inv = math.sqrt(var_inv)
-                    lower_inv = mean_inv - 1.5 * std_dev_inv
-                    upper_inv = mean_inv + 1.5 * std_dev_inv
-                    filtered_inv = [
-                        x for x in amounts_inv if lower_inv <= x <= upper_inv
-                    ]
-                    avg_no_disc_inv = (
-                        (sum(filtered_inv) / len(filtered_inv))
-                        if filtered_inv
-                        else mean_inv
-                    )
-                else:
-                    avg_no_disc_inv = avg_inv
-
-                avg_time_inv = 0
-                if count_inv >= 2:
-                    dates_inv = [i.invoice_date for i in inv_list]
-                    total_days_inv = 0
-                    for i in range(1, len(dates_inv)):
-                        total_days_inv += (dates_inv[i] - dates_inv[i - 1]).days
-                    avg_time_inv = total_days_inv / (count_inv - 1)
-
-                partner.invoice_count = count_inv
-                partner.total_invoiced = total_inv
-                partner.average_invoiced = avg_inv
-                partner.average_invoiced_no_discrepancies = avg_no_disc_inv
-                partner.average_time_between_invoices = avg_time_inv
-                today = fields.Date.context_today(self)
-                partner.days_since_last_invoice = (
-                    (today - partner.last_invoice_date).days
-                    if partner.last_invoice_date
-                    else 0
-                )
+            if so_stats:
+                partner._update_sales_fields(so_stats)
             else:
-                partner.last_invoice_id = False
-                partner.last_invoice_date = False
-                partner.invoice_count = 0
-                partner.total_invoiced = 0
-                partner.average_invoiced = 0
-                partner.average_invoiced_no_discrepancies = 0
-                partner.average_time_between_invoices = 0
-                partner.days_since_last_invoice = 0
+                partner._reset_sales_fields()
 
-        # Reset stats for non-customers
-        for partner in self - partners:
-            partner.update(
-                {
-                    "last_order_id": False,
-                    "last_order_date": False,
-                    "last_order_status": False,
-                    "order_count": 0,
-                    "total_ordered": 0,
-                    "average_ordered": 0,
-                    "average_ordered_no_discrepancies": 0,
-                    "average_time_between_orders": 0,
-                    "days_since_last_order": 0,
-                    "last_invoice_date": False,
-                    "invoice_count": 0,
-                    "total_invoiced": 0,
-                    "average_invoiced": 0,
-                    "average_invoiced_no_discrepancies": 0,
-                    "average_time_between_invoices": 0,
-                    "last_invoice_id": False,
-                    "days_since_last_invoice": 0,
-                }
+            # Processar faturas
+            inv_stats = self._compute_record_stats(
+                invoices_group.get(partner.id, []),
+                lambda r: r.invoice_date,
+                lambda r: r.amount_total,
             )
+            if inv_stats:
+                partner._update_invoice_fields(inv_stats)
+            else:
+                partner._reset_invoice_fields()
+
+        # Resetar parceiros que não são clientes
+        (self - customer_partners).write(
+            {
+                "last_order_id": False,
+                "last_order_date": False,
+                "last_order_status": False,
+                "order_count": 0,
+                "total_ordered": 0,
+                "average_ordered": 0,
+                "average_ordered_no_discrepancies": 0,
+                "average_time_between_orders": 0,
+                "days_since_last_order": 0,
+                "last_invoice_date": False,
+                "invoice_count": 0,
+                "total_invoiced": 0,
+                "average_invoiced": 0,
+                "average_invoiced_no_discrepancies": 0,
+                "average_time_between_invoices": 0,
+                "last_invoice_id": False,
+                "days_since_last_invoice": 0,
+            }
+        )
