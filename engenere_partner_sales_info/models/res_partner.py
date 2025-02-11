@@ -96,7 +96,7 @@ class ResPartner(models.Model):
         compute="_compute_sales_info",
         help="Number of days since the most recent invoice",
     )
-    analysis_message = fields.Html(
+    analysis_message = fields.Text(
         string="Analysis Message",
         compute="_compute_analysis_message",
         sanitize=False,
@@ -159,16 +159,10 @@ class ResPartner(models.Model):
             "engenere_partner_sales_info.default_analysis_months", 24
         )
         analysis_months = int(months)
-        msg_text = _(
+        message = _(
             "Analysis period: %(months)d months. "
             "Note: bonus amounts are not excluded."
         ) % {"months": analysis_months}
-        message = (
-            "<div style='font-size:16px; color:#005cbf; font-weight:bold;"
-            " text-align:center;'>"
-            f"{msg_text}"
-            "</div>"
-        )
         for partner in self:
             partner.analysis_message = message
 

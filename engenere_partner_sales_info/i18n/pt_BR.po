@@ -6,14 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-07 17:35+0000\n"
-"PO-Revision-Date: 2025-02-07 17:35+0000\n"
+"POT-Creation-Date: 2025-02-10 18:31+0000\n"
+"PO-Revision-Date: 2025-02-10 18:31+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+"Language: pt_BR\n"
 
 #. module: engenere_partner_sales_info
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_partner__analysis_message
@@ -36,7 +37,9 @@ msgstr "Configurações de Análise"
 #, python-format
 msgid ""
 "Analysis period: %(months)d months. Note: bonus amounts are not excluded."
-msgstr "Período de análise: %(months)d meses. Nota: os valores bonificados não são excluídos."
+msgstr ""
+"Período de análise: %(months)d meses. Nota: os valores bonificados não são "
+"excluídos."
 
 #. module: engenere_partner_sales_info
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_partner__average_invoiced
@@ -130,6 +133,15 @@ msgid "Contact"
 msgstr "Contato"
 
 #. module: engenere_partner_sales_info
+#: code:addons/engenere_partner_sales_info/models/res_partner.py:0
+#, python-format
+msgid ""
+"Analysis period: %(months)d months. Note: bonus amounts are not excluded."
+msgstr ""
+"Período de análise: %(months)d meses. Nota: os valores bonificados não são "
+"excluídos."
+
+#. module: engenere_partner_sales_info
 #: model:ir.model.fields,help:engenere_partner_sales_info.field_res_partner__last_invoice_date
 #: model:ir.model.fields,help:engenere_partner_sales_info.field_res_users__last_invoice_date
 msgid "Date of the customer's most recent invoice"
@@ -157,13 +169,19 @@ msgstr "Dias desde o Último Pedido"
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_config_settings__display_name
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_partner__display_name
 msgid "Display Name"
-msgstr "Nome exibido"
+msgstr "Nome Exibido"
 
 #. module: engenere_partner_sales_info
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_config_settings__id
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_partner__id
 msgid "ID"
 msgstr "ID"
+
+#. module: engenere_partner_sales_info
+#: model:ir.model.fields,help:engenere_partner_sales_info.field_res_partner__has_open_quotation
+#: model:ir.model.fields,help:engenere_partner_sales_info.field_res_users__has_open_quotation
+msgid "Indicates if there are any draft/sent quotations for this customer"
+msgstr "Indica se há rascunhos ou cotações enviadas para este cliente"
 
 #. module: engenere_partner_sales_info
 #: model_terms:ir.ui.view,arch_db:engenere_partner_sales_info.view_partner_form_sales_info
@@ -189,6 +207,12 @@ msgid "Last Modified on"
 msgstr "Última Modificação em"
 
 #. module: engenere_partner_sales_info
+#: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_partner__last_open_quotation_id
+#: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_users__last_open_quotation_id
+msgid "Last Open Quotation"
+msgstr "Última Cotação Aberta"
+
+#. module: engenere_partner_sales_info
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_partner__last_order_id
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_users__last_order_id
 msgid "Last Order"
@@ -205,6 +229,12 @@ msgstr "Data do Último Pedido"
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_users__last_order_status
 msgid "Last Order Status"
 msgstr "Status do Último Pedido"
+
+#. module: engenere_partner_sales_info
+#: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_partner__last_open_quotation_date
+#: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_users__last_open_quotation_date
+msgid "Last Open Quotation Date"
+msgstr "Data da Última Cotação Aberta"
 
 #. module: engenere_partner_sales_info
 #: model:ir.model.fields,help:engenere_partner_sales_info.field_res_partner__last_order_id
@@ -233,14 +263,25 @@ msgstr "Número de Pedidos"
 #. module: engenere_partner_sales_info
 #: model:ir.model.fields,help:engenere_partner_sales_info.field_res_partner__days_since_last_invoice
 #: model:ir.model.fields,help:engenere_partner_sales_info.field_res_users__days_since_last_invoice
-msgid "Total number of invoices for this customer"
-msgstr "Número total de faturas para este cliente"
+msgid "Number of days since the most recent invoice"
+msgstr "Número de dias desde a última fatura"
 
 #. module: engenere_partner_sales_info
 #: model:ir.model.fields,help:engenere_partner_sales_info.field_res_partner__days_since_last_order
 #: model:ir.model.fields,help:engenere_partner_sales_info.field_res_users__days_since_last_order
 msgid "Number of days since the most recent sale order"
 msgstr "Número de dias desde o último pedido de venda"
+
+#. module: engenere_partner_sales_info
+#: model_terms:ir.ui.view,arch_db:engenere_partner_sales_info.view_partner_form_sales_info
+msgid "Open Quotation"
+msgstr "Cotação Aberta"
+
+#. module: engenere_partner_sales_info
+#: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_partner__has_open_quotation
+#: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_users__has_open_quotation
+msgid "Open Quotation Exists"
+msgstr "Existe Cotação Aberta"
 
 #. module: engenere_partner_sales_info
 #: model_terms:ir.ui.view,arch_db:engenere_partner_sales_info.view_partner_form_sales_info
@@ -251,6 +292,22 @@ msgstr "Informações de Pedido"
 #: model:res.groups,name:engenere_partner_sales_info.group_partner_sales_analysis
 msgid "Partner Sales Analysis"
 msgstr "Análise de Vendas do Parceiro"
+
+#. module: engenere_partner_sales_info
+#: model_terms:ir.ui.view,arch_db:engenere_partner_sales_info.view_partner_form_sales_info
+msgid "Pending Quotation?"
+msgstr "Cotação Pendente?"
+
+#. module: engenere_partner_sales_info
+#: model_terms:ir.ui.view,arch_db:engenere_partner_sales_info.view_partner_form_sales_info
+msgid "Quotation Status"
+msgstr "Status da Cotação"
+
+#. module: engenere_partner_sales_info
+#: model:ir.model.fields,help:engenere_partner_sales_info.field_res_partner__last_open_quotation_id
+#: model:ir.model.fields,help:engenere_partner_sales_info.field_res_users__last_open_quotation_id
+msgid "Reference to the most recent open quotation"
+msgstr "Referência à cotação aberta mais recente"
 
 #. module: engenere_partner_sales_info
 #: model_terms:ir.ui.view,arch_db:engenere_partner_sales_info.res_config_settings_view_form_inherit
@@ -293,6 +350,12 @@ msgstr "Total Faturado"
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_users__total_ordered
 msgid "Total Ordered"
 msgstr "Total de Pedidos"
+
+#. module: engenere_partner_sales_info
+#: model:ir.model.fields,help:engenere_partner_sales_info.field_res_partner__invoice_count
+#: model:ir.model.fields,help:engenere_partner_sales_info.field_res_users__invoice_count
+msgid "Total number of invoices for this customer"
+msgstr "Número total de faturas para este cliente"
 
 #. module: engenere_partner_sales_info
 #: model:ir.model.fields,help:engenere_partner_sales_info.field_res_partner__order_count
