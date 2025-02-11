@@ -150,12 +150,10 @@ class TestPartnerSalesInfo(AccountTestInvoicingCommon):
         self.assertEqual(
             self.customer_partner.last_open_quotation_date, quotation.date_order.date()
         )
-        new_date = fields.Date.today() - relativedelta(days=1)
+        new_date = fields.Date.today() - relativedelta(days=3)
         quotation.write({"date_order": new_date})
         self.customer_partner._compute_open_quotation_info()
-        self.assertEqual(
-            self.customer_partner.last_open_quotation_date, new_date.date()
-        )
+        self.assertEqual(self.customer_partner.last_open_quotation_date, new_date)
 
     def test_partner_not_customer(self):
         """Partner with customer_rank = 0 should reset all related fields."""
@@ -166,8 +164,7 @@ class TestPartnerSalesInfo(AccountTestInvoicingCommon):
                 "property_account_receivable_id": self.account_receivable.id,
             }
         )
-        inv = self._create_invoice(partner_no_customer, 500, days_diff=5)
-        inv.action_post()
+        self._create_invoice(partner_no_customer, 500, days_diff=5, post=False)
         partner_no_customer._compute_sales_info()
         self.assertFalse(partner_no_customer.last_order_id)
         self.assertFalse(partner_no_customer.last_invoice_id)
@@ -253,7 +250,7 @@ class TestPartnerSalesInfo(AccountTestInvoicingCommon):
             }
         )
 
-    def _create_invoice(self, partner, amount, days_diff=0):
+    def _create_invoice(self, partner, amount, days_diff=0, post=True):
         inv_date = fields.Date.today() - relativedelta(days=days_diff)
         invoice = self.invoice_model.create(
             {
@@ -275,4 +272,6 @@ class TestPartnerSalesInfo(AccountTestInvoicingCommon):
                 ],
             }
         )
+        if post:
+            invoice.action_post()
         return invoice
