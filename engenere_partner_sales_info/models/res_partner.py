@@ -183,7 +183,9 @@ class ResPartner(models.Model):
             grouped[record.partner_id.id].append(record)
         return grouped
 
-    def _compute_record_stats(self, records, date_extractor, amount_extractor):
+    def _prepare_record_statistics_vals(
+        self, records, date_extractor, amount_extractor
+    ):
         """Calcula estatísticas básicas de uma lista (ordens ou faturas)."""
         if not records:
             return None
@@ -309,7 +311,7 @@ class ResPartner(models.Model):
         invoices_group = self._group_records_by_partner(invoices)
 
         for partner in customer_partners:
-            so_stats = self._compute_record_stats(
+            so_stats = self._prepare_record_statistics_vals(
                 sales_group.get(partner.id, []),
                 lambda r: r.date_order.date(),
                 lambda r: r.amount_total,
@@ -319,7 +321,7 @@ class ResPartner(models.Model):
             else:
                 partner._reset_sales_fields()
 
-            inv_stats = self._compute_record_stats(
+            inv_stats = self._prepare_record_statistics_vals(
                 invoices_group.get(partner.id, []),
                 lambda r: r.invoice_date,
                 lambda r: r.amount_total,
