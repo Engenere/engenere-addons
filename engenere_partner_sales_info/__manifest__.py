@@ -4,7 +4,7 @@
     "category": "Sales",
     "summary": "Add sales analysis fields to partners",
     "author": "Engenere",
-    "maintainers": ["felipempereira"],
+    "maintainers": ["felipemotter"],
     "website": "https://engenere.one",
     "depends": ["sale", "account"],
     "data": [
