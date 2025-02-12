@@ -116,10 +116,10 @@ class ResPartner(models.Model):
         help="Date of the most recent draft/sent quotation",
     )
 
-    # ========== COTAÇÕES ==========
+    # ========== OPEN QUOTATIONS ==========
 
     def _compute_open_quotation_info(self):
-        """Calcula cotações em aberto (draft/sent)"""
+        """Calculate open quotations (draft/sent)."""
         for partner in self:
             partner.has_open_quotation = False
             partner.last_open_quotation_id = False
@@ -149,7 +149,7 @@ class ResPartner(models.Model):
                 if last_quot.date_order:
                     partner.last_open_quotation_date = last_quot.date_order.date()
 
-    # ========== MENSAGEM ==========
+    # ========== ANALYSIS MESSAGE ==========
 
     def _compute_analysis_message(self):
         config_param = self.env["ir.config_parameter"].sudo()
@@ -164,7 +164,7 @@ class ResPartner(models.Model):
         for partner in self:
             partner.analysis_message = message
 
-    # ========== FUNÇÕES AUXILIARES ==========
+    # ========== AUXILIARY FUNCTIONS ==========
 
     def _get_analysis_months(self):
         config_param = self.env["ir.config_parameter"].sudo()
@@ -186,7 +186,7 @@ class ResPartner(models.Model):
     def _prepare_record_statistics_vals(
         self, records, date_extractor, amount_extractor
     ):
-        """Calcula estatísticas básicas de uma lista (ordens ou faturas)."""
+        """Calculate basic statistics for a list (orders or invoices)."""
         if not records:
             return None
 
@@ -230,54 +230,74 @@ class ResPartner(models.Model):
             "days_since_last": days_since_last,
         }
 
-    # ========== ATUALIZA CAMPOS ==========
+    # ========== UPDATE FIELDS ==========
 
     def _update_sales_fields(self, stats):
-        self.last_order_id = stats["last_record"].id if stats else False
-        self.last_order_date = stats["last_date"]
-        self.last_order_status = stats["last_record"].state if stats else False
-        self.order_count = stats["count"] or 0
-        self.total_ordered = stats["total"] or 0
-        self.average_ordered = stats["average"] or 0
-        self.average_ordered_no_discrepancies = stats["avg_no_outliers"] or 0
-        self.average_time_between_orders = stats["avg_time_between"] or 0
-        self.days_since_last_order = stats["days_since_last"] or 0
+        """Update sales-related fields using a dictionary."""
+        last_order = stats.get("last_record")
+        vals = {
+            "last_order_id": last_order.id if last_order else False,
+            "last_order_date": stats.get("last_date", False),
+            "last_order_status": last_order.state if last_order else False,
+            "order_count": stats.get("count", 0),
+            "total_ordered": stats.get("total", 0),
+            "average_ordered": stats.get("average", 0),
+            "average_ordered_no_discrepancies": stats.get("avg_no_outliers", 0),
+            "average_time_between_orders": stats.get("avg_time_between", 0),
+            "days_since_last_order": stats.get("days_since_last", 0),
+        }
+        self.update(vals)
 
     def _update_invoice_fields(self, stats):
-        self.last_invoice_id = stats["last_record"].id if stats else False
-        self.last_invoice_date = stats["last_date"]
-        self.invoice_count = stats["count"] or 0
-        self.total_invoiced = stats["total"] or 0
-        self.average_invoiced = stats["average"] or 0
-        self.average_invoiced_no_discrepancies = stats["avg_no_outliers"] or 0
-        self.average_time_between_invoices = stats["avg_time_between"] or 0
-        self.days_since_last_invoice = stats["days_since_last"] or 0
+        """Update invoice-related fields using a dictionary."""
+        last_invoice = stats.get("last_record")
+        vals = {
+            "last_invoice_id": last_invoice.id if last_invoice else False,
+            "last_invoice_date": stats.get("last_date", False),
+            "invoice_count": stats.get("count", 0),
+            "total_invoiced": stats.get("total", 0),
+            "average_invoiced": stats.get("average", 0),
+            "average_invoiced_no_discrepancies": stats.get("avg_no_outliers", 0),
+            "average_time_between_invoices": stats.get("avg_time_between", 0),
+            "days_since_last_invoice": stats.get("days_since_last", 0),
+        }
+        self.update(vals)
 
     def _reset_sales_fields(self):
-        self.last_order_id = False
-        self.last_order_date = False
-        self.last_order_status = False
-        self.order_count = 0
-        self.total_ordered = 0
-        self.average_ordered = 0
-        self.average_ordered_no_discrepancies = 0
-        self.average_time_between_orders = 0
-        self.days_since_last_order = 0
+        """Reset all sales-related fields to default values."""
+        self.update(
+            {
+                "last_order_id": False,
+                "last_order_date": False,
+                "last_order_status": False,
+                "order_count": 0,
+                "total_ordered": 0,
+                "average_ordered": 0,
+                "average_ordered_no_discrepancies": 0,
+                "average_time_between_orders": 0,
+                "days_since_last_order": 0,
+            }
+        )
 
     def _reset_invoice_fields(self):
-        self.last_invoice_id = False
-        self.last_invoice_date = False
-        self.invoice_count = 0
-        self.total_invoiced = 0
-        self.average_invoiced = 0
-        self.average_invoiced_no_discrepancies = 0
-        self.average_time_between_invoices = 0
-        self.days_since_last_invoice = 0
+        """Reset all invoice-related fields to default values."""
+        self.update(
+            {
+                "last_invoice_id": False,
+                "last_invoice_date": False,
+                "invoice_count": 0,
+                "total_invoiced": 0,
+                "average_invoiced": 0,
+                "average_invoiced_no_discrepancies": 0,
+                "average_time_between_invoices": 0,
+                "days_since_last_invoice": 0,
+            }
+        )
 
-    # ========== COMPUTE PRINCIPAL ==========
+    # ========== MAIN COMPUTE ==========
 
     def _compute_sales_info(self):
-        """Calcula métricas de vendas e faturas dentro do período configurado."""
+        """Calculate sales and invoice metrics within the configured period."""
         analysis_months = self._get_analysis_months()
         if analysis_months <= 0:
             for partner in self:
