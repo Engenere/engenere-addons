@@ -16,12 +16,17 @@ class ResPartner(models.Model):
         help="Last sale order of this customer",
     )
     last_order_date = fields.Date(
-        string="Last Order Date",
         compute="_compute_sales_info",
         help="Date of the customer's most recent sale order",
     )
-    last_order_status = fields.Char(
-        string="Last Order Status",
+    last_order_status = fields.Selection(
+        [
+            ("draft", "Quotation"),
+            ("sent", "Quotation Sent"),
+            ("sale", "Sales Order"),
+            ("done", "Locked"),
+            ("cancel", "Cancelled"),
+        ],
         compute="_compute_sales_info",
         help="Status of the customer's most recent sale order",
     )
@@ -31,12 +36,10 @@ class ResPartner(models.Model):
         help="Total number of sale orders for this customer",
     )
     total_ordered = fields.Monetary(
-        string="Total Ordered",
         compute="_compute_sales_info",
         help="Sum of all sale order amounts for this customer",
     )
     average_ordered = fields.Monetary(
-        string="Average Ordered",
         compute="_compute_sales_info",
         help="Average sale order amount for this customer",
     )
@@ -51,12 +54,10 @@ class ResPartner(models.Model):
         help="Average number of days between sale orders",
     )
     days_since_last_order = fields.Integer(
-        string="Days Since Last Order",
         compute="_compute_sales_info",
         help="Number of days since the most recent sale order",
     )
     last_invoice_date = fields.Date(
-        string="Last Invoice Date",
         compute="_compute_sales_info",
         help="Date of the customer's most recent invoice",
     )
@@ -66,12 +67,10 @@ class ResPartner(models.Model):
         help="Total number of invoices for this customer",
     )
     total_invoiced = fields.Monetary(
-        string="Total Invoiced",
         compute="_compute_sales_info",
         help="Sum of all invoice amounts for this customer",
     )
     average_invoiced = fields.Monetary(
-        string="Average Invoiced",
         compute="_compute_sales_info",
         help="Average invoice amount for this customer",
     )
@@ -92,12 +91,10 @@ class ResPartner(models.Model):
         help="Most recent invoice of this customer",
     )
     days_since_last_invoice = fields.Integer(
-        string="Days Since Last Invoice",
         compute="_compute_sales_info",
         help="Number of days since the most recent invoice",
     )
     analysis_message = fields.Text(
-        string="Analysis Message",
         compute="_compute_analysis_message",
         translate=True,
     )
