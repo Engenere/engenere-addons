@@ -32,14 +32,6 @@ msgstr "Período de Análise (Meses)"
 msgid "Analysis Settings"
 msgstr "Configurações de Análise"
 
-#. module: engenere_partner_sales_info
-#: code:addons/engenere_partner_sales_info/models/res_partner.py:0
-#, python-format
-msgid ""
-"Analysis period: %(months)d months. Note: bonus amounts are not excluded."
-msgstr ""
-"Período de análise: %(months)d meses. Nota: os valores bonificados não são "
-"excluídos."
 
 #. module: engenere_partner_sales_info
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_partner__average_invoiced

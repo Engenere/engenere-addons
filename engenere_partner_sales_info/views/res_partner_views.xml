@@ -7,11 +7,11 @@
             <xpath expr="//page[@name='internal_notes']" position="after">
                 <field name="customer_rank" invisible="1" />
                 <page
-          name="partner_sales_analysis"
-          string="Sales Analysis"
-          groups="engenere_partner_sales_info.group_partner_sales_analysis"
-          attrs="{'invisible': [('customer_rank','=',0)]}"
-        >
+                    name="partner_sales_analysis"
+                    string="Sales Analysis"
+                    groups="engenere_partner_sales_info.group_partner_sales_analysis"
+                    attrs="{'invisible': [('customer_rank','=',0)]}"
+                >
                     <group>
                         <group string="Order Information">
                             <field name="last_order_date" />
@@ -26,21 +26,21 @@
                         </group>
                         <group string="Quotation Status">
                             <field
-                name="has_open_quotation"
-                string="Pending Quotation?"
-                widget="boolean_checkbox"
-                class="oe_inline"
-              />
+                                name="has_open_quotation"
+                                string="Pending Quotation?"
+                                widget="boolean_checkbox"
+                                class="oe_inline"
+                            />
                             <field
-                name="last_open_quotation_date"
-                string="Last Quotation Date"
-                attrs="{'invisible': [('has_open_quotation', '=', False)]}"
-              />
+                                name="last_open_quotation_date"
+                                string="Last Quotation Date"
+                                attrs="{'invisible': [('has_open_quotation', '=', False)]}"
+                            />
                             <field
-                name="last_open_quotation_id"
-                string="Open Quotation"
-                attrs="{'invisible': [('has_open_quotation', '=', False)]}"
-              />
+                                name="last_open_quotation_id"
+                                string="Open Quotation"
+                                attrs="{'invisible': [('has_open_quotation', '=', False)]}"
+                            />
                         </group>
                         <group string="Invoice Information">
                             <field name="last_invoice_date" />
@@ -52,19 +52,17 @@
                             <field name="days_since_last_invoice" />
                             <field name="last_invoice_id" />
                         </group>
-                        <group>
                         <div
-                title="analysis-message"
-                class="alert alert-warning"
-                role="alert"
-              >
+                            title="analysis-message"
+                            class="alert alert-warning"
+                            role="alert"
+                        >
                             <span
-                  class="fa fa-exclamation-circle"
-                  style="margin-right: 5px;"
-                />
+                                class="fa fa-exclamation-circle"
+                                style="margin-right: 5px;"
+                            />
                             <field name="analysis_message" nolabel="1" />
                         </div>
-                        </group>
                     </group>
                 </page>
             </xpath>
