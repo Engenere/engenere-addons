@@ -2,20 +2,21 @@ from odoo.tests.common import TransactionCase
 
 
 class TestFileName(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.company = self.env.ref("base.main_company")
-        self.journal = self.env["account.journal"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.company = cls.env.ref("base.main_company")
+        cls.journal = cls.env["account.journal"].create(
             {
                 "name": "Journal 1",
                 "code": "J1",
                 "type": "bank",
-                "company_id": self.company.id,
+                "company_id": cls.company.id,
             }
         )
-        self.manual_out = self.env.ref("account.account_payment_method_manual_out")
-        self.partner_id = self.env.ref("base.res_partner_12")
-        self.sequence = self.env["ir.sequence"].create(
+        cls.manual_out = cls.env.ref("account.account_payment_method_manual_out")
+        cls.partner_id = cls.env.ref("base.res_partner_12")
+        cls.sequence = cls.env["ir.sequence"].create(
             {
                 "name": "test seq",
                 "implementation": "standard",
@@ -23,22 +24,22 @@ class TestFileName(TransactionCase):
                 "number_increment": 1,
             }
         )
-        self.cnab_config = self.env["l10n_br_cnab.config"].create(
+        cls.cnab_config = cls.env["l10n_br_cnab.config"].create(
             {
                 "name": "CNAB config test",
-                "company_id": self.company.id,
-                "filename_sequence_id": self.sequence.id,
+                "company_id": cls.company.id,
+                "filename_sequence_id": cls.sequence.id,
             }
         )
-        self.payment_mode = self.env["account.payment.mode"].create(
+        cls.payment_mode = cls.env["account.payment.mode"].create(
             {
                 "name": "Test Payment Mode",
                 "bank_account_link": "variable",
-                "payment_method_id": self.manual_out.id,
-                "company_id": self.company.id,
-                "fixed_journal_id": self.journal.id,
-                "variable_journal_ids": [(6, 0, [self.journal.id])],
-                "cnab_config_id": self.cnab_config.id,
+                "payment_method_id": cls.manual_out.id,
+                "company_id": cls.company.id,
+                "fixed_journal_id": cls.journal.id,
+                "variable_journal_ids": [(6, 0, [cls.journal.id])],
+                "cnab_config_id": cls.cnab_config.id,
             }
         )
 
