@@ -28,8 +28,11 @@ addon | version | maintainers | summary
 [eng_consent_letter_report](eng_consent_letter_report/) | 16.0.1.0.0 | [![cristianomafrajunior](https://github.com/cristianomafrajunior.png?size=30px)](https://github.com/cristianomafrajunior) | Relatório em PDF de carta de Anuência.
 [eng_customer_fiscal_comments](eng_customer_fiscal_comments/) | 16.0.1.0.0 | [![cristianomafrajunior](https://github.com/cristianomafrajunior.png?size=30px)](https://github.com/cristianomafrajunior) | The Customer Fiscal Comments module enables users to add tax-related comments to customer profiles, which are displayed on invoices for better compliance.
 [eng_dummy_br_coa_dependency](eng_dummy_br_coa_dependency/) | 16.0.1.0.0 | [![antoniospneto](https://github.com/antoniospneto.png?size=30px)](https://github.com/antoniospneto) | Força a instalação dos módulos l10n_br_coa_generic e l10n_br_coa_simple,
+[engenere_partner_sales_info](engenere_partner_sales_info/) | 16.0.1.0.0 | [![felipemotter](https://github.com/felipemotter.png?size=30px)](https://github.com/felipemotter) | Add sales analysis fields to partners
 [l10n_br_account_document_number_integer](l10n_br_account_document_number_integer/) | 16.0.1.0.0 | [![cristianomafrajunior](https://github.com/cristianomafrajunior.png?size=30px)](https://github.com/cristianomafrajunior) | Creation of the int field for better search organization
 [l10n_br_account_due_date_usability](l10n_br_account_due_date_usability/) | 16.0.1.0.0 | [![cristianomafrajunior](https://github.com/cristianomafrajunior.png?size=30px)](https://github.com/cristianomafrajunior) | Change in the due date format to the standard dd/mm/yyyy
+[l10n_br_base_allows_duplicate_cnpj_ie](l10n_br_base_allows_duplicate_cnpj_ie/) | 16.0.1.0.0 | [![felipemotter](https://github.com/felipemotter.png?size=30px)](https://github.com/felipemotter) | Partners with duplicate CNPJ/IE
+[sale_order_general_client_order_ref](sale_order_general_client_order_ref/) | 16.0.1.0.0 |  | Take the General Client Order Ref on Sale Order to Partner Order in Sale Order Line.
 
 [//]: # (end addons)
 
