@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="punctuality_discount_sale_oder_form" model="ir.ui.view">
+        <field name="name">punctuality_discount.sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="priority">5</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <field name="fiscal_position_id" position="after">
+                    <group>
+                        <field name="punctuality_discount" />
+                    </group>
+            </field>
+        </field>
+    </record>
+</odoo>
