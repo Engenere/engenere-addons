@@ -10,19 +10,19 @@
         <field name="arch" type="xml">
             <xpath expr="//header/button[@name='button_draft']" position="after">
                 <button
-          name="generate_combined_pdf"
-          type="object"
-          string="Issue and Print"
-          class="btn-primary"
-          attrs="{'invisible': [('payment_method_code', 'not in', ('240', '400', '500'))]}"
-        />
+                    name="generate_combined_pdf"
+                    type="object"
+                    string="Issue and Print"
+                    class="btn-primary"
+                    attrs="{'invisible': [('payment_method_code', 'not in', ('240', '400', '500'))]}"
+                />
             </xpath>
             <xpath expr="//sheet" position="before">
                 <div
-          class="alert alert-danger"
-          role="alert"
-          attrs="{'invisible': [('xml_error_message', '=', False)]}"
-        >
+                    class="alert alert-danger"
+                    role="alert"
+                    attrs="{'invisible': [('xml_error_message', '=', False)]}"
+                >
                     <strong>XML validation errors:</strong>
                     <field name="xml_error_message" readonly="1" />
                 </div>

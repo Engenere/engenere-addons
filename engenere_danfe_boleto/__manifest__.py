@@ -5,13 +5,12 @@
     """,
     "license": "AGPL-3",
     "maintainers": ["cristianomafrajunior"],
-    "website": "https://engenere.one",
-    "version": "14.0.1.0.0",
+    "website": "https://github.com/Engenere/engenere-addons",
+    "version": "16.0.1.0.0",
     "author": "Engenere",
     "depends": [
-        "l10n_br_account",
-        "l10n_br_account_nfe",
-        "l10n_br_account_payment_brcobranca",
+        "l10n_br_fiscal",
+        "l10n_br_account_payment_order",
     ],
     "data": [
         "views/l10n_br_fiscal_document_view.xml",
