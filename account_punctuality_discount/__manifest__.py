@@ -9,7 +9,7 @@
     "maintainers": ["felipemotter"],
     "website": "https://github.com/Engenere/engenere-addons",
     "version": "16.0.1.0.0",
-    "development_status": "Alpha",
+    "development_status": "Beta",
     "depends": ["l10n_br_account", "l10n_br_account_payment_order", "sale_management"],
     "data": [
         "views/res_partner_view.xml",
