@@ -4,7 +4,7 @@
     <field name="name">l10n.br.nfe.adi.tree</field>
     <field name="model">nfe.40.adi</field>
     <field name="arch" type="xml">
-        <tree string="Adi">
+        <tree>
             <field name="nfe40_nAdicao" string="Número" />
             <field name="nfe40_nSeqAdic" string="Sequência" />
             <field name="nfe40_cFabricante" string="Código do Fabricante" />

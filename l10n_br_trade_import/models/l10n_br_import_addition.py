@@ -46,4 +46,4 @@ class ImportAddition(models.Model):
         string="Discount", help="Discount value of the DI item - Addition"
     )
 
-    drawback = fields.Char(string="Drawback", help="Drawback concession act number")
+    drawback = fields.Char(help="Drawback concession act number")

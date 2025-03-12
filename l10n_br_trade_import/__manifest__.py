@@ -9,8 +9,8 @@
     "license": "AGPL-3",
     "author": "Engenere," "Odoo Community Association (OCA)",
     "maintainers": ["antoniospneto", "felipemotter"],
-    "website": "https://engenere.one",
-    "version": "14.0.0.0.0",
+    "website": "https://github.com/Engenere/engenere-addons",
+    "version": "16.0.0.0.0",
     "development_status": "Beta",
     "depends": [
         "l10n_br_nfe",

@@ -4,7 +4,7 @@
         <field name="name">l10n.br.nfe.di.tree</field>
         <field name="model">nfe.40.di</field>
         <field name="arch" type="xml">
-            <tree string="DI">
+            <tree>
                 <field name="brl_currency_id" invisible="1" />
                 <field name="nfe40_nDI" string="Número" />
                 <field name="nfe40_dDI" string="Data de Registro" />
