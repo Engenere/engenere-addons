@@ -35,26 +35,6 @@ goods - Delivery receipts or other related documents
 .. contents::
    :local:
 
-Installation
-============
-
-TODO
-
-Configuration
-=============
-
-TODO
-
-Usage
-=====
-
-TODO
-
-Known issues / Roadmap
-======================
-
-TODO
-
 Bug Tracker
 ===========
 
@@ -77,7 +57,7 @@ Contributors
 ------------
 
 - [Felipe Motter Pereira](https://github.com/felipemotter)
-- [Antônio S. Pereira Neto](https://github.com/netosjb)
+- [Antônio S. Pereira Neto](https://github.com/antoniospneto)
 
 Maintainers
 -----------

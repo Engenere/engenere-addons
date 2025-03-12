@@ -32,11 +32,10 @@ conferência dos lançamentos.
 Principais características:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  Torna clara a exibição dos valores de **débito e crédito**
-   associados.
--  Facilita a identificação de lançamentos relacionados.
--  Melhora a experiência do usuário ao revisar as movimentações
-   contábeis.
+- Torna clara a exibição dos valores de **débito e crédito** associados.
+- Facilita a identificação de lançamentos relacionados.
+- Melhora a experiência do usuário ao revisar as movimentações
+  contábeis.
 
 Ideal para contadores e usuários do Odoo que desejam uma visão mais
 organizada e intuitiva das movimentações financeiras.
