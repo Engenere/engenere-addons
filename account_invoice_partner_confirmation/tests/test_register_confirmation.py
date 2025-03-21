@@ -8,18 +8,19 @@ from odoo.tests.common import TransactionCase
 
 
 class TestRegisterConfirmation(TransactionCase):
-    def setUp(self):
-        super().setUp()
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
 
         # Create user.
-        user = self.env["res.users"].create(
+        user = cls.env["res.users"].create(
             {
                 "name": "Because I am accountman!",
                 "login": "accountman",
                 "password": "accountman",
                 "groups_id": [
-                    (6, 0, self.env.user.groups_id.ids),
-                    (4, self.env.ref("account.group_account_user").id),
+                    (6, 0, cls.env.user.groups_id.ids),
+                    (4, cls.env.ref("account.group_account_user").id),
                 ],
             }
         )
@@ -28,20 +29,20 @@ class TestRegisterConfirmation(TransactionCase):
         # Shadow the current environment/cursor
         # with one having the report user.
         # This is mandatory to test access rights.
-        self.env = self.env(user=user)
-        self.cr = self.env.cr
+        cls.env = cls.env(user=user)
+        cls.cr = cls.env.cr
 
-        self.partner_confirm_obj = self.env["account.invoice.partner.confirmation"]
-        self.part_confirm_registe_model = self.env[
+        cls.partner_confirm_obj = cls.env["account.invoice.partner.confirmation"]
+        cls.part_confirm_registe_model = cls.env[
             "account.invoice.partner.confirmation.register"
         ]
-        self.account_move_model = self.env["account.move"]
+        cls.account_move_model = cls.env["account.move"]
 
-        self.journal_sale = self.env["account.journal"].create(
+        cls.journal_sale = cls.env["account.journal"].create(
             {"name": "Sale Journal", "type": "sale", "code": "TEST_SALES_JOURNAL"}
         )
 
-        self.account_receivable = self.env["account.account"].create(
+        cls.account_receivable = cls.env["account.account"].create(
             {
                 "name": "Test receivable account",
                 "reconcile": True,
@@ -49,21 +50,21 @@ class TestRegisterConfirmation(TransactionCase):
                 "code": "ACCRV",
             }
         )
-        self.partner = self.env["res.partner"].create(
+        cls.partner = cls.env["res.partner"].create(
             {
                 "name": "Partner",
-                "property_account_receivable_id": self.account_receivable.id,
+                "property_account_receivable_id": cls.account_receivable.id,
             }
         )
 
-        self.brand = self.env["fleet.vehicle.model.brand"].create(
+        cls.brand = cls.env["fleet.vehicle.model.brand"].create(
             {"name": "Brand Vehicle"}
         )
-        self.model = self.env["fleet.vehicle.model"].create(
-            {"brand_id": self.brand.id, "name": "Test1"}
+        cls.model = cls.env["fleet.vehicle.model"].create(
+            {"brand_id": cls.brand.id, "name": "Test1"}
         )
-        self.vehicle = self.env["fleet.vehicle"].create({"model_id": self.model.id})
-        self.employee = self.env["hr.employee"].create({"name": "Test Employee"})
+        cls.vehicle = cls.env["fleet.vehicle"].create({"model_id": cls.model.id})
+        cls.employee = cls.env["hr.employee"].create({"name": "Test Employee"})
 
     def create_invoice(self, posted=True, move_type="out_invoice"):
         invoice = self.account_move_model.create(

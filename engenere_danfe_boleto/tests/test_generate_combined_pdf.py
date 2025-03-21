@@ -5,18 +5,19 @@ from odoo.tests.common import TransactionCase
 
 
 class TestGenerateCombinedPDF(TransactionCase):
-    def setUp(self):
-        super().setUp()
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
 
-        self.invoice_cef = self.env.ref(
+        cls.invoice_cef = cls.env.ref(
             "l10n_br_account_payment_order." "demo_invoice_payment_order_cef_cnab240"
         )
-        self.fiscal_doc = self.env["l10n_br_fiscal.document"].create(
+        cls.fiscal_doc = cls.env["l10n_br_fiscal.document"].create(
             {
                 "document_number": "123456",
-                "move_ids": [(6, 0, [self.invoice_cef.id])],
+                "move_ids": [(6, 0, [cls.invoice_cef.id])],
                 "issuer": "company",
-                "document_type_id": self.env.ref("l10n_br_fiscal.document_55").id,
+                "document_type_id": cls.env.ref("l10n_br_fiscal.document_55").id,
             }
         )
 
