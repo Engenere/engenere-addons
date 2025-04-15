@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="l10n_br_nfe_prod_name" model="ir.ui.view">
+        <field name="name">nfe.res.company.form.prod_name</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="l10n_br_fiscal.fiscal_res_company_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='nfe_enable_sync_transmission']"
+                position="after"
+            >
+                <field name="nfe_product_name" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
