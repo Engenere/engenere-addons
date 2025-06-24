@@ -1,14 +1,9 @@
-from odoo import _, api, fields, models
+from odoo import _, api, models
 from odoo.exceptions import UserError
 
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
-
-    stage_state = fields.Selection(
-        related="stage_id.state",
-        string="Stage state",
-    )
 
     @api.model
     def _is_draft_state(self, partner, new_stage_id=None):
@@ -16,11 +11,11 @@ class ResPartner(models.Model):
         if new_stage_id:
             new_stage = self.env["res.partner.stage"].browse(new_stage_id)
             return new_stage.state == "draft"
-        return partner.stage_state == "draft"
+        return partner.state == "draft"
 
     def write(self, vals):
         # Permit mudar apenas stage_id para/desde draft
-        other_fields = set(vals) - {"stage_id"}
+        other_fields = set(vals) - {"stage_id", "state"}
         for partner in self:
             will_be_draft = self._is_draft_state(partner, vals.get("stage_id"))
             if other_fields and not will_be_draft:
