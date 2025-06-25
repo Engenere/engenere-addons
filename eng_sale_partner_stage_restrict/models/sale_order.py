@@ -10,12 +10,10 @@ class SaleOrder(models.Model):
 
     # Only select Partners approved for Sales
     partner_id = fields.Many2one(
-        domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)"
-        ", ('sale_ok', '=', True), ('stage_id.state', '=', 'confirmed')]",
+        domain="['|', ('company_id', '=', False), ('company_id', '=', company_id), ('stage_id.state', '=', 'confirmed')]",
     )
     partner_invoice_id = fields.Many2one(
-        domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)"
-        ", ('sale_ok', '=', True), ('stage_id.state', '=', 'confirmed')]",
+        domain="['|', ('company_id', '=', False), ('company_id', '=', company_id), ('stage_id.state', '=', 'confirmed')]",
     )
 
     @api.constrains("partner_id")
