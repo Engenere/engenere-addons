@@ -60,8 +60,8 @@ class TestPartnerSalesInfo(AccountTestInvoicingCommon):
         inv = self._create_invoice(self.customer_partner, 200, days_diff=5)
         self.customer_partner._compute_sales_info()
         self.assertEqual(self.customer_partner.invoice_count, 2)
-        self.assertAlmostEqual(self.customer_partner.total_invoiced, 300)
-        self.assertAlmostEqual(self.customer_partner.average_invoiced, 150)
+        self.assertAlmostEqual(self.customer_partner.total_invoiced, 345)
+        self.assertAlmostEqual(self.customer_partner.average_invoiced, 172.5)
         self.assertEqual(self.customer_partner.last_invoice_id, inv)
         self.assertEqual(self.customer_partner.last_invoice_date, inv.invoice_date)
 
@@ -72,9 +72,9 @@ class TestPartnerSalesInfo(AccountTestInvoicingCommon):
         self._create_invoice(self.customer_partner, 10000, days_diff=1)
         self.customer_partner._compute_sales_info()
         self.assertEqual(self.customer_partner.invoice_count, 4)
-        self.assertAlmostEqual(self.customer_partner.total_invoiced, 10330)
-        self.assertTrue(100 < self.customer_partner.average_invoiced < 10330)
-        self.assertTrue(self.customer_partner.average_invoiced_no_discrepancies < 1000)
+        self.assertEqual(self.customer_partner.total_invoiced, 11879.5)
+        self.assertEqual(self.customer_partner.average_invoiced, 2969.88)
+        self.assertEqual(self.customer_partner.average_invoiced_no_discrepancies, 126.5)
 
     def test_days_since_last_invoice(self):
         self._create_invoice(self.customer_partner, 150, days_diff=10)

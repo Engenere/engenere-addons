@@ -33,15 +33,6 @@ msgid "Analysis Settings"
 msgstr "Configurações de Análise"
 
 #. module: engenere_partner_sales_info
-#: code:addons/engenere_partner_sales_info/models/res_partner.py:0
-#, python-format
-msgid ""
-"Analysis period: %(months)d months. Note: bonus amounts are not excluded."
-msgstr ""
-"Período de análise: %(months)d meses. Nota: os valores bonificados não são "
-"excluídos."
-
-#. module: engenere_partner_sales_info
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_partner__average_invoiced
 #: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_users__average_invoiced
 msgid "Average Invoiced"
@@ -114,6 +105,11 @@ msgid "Average sale order amount for this customer"
 msgstr "Valor médio do pedido de venda para este cliente"
 
 #. module: engenere_partner_sales_info
+#: model:ir.model.fields.selection,name:engenere_partner_sales_info.selection__res_partner__last_order_status__cancel
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#. module: engenere_partner_sales_info
 #: model:ir.model,name:engenere_partner_sales_info.model_res_config_settings
 msgid "Config Settings"
 msgstr "Definições de Configuração"
@@ -178,12 +174,6 @@ msgid "ID"
 msgstr "ID"
 
 #. module: engenere_partner_sales_info
-#: model:ir.model.fields,help:engenere_partner_sales_info.field_res_partner__has_open_quotation
-#: model:ir.model.fields,help:engenere_partner_sales_info.field_res_users__has_open_quotation
-msgid "Indicates if there are any draft/sent quotations for this customer"
-msgstr "Indica se há rascunhos ou cotações enviadas para este cliente"
-
-#. module: engenere_partner_sales_info
 #: model_terms:ir.ui.view,arch_db:engenere_partner_sales_info.view_partner_form_sales_info
 msgid "Invoice Information"
 msgstr "Informações de Fatura"
@@ -243,6 +233,11 @@ msgid "Last sale order of this customer"
 msgstr "Último pedido de venda deste cliente"
 
 #. module: engenere_partner_sales_info
+#: model:ir.model.fields.selection,name:engenere_partner_sales_info.selection__res_partner__last_order_status__done
+msgid "Locked"
+msgstr "Trancado"
+
+#. module: engenere_partner_sales_info
 #: model:ir.model.fields,help:engenere_partner_sales_info.field_res_partner__last_invoice_id
 #: model:ir.model.fields,help:engenere_partner_sales_info.field_res_users__last_invoice_id
 msgid "Most recent invoice of this customer"
@@ -299,6 +294,16 @@ msgid "Pending Quotation?"
 msgstr "Cotação Pendente?"
 
 #. module: engenere_partner_sales_info
+#: model:ir.model.fields.selection,name:engenere_partner_sales_info.selection__res_partner__last_order_status__draft
+msgid "Quotation"
+msgstr "Cotação"
+
+#. module: engenere_partner_sales_info
+#: model:ir.model.fields.selection,name:engenere_partner_sales_info.selection__res_partner__last_order_status__sent
+msgid "Quotation Sent"
+msgstr "Cotação Enviada"
+
+#. module: engenere_partner_sales_info
 #: model_terms:ir.ui.view,arch_db:engenere_partner_sales_info.view_partner_form_sales_info
 msgid "Quotation Status"
 msgstr "Status da Cotação"
@@ -316,10 +321,9 @@ msgid "Sales Analysis"
 msgstr "Análise de Vendas"
 
 #. module: engenere_partner_sales_info
-#: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_config_settings__smart_search
-#: model:ir.model.fields,field_description:engenere_partner_sales_info.field_res_partner__smart_search
-msgid "Smart Search"
-msgstr "Busca Inteligente"
+#: model:ir.model.fields.selection,name:engenere_partner_sales_info.selection__res_partner__last_order_status__sale
+msgid "Sales Order"
+msgstr "Pedido de Venda"
 
 #. module: engenere_partner_sales_info
 #: model:ir.model.fields,help:engenere_partner_sales_info.field_res_partner__last_order_status
