@@ -1,0 +1,94 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* eng_sale_first_time_state
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-08 01:19+0000\n"
+"PO-Revision-Date: 2023-11-08 01:19+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: eng_sale_first_time_state
+#: model_terms:ir.ui.view,arch_db:eng_sale_first_time_state.sale_config_settings_form_view
+msgid "<span class=\"o_form_label\" style=\"margin-left: 5px;\">Days</span>"
+msgstr ""
+
+#. module: eng_sale_first_time_state
+#: model:ir.model,name:eng_sale_first_time_state.model_res_config_settings
+msgid "Config Settings"
+msgstr "Definições de Configuração"
+
+#. module: eng_sale_first_time_state
+#: model:ir.model.fields,field_description:eng_sale_first_time_state.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:eng_sale_first_time_state.field_sale_order__display_name
+#: model:ir.model.fields,field_description:eng_sale_first_time_state.field_sale_order_line__display_name
+msgid "Display Name"
+msgstr "Nome exibido"
+
+#. module: eng_sale_first_time_state
+#: code:addons/eng_sale_first_time_state/models/sale_order_line.py:0
+#: model:ir.model.fields.selection,name:eng_sale_first_time_state.selection__sale_order_line__product_first_sale__first_sale
+#, python-format
+msgid "First Sale"
+msgstr "Primeira Venda"
+
+#. module: eng_sale_first_time_state
+#: model:ir.model.fields,field_description:eng_sale_first_time_state.field_sale_order_line__product_first_sale
+msgid "First Sale?"
+msgstr "Primeira Venda?"
+
+#. module: eng_sale_first_time_state
+#: model:ir.model.fields,field_description:eng_sale_first_time_state.field_res_config_settings__id
+#: model:ir.model.fields,field_description:eng_sale_first_time_state.field_sale_order__id
+#: model:ir.model.fields,field_description:eng_sale_first_time_state.field_sale_order_line__id
+msgid "ID"
+msgstr ""
+
+#. module: eng_sale_first_time_state
+#: model:ir.model.fields,field_description:eng_sale_first_time_state.field_res_config_settings____last_update
+#: model:ir.model.fields,field_description:eng_sale_first_time_state.field_sale_order____last_update
+#: model:ir.model.fields,field_description:eng_sale_first_time_state.field_sale_order_line____last_update
+msgid "Last Modified on"
+msgstr "Última modificação em"
+
+#. module: eng_sale_first_time_state
+#: model:ir.model.fields,field_description:eng_sale_first_time_state.field_res_config_settings__sale_first_sale_days_limit
+msgid "Limit Days for First Sale"
+msgstr "Limite de Dias para Primeira Venda"
+
+#. module: eng_sale_first_time_state
+#: model_terms:ir.ui.view,arch_db:eng_sale_first_time_state.sale_config_settings_form_view
+msgid ""
+"Limit of days to check whether a product has been sold to a specific "
+"partner. Set it to 0 so you don't have a limit."
+msgstr "Limite de dias para verificar se um produto foi vendido para um determinado "
+"parceiro. Defina como 0 para não ter limite."
+
+#. module: eng_sale_first_time_state
+#: model:ir.model,name:eng_sale_first_time_state.model_sale_order
+msgid "Sales Order"
+msgstr "Pedidos de Venda"
+
+#. module: eng_sale_first_time_state
+#: model:ir.model,name:eng_sale_first_time_state.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Linha de Pedidos de Venda"
+
+#. module: eng_sale_first_time_state
+#: model:ir.model.fields,field_description:eng_sale_first_time_state.field_sale_order__show_first_sale_column
+msgid "Show First Sale Column"
+msgstr "Mostrar coluna da primeira venda"
+
+#. module: eng_sale_first_time_state
+#: model:ir.model.fields,field_description:eng_sale_first_time_state.field_res_config_settings__smart_search
+#: model:ir.model.fields,field_description:eng_sale_first_time_state.field_sale_order__smart_search
+#: model:ir.model.fields,field_description:eng_sale_first_time_state.field_sale_order_line__smart_search
+msgid "Smart Search"
+msgstr ""
