@@ -19,10 +19,10 @@ class TestSaleFirstTimeState(TransactionCase):
     def _create_confirmed_order(self, days_ago=0, product=None):
         product = product or self.product
         date_order = fields.Datetime.now() - timedelta(days=days_ago)
+
         order = self.env["sale.order"].create(
             {
                 "partner_id": self.partner.id,
-                "date_order": date_order,
                 "order_line": [
                     (
                         0,
@@ -38,6 +38,8 @@ class TestSaleFirstTimeState(TransactionCase):
             }
         )
         order.action_confirm()
+        # restore desired date_order for test isolation
+        order.write({"date_order": date_order})
         return order
 
     # ------------------------------------------------------------------ #
