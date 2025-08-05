@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Engenere.one - Felipe Motter Pereira
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.form (in eng_sale_first_time_state)</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']" position="after">
+            <field name="show_first_sale_column" invisible="True" />
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/tree//field[@name='product_template_id']"
+                position="before"
+            >
+                <field
+                    name="product_first_sale"
+                    widget="badge"
+                    decoration-warning="product_first_sale in ('first_sale')"
+                    attrs="{'column_invisible': [('parent.show_first_sale_column', '=', False)]}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
