@@ -37,7 +37,7 @@ class SaleOrderLine(models.Model):
                 ("product_uom_qty", ">", 0),
             ]
             if days_limit:
-                date_limit = fields.Date.today() - timedelta(days=days_limit)
+                date_limit = fields.Datetime.now() - timedelta(days=days_limit)
                 domain.append(("order_id.date_order", ">=", date_limit))
 
             has_prev = bool(self.env["sale.order.line"].search_count(domain))
