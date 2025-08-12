@@ -15,7 +15,7 @@ def post_init_hook(cr, registry):
     env = api.Environment(cr, SUPERUSER_ID, {})
     companies = env["res.company"].search([])
     _logger.info(
-        "engenere_web_company_color_responsive: gerando SCSS para %d empresas",
+        "eng_web_company_color_responsive: gerando SCSS para %d empresas",
         len(companies),
     )
     companies.scss_create_or_update_attachment()
