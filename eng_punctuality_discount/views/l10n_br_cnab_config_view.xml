@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="account_punctuality_discount_cnab_config_form" model="ir.ui.view">
+    <record id="eng_punctuality_discount_cnab_config_form" model="ir.ui.view">
         <field name="name">account.punctuality.discount.cnab.config.form</field>
         <field name="model">l10n_br_cnab.config</field>
         <field name="priority">99</field>

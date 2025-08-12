@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="account_punctuality_discount_account_move_form" model="ir.ui.view">
+    <record id="eng_punctuality_discount_account_move_form" model="ir.ui.view">
         <field name="name">account.punctuality.discount.account.move.form</field>
         <field name="model">account.move</field>
         <field name="priority">97</field>
