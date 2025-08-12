@@ -1,4 +1,4 @@
-# Copyright (C) 2023-Today - Engenere (<https://engenere.one>).
+# Copyright (C) 2023 - Engenere (<https://engenere.one>).
 # @author Felipe Motter Pereira <felipe@engenere.one>
 
 {
@@ -12,6 +12,7 @@
     "category": "Sales",
     "website": "https://github.com/Engenere/engenere-addons",
     "author": "Engenere",
+    "maintainers": ["felipemotter"],
     "license": "AGPL-3",
     "application": False,
     "installable": True,

@@ -56,6 +56,14 @@ Authors
 Maintainers
 -----------
 
+.. |maintainer-felipemotter| image:: https://github.com/felipemotter.png?size=40px
+    :target: https://github.com/felipemotter
+    :alt: felipemotter
+
+Current maintainer:
+
+|maintainer-felipemotter| 
+
 This module is part of the `Engenere/engenere-addons <https://github.com/Engenere/engenere-addons/tree/16.0/eng_sale_customer_order_ref>`_ project on GitHub.
 
 You are welcome to contribute.
