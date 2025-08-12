@@ -1,0 +1,356 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* eng_partner_sales_info
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-10 18:31+0000\n"
+"PO-Revision-Date: 2025-02-10 18:31+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+"Language: pt_BR\n"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_partner__analysis_message
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_users__analysis_message
+msgid "Analysis Message"
+msgstr "Mensagem de Análise"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_config_settings__partner_sales_info_months
+msgid "Analysis Period (Months)"
+msgstr "Período de Análise (Meses)"
+
+#. module: eng_partner_sales_info
+#: model_terms:ir.ui.view,arch_db:eng_partner_sales_info.res_config_settings_view_form_inherit
+msgid "Analysis Settings"
+msgstr "Configurações de Análise"
+
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_partner__average_invoiced
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_users__average_invoiced
+msgid "Average Invoiced"
+msgstr "Média Faturada"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_partner__average_invoiced_no_discrepancies
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_users__average_invoiced_no_discrepancies
+msgid "Average Invoiced (No Discrepancies)"
+msgstr "Média Faturada (Sem Discrepâncias)"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_partner__average_ordered
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_users__average_ordered
+msgid "Average Ordered"
+msgstr "Média de Pedidos"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_partner__average_ordered_no_discrepancies
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_users__average_ordered_no_discrepancies
+msgid "Average Ordered (No Discrepancies)"
+msgstr "Média de Pedidos (Sem Discrepâncias)"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_partner__average_time_between_invoices
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_users__average_time_between_invoices
+msgid "Average Time Between Invoices (Days)"
+msgstr "Tempo Médio Entre Faturas (Dias)"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_partner__average_time_between_orders
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_users__average_time_between_orders
+msgid "Average Time Between Orders (Days)"
+msgstr "Tempo Médio Entre Pedidos (Dias)"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_partner__average_invoiced_no_discrepancies
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_users__average_invoiced_no_discrepancies
+msgid "Average invoice amount excluding outliers"
+msgstr "Valor médio da fatura excluindo valores atípicos"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_partner__average_invoiced
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_users__average_invoiced
+msgid "Average invoice amount for this customer"
+msgstr "Valor médio da fatura para este cliente"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_partner__average_time_between_invoices
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_users__average_time_between_invoices
+msgid "Average number of days between invoices"
+msgstr "Número médio de dias entre faturas"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_partner__average_time_between_orders
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_users__average_time_between_orders
+msgid "Average number of days between sale orders"
+msgstr "Número médio de dias entre pedidos de venda"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_partner__average_ordered_no_discrepancies
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_users__average_ordered_no_discrepancies
+msgid "Average order amount excluding outliers"
+msgstr "Valor médio do pedido excluindo valores atípicos"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_partner__average_ordered
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_users__average_ordered
+msgid "Average sale order amount for this customer"
+msgstr "Valor médio do pedido de venda para este cliente"
+
+#. module: eng_partner_sales_info
+#: model:ir.model,name:eng_partner_sales_info.model_res_config_settings
+msgid "Config Settings"
+msgstr "Definições de Configuração"
+
+#. module: eng_partner_sales_info
+#: model_terms:ir.ui.view,arch_db:eng_partner_sales_info.res_config_settings_view_form_inherit
+msgid ""
+"Configure the default analysis period for partner\n"
+"                            sales information."
+msgstr ""
+"Configure o período de análise padrão para as informações de vendas do "
+"parceiro."
+
+#. module: eng_partner_sales_info
+#: model:ir.model,name:eng_partner_sales_info.model_res_partner
+msgid "Contact"
+msgstr "Contato"
+
+#. module: eng_partner_sales_info
+#: code:addons/eng_partner_sales_info/models/res_partner.py:0
+#, python-format
+msgid ""
+"Analysis period: %(months)d months. Note: bonus amounts are not excluded."
+msgstr ""
+"Período de análise: %(months)d meses. Nota: os valores bonificados não são "
+"excluídos."
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_partner__last_invoice_date
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_users__last_invoice_date
+msgid "Date of the customer's most recent invoice"
+msgstr "Data da fatura mais recente do cliente"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_partner__last_order_date
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_users__last_order_date
+msgid "Date of the customer's most recent sale order"
+msgstr "Data do pedido de venda mais recente do cliente"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_partner__days_since_last_invoice
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_users__days_since_last_invoice
+msgid "Days Since Last Invoice"
+msgstr "Dias desde a Última Fatura"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_partner__days_since_last_order
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_users__days_since_last_order
+msgid "Days Since Last Order"
+msgstr "Dias desde o Último Pedido"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_partner__display_name
+msgid "Display Name"
+msgstr "Nome Exibido"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_config_settings__id
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_partner__id
+msgid "ID"
+msgstr "ID"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_partner__has_open_quotation
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_users__has_open_quotation
+msgid "Indicates if there are any draft/sent quotations for this customer"
+msgstr "Indica se há rascunhos ou cotações enviadas para este cliente"
+
+#. module: eng_partner_sales_info
+#: model_terms:ir.ui.view,arch_db:eng_partner_sales_info.view_partner_form_sales_info
+msgid "Invoice Information"
+msgstr "Informações de Fatura"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_partner__last_invoice_id
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_users__last_invoice_id
+msgid "Last Invoice"
+msgstr "Última Fatura"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_partner__last_invoice_date
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_users__last_invoice_date
+msgid "Last Invoice Date"
+msgstr "Data da Última Fatura"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_config_settings____last_update
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_partner____last_update
+msgid "Last Modified on"
+msgstr "Última Modificação em"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_partner__last_open_quotation_id
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_users__last_open_quotation_id
+msgid "Last Open Quotation"
+msgstr "Última Cotação Aberta"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_partner__last_order_id
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_users__last_order_id
+msgid "Last Order"
+msgstr "Último Pedido"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_partner__last_order_date
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_users__last_order_date
+msgid "Last Order Date"
+msgstr "Data do Último Pedido"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_partner__last_order_status
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_users__last_order_status
+msgid "Last Order Status"
+msgstr "Status do Último Pedido"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_partner__last_open_quotation_date
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_users__last_open_quotation_date
+msgid "Last Open Quotation Date"
+msgstr "Data da Última Cotação Aberta"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_partner__last_order_id
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_users__last_order_id
+msgid "Last sale order of this customer"
+msgstr "Último pedido de venda deste cliente"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_partner__last_invoice_id
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_users__last_invoice_id
+msgid "Most recent invoice of this customer"
+msgstr "Fatura mais recente deste cliente"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_partner__invoice_count
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_users__invoice_count
+msgid "Number of Invoices"
+msgstr "Número de Faturas"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_partner__order_count
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_users__order_count
+msgid "Number of Orders"
+msgstr "Número de Pedidos"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_partner__days_since_last_invoice
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_users__days_since_last_invoice
+msgid "Number of days since the most recent invoice"
+msgstr "Número de dias desde a última fatura"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_partner__days_since_last_order
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_users__days_since_last_order
+msgid "Number of days since the most recent sale order"
+msgstr "Número de dias desde o último pedido de venda"
+
+#. module: eng_partner_sales_info
+#: model_terms:ir.ui.view,arch_db:eng_partner_sales_info.view_partner_form_sales_info
+msgid "Open Quotation"
+msgstr "Cotação Aberta"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_partner__has_open_quotation
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_users__has_open_quotation
+msgid "Open Quotation Exists"
+msgstr "Existe Cotação Aberta"
+
+#. module: eng_partner_sales_info
+#: model_terms:ir.ui.view,arch_db:eng_partner_sales_info.view_partner_form_sales_info
+msgid "Order Information"
+msgstr "Informações de Pedido"
+
+#. module: eng_partner_sales_info
+#: model:res.groups,name:eng_partner_sales_info.group_partner_sales_analysis
+msgid "Partner Sales Analysis"
+msgstr "Análise de Vendas do Parceiro"
+
+#. module: eng_partner_sales_info
+#: model_terms:ir.ui.view,arch_db:eng_partner_sales_info.view_partner_form_sales_info
+msgid "Pending Quotation?"
+msgstr "Cotação Pendente?"
+
+#. module: eng_partner_sales_info
+#: model_terms:ir.ui.view,arch_db:eng_partner_sales_info.view_partner_form_sales_info
+msgid "Quotation Status"
+msgstr "Status da Cotação"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_partner__last_open_quotation_id
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_users__last_open_quotation_id
+msgid "Reference to the most recent open quotation"
+msgstr "Referência à cotação aberta mais recente"
+
+#. module: eng_partner_sales_info
+#: model_terms:ir.ui.view,arch_db:eng_partner_sales_info.res_config_settings_view_form_inherit
+#: model_terms:ir.ui.view,arch_db:eng_partner_sales_info.view_partner_form_sales_info
+msgid "Sales Analysis"
+msgstr "Análise de Vendas"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_config_settings__smart_search
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_partner__smart_search
+msgid "Smart Search"
+msgstr "Busca Inteligente"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_partner__last_order_status
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_users__last_order_status
+msgid "Status of the customer's most recent sale order"
+msgstr "Status do pedido de venda mais recente do cliente"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_partner__total_invoiced
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_users__total_invoiced
+msgid "Sum of all invoice amounts for this customer"
+msgstr "Soma de todos os valores de fatura para este cliente"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_partner__total_ordered
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_users__total_ordered
+msgid "Sum of all sale order amounts for this customer"
+msgstr "Soma de todos os valores dos pedidos de venda para este cliente"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_partner__total_invoiced
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_users__total_invoiced
+msgid "Total Invoiced"
+msgstr "Total Faturado"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_partner__total_ordered
+#: model:ir.model.fields,field_description:eng_partner_sales_info.field_res_users__total_ordered
+msgid "Total Ordered"
+msgstr "Total de Pedidos"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_partner__invoice_count
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_users__invoice_count
+msgid "Total number of invoices for this customer"
+msgstr "Número total de faturas para este cliente"
+
+#. module: eng_partner_sales_info
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_partner__order_count
+#: model:ir.model.fields,help:eng_partner_sales_info.field_res_users__order_count
+msgid "Total number of sale orders for this customer"
+msgstr "Número total de pedidos de venda para este cliente"
