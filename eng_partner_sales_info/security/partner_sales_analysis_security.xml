@@ -7,7 +7,7 @@
     <record id="base.group_system" model="res.groups">
         <field
             name="implied_ids"
-            eval="[(4, ref('engenere_partner_sales_info.group_partner_sales_analysis'))]"
+            eval="[(4, ref('eng_partner_sales_info.group_partner_sales_analysis'))]"
         />
     </record>
 </odoo>

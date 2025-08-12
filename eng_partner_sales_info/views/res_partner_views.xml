@@ -9,7 +9,7 @@
                 <page
                     name="partner_sales_analysis"
                     string="Sales Analysis"
-                    groups="engenere_partner_sales_info.group_partner_sales_analysis"
+                    groups="eng_partner_sales_info.group_partner_sales_analysis"
                     attrs="{'invisible': [('customer_rank','=',0)]}"
                 >
                     <group>

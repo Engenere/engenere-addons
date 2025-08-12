@@ -28,9 +28,7 @@ class TestPartnerSalesInfo(AccountTestInvoicingCommon):
             }
         )
 
-        cls.config_param.set_param(
-            "engenere_partner_sales_info.default_analysis_months", 12
-        )
+        cls.config_param.set_param("eng_partner_sales_info.default_analysis_months", 12)
 
     def test_no_sales_no_invoices(self):
         self.customer_partner._compute_sales_info()
@@ -197,7 +195,7 @@ class TestPartnerSalesInfo(AccountTestInvoicingCommon):
     def test_analysis_months_zero_or_negative(self):
         """If analysis months is 0 or negative, no records should be included."""
         self.config_param.set_param(
-            "engenere_partner_sales_info.default_analysis_months", -1
+            "eng_partner_sales_info.default_analysis_months", -1
         )
         self._create_invoice(self.customer_partner, 100, days_diff=1)
         self.customer_partner._compute_sales_info()
@@ -205,9 +203,7 @@ class TestPartnerSalesInfo(AccountTestInvoicingCommon):
         self.assertEqual(self.customer_partner.invoice_count, 0)
         self.assertEqual(self.customer_partner.total_invoiced, 0)
 
-        self.config_param.set_param(
-            "engenere_partner_sales_info.default_analysis_months", 0
-        )
+        self.config_param.set_param("eng_partner_sales_info.default_analysis_months", 0)
         self.customer_partner._compute_sales_info()
         self.assertFalse(self.customer_partner.last_invoice_date)
         self.assertEqual(self.customer_partner.invoice_count, 0)
@@ -222,7 +218,7 @@ class TestPartnerSalesInfo(AccountTestInvoicingCommon):
         )
 
         self.config_param.set_param(
-            "engenere_partner_sales_info.default_analysis_months", 24
+            "eng_partner_sales_info.default_analysis_months", 24
         )
         self.customer_partner._compute_analysis_message()
         self.assertIn(

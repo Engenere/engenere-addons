@@ -144,7 +144,7 @@ class ResPartner(models.Model):
     def _compute_analysis_message(self):
         config_param = self.env["ir.config_parameter"].sudo()
         months = config_param.get_param(
-            "engenere_partner_sales_info.default_analysis_months", 24
+            "eng_partner_sales_info.default_analysis_months", 24
         )
         analysis_months = int(months)
         message = _(
@@ -159,9 +159,7 @@ class ResPartner(models.Model):
     def _get_analysis_months(self):
         config_param = self.env["ir.config_parameter"].sudo()
         return int(
-            config_param.get_param(
-                "engenere_partner_sales_info.default_analysis_months", 24
-            )
+            config_param.get_param("eng_partner_sales_info.default_analysis_months", 24)
         )
 
     def _get_start_date(self, analysis_months):
