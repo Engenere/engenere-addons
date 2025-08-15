@@ -40,6 +40,12 @@ class ResCompany(models.Model):
     background-color: %(color_button_bg)s !important;
     color: %(color_button_text)s !important;
     }
+    .o_field_statusbar > .o_statusbar_status
+    > .o_arrow_button.o_arrow_button_current.disabled:before,
+    .o_field_statusbar > .o_statusbar_status
+    > .o_arrow_button.o_arrow_button_current.disabled:after {
+        border-left-color: %(color_button_bg)s !important;
+    }
     """
 
     OUTLINE_PRIMARY_SCSS_TEMPLATE = """
