@@ -11,7 +11,7 @@
     "maintainers": ["felipemotter"],
     "website": "https://github.com/Engenere/engenere-addons",
     "depends": [
-        "sale",
+        "l10n_br_sale",  # TODO só sale da conflito nos testes por causa da l10n_brazil
     ],
     "data": [
         "views/sale_order_view.xml",
