@@ -1,8 +1,8 @@
 from odoo import models
 
 
-class DocumentMixinMethods(models.AbstractModel):
-    _inherit = "l10n_br_fiscal.document.mixin.methods"
+class Document(models.Model):
+    _inherit = "l10n_br_fiscal.document"
 
     def _document_comment(self):
         for d in self:
