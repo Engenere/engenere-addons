@@ -14,10 +14,21 @@
                     <table class="table" style="margin-bottom: 20px;">
                         <thead>
                             <tr>
-                                <th style="font-size: 20px;">Duplicata</th>
-                                <th style="font-size: 20px;">Nosso Número</th>
-                                <th style="font-size: 20px;">Valor</th>
-                                <th style="font-size: 20px;">Vencimento</th>
+                                <th
+                                    style="font-size: 20px; text-align: center;"
+                                >Duplicata</th>
+                                <th
+                                    style="font-size: 20px; text-align: center;"
+                                >Nosso Número</th>
+                                <th
+                                    style="font-size: 20px; text-align: center;"
+                                >Banco</th>
+                                <th
+                                    style="font-size: 20px; text-align: center;"
+                                >Valor</th>
+                                <th
+                                    style="font-size: 20px; text-align: center;"
+                                >Vencimento</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,10 +40,21 @@
                                         t-value="line_counter + 1"
                                     />
                                     <tr>
-                                        <td><span t-field="doc.name" /></td>
-                                        <td><span t-field="doc.own_number" /></td>
-                                        <td><span t-field="doc.balance" /></td>
-                                        <td><span t-field="doc.date_maturity" /></td>
+                                        <td style="text-align: center;"><span
+                                                t-field="doc.name"
+                                            /></td>
+                                        <td style="text-align: center;"><span
+                                                t-field="doc.own_number"
+                                            /></td>
+                                        <td style="text-align: center;"><span
+                                                t-field="doc.payment_mode_id.bank_id.name"
+                                            /></td>
+                                        <td style="text-align: center;"><span
+                                                t-field="doc.balance"
+                                            /></td>
+                                        <td style="text-align: center;"><span
+                                                t-field="doc.date_maturity"
+                                            /></td>
                                     </tr>
                                     <t t-if="line_counter % 20 == 0">
                                         <tr style="page-break-after: always;" />
