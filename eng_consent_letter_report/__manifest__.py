@@ -6,7 +6,11 @@
     "maintainers": ["cristianomafrajunior"],
     "website": "https://github.com/Engenere/engenere-addons",
     "version": "16.0.1.0.0",
-    "depends": ["l10n_br_account", "account_reconcile_oca"],
+    "depends": [
+        "l10n_br_account",
+        "l10n_br_account_payment_order",
+        "account_reconcile_oca",
+    ],
     "data": [
         "report/account_move_line_template.xml",
         "report/account_move_line_report.xml",

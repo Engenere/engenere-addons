@@ -15,6 +15,7 @@
                         <thead>
                             <tr>
                                 <th style="font-size: 20px;">Duplicata</th>
+                                <th style="font-size: 20px;">Nosso Número</th>
                                 <th style="font-size: 20px;">Valor</th>
                                 <th style="font-size: 20px;">Vencimento</th>
                             </tr>
@@ -29,6 +30,7 @@
                                     />
                                     <tr>
                                         <td><span t-field="doc.name" /></td>
+                                        <td><span t-field="doc.own_number" /></td>
                                         <td><span t-field="doc.balance" /></td>
                                         <td><span t-field="doc.date_maturity" /></td>
                                     </tr>
