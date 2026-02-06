@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-24 18:15+0000\n"
-"PO-Revision-Date: 2023-10-24 18:15+0000\n"
+"POT-Creation-Date: 2026-02-06 17:58+0000\n"
+"PO-Revision-Date: 2026-02-06 17:58+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,45 +16,51 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: eng_partner_confirmation
+#. odoo-python
 #: code:addons/eng_partner_confirmation/models/account_move.py:0
 #, python-format
-msgid "%s <li>Date: %s </li>"
-msgstr "%s <li>Data: %s </li>"
+msgid "%(msg)s <li>Date: %(date)s </li>"
+msgstr "%(msg)s <li>Data: %(date)s </li>"
 
 #. module: eng_partner_confirmation
+#. odoo-python
 #: code:addons/eng_partner_confirmation/models/account_move.py:0
 #, python-format
-msgid "%s <li>Employees: %s </li>"
-msgstr "%s <li>Funcionários: %s </li>"
+msgid "%(msg)s <li>Employees: %(employees)s </li>"
+msgstr "%(msg)s <li>Funcionários: %(employees)s </li>"
 
 #. module: eng_partner_confirmation
+#. odoo-python
 #: code:addons/eng_partner_confirmation/models/account_move.py:0
 #, python-format
-msgid "%s <li>Observations: %s </li>"
-msgstr "%s <li>Observações: %s </li>"
+msgid "%(msg)s <li>Observations: %(observations)s </li>"
+msgstr "%(msg)s <li>Observações: %(observations)s </li>"
 
 #. module: eng_partner_confirmation
+#. odoo-python
 #: code:addons/eng_partner_confirmation/models/account_move.py:0
 #, python-format
-msgid "%s <li>Receipt Person: %s </li>"
-msgstr "%s <li>Responsável pelo recebimento: %s </li>"
+msgid "%(msg)s <li>Receipt Person: %(receipt_person)s </li>"
+msgstr "%(msg)s <li>Responsável pelo recebimento: %(receipt_person)s </li>"
 
 #. module: eng_partner_confirmation
+#. odoo-python
 #: code:addons/eng_partner_confirmation/models/account_move.py:0
 #, python-format
-msgid "%s <li>State: %s </li>"
-msgstr "%s <li>Estado: %s </li>"
+msgid "%(msg)s <li>State: %(state)s </li>"
+msgstr "%(msg)s <li>Estado: %(state)s </li>"
 
 #. module: eng_partner_confirmation
+#. odoo-python
 #: code:addons/eng_partner_confirmation/models/account_move.py:0
 #, python-format
-msgid "%s <li>Vehicle: %s </li>"
-msgstr "%s <li>Veículo: %s </li>"
+msgid "%(msg)s <li>Vehicle: %(vehicle)s </li>"
+msgstr "%(msg)s <li>Veículo: %(vehicle)s </li>"
 
 #. module: eng_partner_confirmation
 #: model_terms:ir.ui.view,arch_db:eng_partner_confirmation.account_invoice_partner_confirmation_register_form_view
 msgid "Account Invoice Partner Confirmation Register"
-msgstr "Registro de Confirmação da Fatura de Parceiro"
+msgstr "Registro de Confirmação de Entrega ao Parceiro"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__message_needaction
@@ -74,17 +80,17 @@ msgstr "Atividades"
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr ""
+msgstr "Decoração de Exceção de Atividade"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__activity_state
 msgid "Activity State"
-msgstr ""
+msgstr "Estado da Atividade"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__activity_type_icon
 msgid "Activity Type Icon"
-msgstr ""
+msgstr "Ícone do Tipo de Atividade"
 
 #. module: eng_partner_confirmation
 #: model_terms:ir.ui.view,arch_db:eng_partner_confirmation.account_move_form_view_invoice_partner_confirmation
@@ -94,12 +100,12 @@ msgstr "Tem certeza de que deseja cancelar a confirmação do parceiro?"
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__message_attachment_count
 msgid "Attachment Count"
-msgstr "Contagem de anexos"
+msgstr "Contagem de Anexos"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation_register__batch_register
 msgid "Batch Register"
-msgstr "Registro em massa"
+msgstr "Registro em Massa"
 
 #. module: eng_partner_confirmation
 #: model_terms:ir.ui.view,arch_db:eng_partner_confirmation.account_invoice_partner_confirmation_register_form_view
@@ -115,6 +121,11 @@ msgstr "Cancelar Confirmação do Parceiro"
 #: model_terms:ir.ui.view,arch_db:eng_partner_confirmation.account_move_form_view_invoice_partner_confirmation
 msgid "Cancel receipt of the goods by the customer"
 msgstr "Cancelar o recebimento da mercadoria pelo cliente"
+
+#. module: eng_partner_confirmation
+#: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__company_id
+msgid "Company"
+msgstr "Empresa"
 
 #. module: eng_partner_confirmation
 #: model_terms:ir.ui.view,arch_db:eng_partner_confirmation.account_invoice_partner_confirmation_register_form_view
@@ -137,6 +148,16 @@ msgid "Confirmation Date"
 msgstr "Data de Confirmação"
 
 #. module: eng_partner_confirmation
+#: model:ir.actions.act_window,name:eng_partner_confirmation.action_partner_confirmation_responsible
+msgid "Confirmation Responsibles"
+msgstr "Responsáveis pela Confirmação"
+
+#. module: eng_partner_confirmation
+#: model:ir.actions.act_window,name:eng_partner_confirmation.action_partner_confirmation_vehicle
+msgid "Confirmation Vehicles"
+msgstr "Veículos de Confirmação"
+
+#. module: eng_partner_confirmation
 #: model:ir.model.fields.selection,name:eng_partner_confirmation.selection__account_invoice_partner_confirmation__state__confirmed
 #: model:ir.model.fields.selection,name:eng_partner_confirmation.selection__account_invoice_partner_confirmation_register__state__confirmed
 msgid "Confirmed"
@@ -145,12 +166,16 @@ msgstr "Confirmado"
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__create_uid
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation_register__create_uid
+#: model:ir.model.fields,field_description:eng_partner_confirmation.field_partner_confirmation_responsible__create_uid
+#: model:ir.model.fields,field_description:eng_partner_confirmation.field_partner_confirmation_vehicle__create_uid
 msgid "Created by"
 msgstr "Criado por"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__create_date
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation_register__create_date
+#: model:ir.model.fields,field_description:eng_partner_confirmation.field_partner_confirmation_responsible__create_date
+#: model:ir.model.fields,field_description:eng_partner_confirmation.field_partner_confirmation_vehicle__create_date
 msgid "Created on"
 msgstr "Criado em"
 
@@ -164,8 +189,8 @@ msgstr "Veículo de Entrega"
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__display_name
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation_register__display_name
-#: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_move__display_name
-#: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_move_line__display_name
+#: model:ir.model.fields,field_description:eng_partner_confirmation.field_partner_confirmation_responsible__display_name
+#: model:ir.model.fields,field_description:eng_partner_confirmation.field_partner_confirmation_vehicle__display_name
 msgid "Display Name"
 msgstr "Nome para Exibição"
 
@@ -175,11 +200,6 @@ msgid "Followers"
 msgstr "Seguidores"
 
 #. module: eng_partner_confirmation
-#: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__message_channel_ids
-msgid "Followers (Channels)"
-msgstr "Seguidores (Canais)"
-
-#. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__message_partner_ids
 msgid "Followers (Partners)"
 msgstr "Seguidores (Parceiros)"
@@ -187,20 +207,25 @@ msgstr "Seguidores (Parceiros)"
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,help:eng_partner_confirmation.field_account_invoice_partner_confirmation__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
-msgstr ""
+msgstr "Ícone Font Awesome ex. fa-tasks"
+
+#. module: eng_partner_confirmation
+#: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__has_message
+msgid "Has Message"
+msgstr "Tem Mensagem"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__id
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation_register__id
-#: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_move__id
-#: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_move_line__id
+#: model:ir.model.fields,field_description:eng_partner_confirmation.field_partner_confirmation_responsible__id
+#: model:ir.model.fields,field_description:eng_partner_confirmation.field_partner_confirmation_vehicle__id
 msgid "ID"
 msgstr "ID"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__activity_exception_icon
 msgid "Icon"
-msgstr "Icon"
+msgstr "Ícone"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,help:eng_partner_confirmation.field_account_invoice_partner_confirmation__activity_exception_icon
@@ -209,14 +234,13 @@ msgstr "Ícone para indicar uma atividade de exceção."
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,help:eng_partner_confirmation.field_account_invoice_partner_confirmation__message_needaction
-#: model:ir.model.fields,help:eng_partner_confirmation.field_account_invoice_partner_confirmation__message_unread
 msgid "If checked, new messages require your attention."
-msgstr "Se marcada, novas mensagens requerem sua atenção."
+msgstr "Se marcado, novas mensagens requerem sua atenção."
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,help:eng_partner_confirmation.field_account_invoice_partner_confirmation__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr "Se marcada, algumas mensagens apresentam um erro de entrega."
+msgstr "Se marcado, algumas mensagens apresentam um erro de entrega."
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,help:eng_partner_confirmation.field_account_bank_statement_line__part_conf_one_id
@@ -243,27 +267,31 @@ msgstr "Lançamento de Diário"
 #. module: eng_partner_confirmation
 #: model:ir.model,name:eng_partner_confirmation.model_account_move_line
 msgid "Journal Item"
-msgstr "Diário"
+msgstr "Item de Diário"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation____last_update
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation_register____last_update
-#: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_move____last_update
-#: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_move_line____last_update
+#: model:ir.model.fields,field_description:eng_partner_confirmation.field_partner_confirmation_responsible____last_update
+#: model:ir.model.fields,field_description:eng_partner_confirmation.field_partner_confirmation_vehicle____last_update
 msgid "Last Modified on"
 msgstr "Última Modificação em"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__write_uid
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation_register__write_uid
+#: model:ir.model.fields,field_description:eng_partner_confirmation.field_partner_confirmation_responsible__write_uid
+#: model:ir.model.fields,field_description:eng_partner_confirmation.field_partner_confirmation_vehicle__write_uid
 msgid "Last Updated by"
-msgstr "Última atualização por"
+msgstr "Última Atualização por"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__write_date
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation_register__write_date
+#: model:ir.model.fields,field_description:eng_partner_confirmation.field_partner_confirmation_responsible__write_date
+#: model:ir.model.fields,field_description:eng_partner_confirmation.field_partner_confirmation_vehicle__write_date
 msgid "Last Updated on"
-msgstr "Última atualização em"
+msgstr "Última Atualização em"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__message_main_attachment_id
@@ -273,7 +301,7 @@ msgstr "Anexo Principal"
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__message_has_error
 msgid "Message Delivery error"
-msgstr "Erro na entrega de mensagens"
+msgstr "Erro na Entrega de Mensagens"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__message_ids
@@ -283,27 +311,29 @@ msgstr "Mensagens"
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__my_activity_date_deadline
 msgid "My Activity Deadline"
-msgstr "Prazo da minha atividade"
+msgstr "Prazo da Minha Atividade"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__name
+#: model:ir.model.fields,field_description:eng_partner_confirmation.field_partner_confirmation_responsible__name
+#: model:ir.model.fields,field_description:eng_partner_confirmation.field_partner_confirmation_vehicle__name
 msgid "Name"
 msgstr "Nome"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__activity_date_deadline
 msgid "Next Activity Deadline"
-msgstr "Prazo da próxima atividade"
+msgstr "Prazo da Próxima Atividade"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__activity_summary
 msgid "Next Activity Summary"
-msgstr "Resumo da próxima atividade"
+msgstr "Resumo da Próxima Atividade"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__activity_type_id
 msgid "Next Activity Type"
-msgstr "Próximo tipo de atividade"
+msgstr "Próximo Tipo de Atividade"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__message_needaction_counter
@@ -313,22 +343,17 @@ msgstr "Número de Ações"
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__message_has_error_counter
 msgid "Number of errors"
-msgstr "Número de erros"
+msgstr "Número de Erros"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,help:eng_partner_confirmation.field_account_invoice_partner_confirmation__message_needaction_counter
-msgid "Number of messages which requires an action"
+msgid "Number of messages requiring action"
 msgstr "Número de mensagens que requerem uma ação"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,help:eng_partner_confirmation.field_account_invoice_partner_confirmation__message_has_error_counter
 msgid "Number of messages with delivery error"
 msgstr "Número de mensagens com erro de entrega"
-
-#. module: eng_partner_confirmation
-#: model:ir.model.fields,help:eng_partner_confirmation.field_account_invoice_partner_confirmation__message_unread_counter
-msgid "Number of unread messages"
-msgstr "Número de mensagens não lidas"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__observations
@@ -351,14 +376,27 @@ msgid "Partner"
 msgstr "Parceiro"
 
 #. module: eng_partner_confirmation
+#. odoo-python
 #: code:addons/eng_partner_confirmation/wizards/account_invoice_partner_confirmation_register.py:0
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_bank_statement_line__part_conf_one_id
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_move__part_conf_one_id
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_payment__part_conf_one_id
+#: model:ir.module.category,name:eng_partner_confirmation.module_category_partner_confirmation
+#: model:ir.ui.menu,name:eng_partner_confirmation.menu_partner_confirmation_config
 #: model_terms:ir.ui.view,arch_db:eng_partner_confirmation.account_move_form_view_invoice_partner_confirmation
 #, python-format
 msgid "Partner Confirmation"
 msgstr "Confirmação do Parceiro"
+
+#. module: eng_partner_confirmation
+#: model:res.groups,name:eng_partner_confirmation.group_partner_confirmation
+msgid "Partner Confirmation Manager"
+msgstr "Gerente de Confirmação do Parceiro"
+
+#. module: eng_partner_confirmation
+#: model:ir.model,name:eng_partner_confirmation.model_partner_confirmation_responsible
+msgid "Partner Confirmation Responsible"
+msgstr "Responsável pela Confirmação do Parceiro"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_bank_statement_line__part_confirm_state
@@ -368,17 +406,23 @@ msgid "Partner Confirmation State"
 msgstr "Estado da Confirmação do Parceiro"
 
 #. module: eng_partner_confirmation
+#: model:ir.model,name:eng_partner_confirmation.model_partner_confirmation_vehicle
+msgid "Partner Confirmation Vehicle"
+msgstr "Veículo de Confirmação do Parceiro"
+
+#. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__receipt_person
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation_register__receipt_person
 msgid "Receipt Person"
-msgstr "Responsável pelo recebimento"
+msgstr "Responsável pelo Recebimento"
 
 #. module: eng_partner_confirmation
 #: model:ir.model,name:eng_partner_confirmation.model_account_invoice_partner_confirmation
-msgid "Receipt of goods from the partners in account invoices."
-msgstr "Recebimento de mercadorias dos parceiros em faturas de contas."
+msgid "Receipt of goods from the partners in account invoices"
+msgstr "Recebimento de mercadorias dos parceiros em faturas"
 
 #. module: eng_partner_confirmation
+#. odoo-python
 #: code:addons/eng_partner_confirmation/models/account_move.py:0
 #: model:ir.model,name:eng_partner_confirmation.model_account_invoice_partner_confirmation_register
 #: model_terms:ir.ui.view,arch_db:eng_partner_confirmation.account_move_form_view_invoice_partner_confirmation
@@ -390,7 +434,7 @@ msgstr "Registrar Confirmação do Parceiro"
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__related_file_ids
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation_register__related_file_ids
 msgid "Related Files"
-msgstr "Arquivos relacionados"
+msgstr "Arquivos Relacionados"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_bank_statement_line__part_confirm_responsible_employee_ids
@@ -402,17 +446,14 @@ msgid "Responsible Employees"
 msgstr "Funcionários Responsáveis"
 
 #. module: eng_partner_confirmation
+#: model:ir.ui.menu,name:eng_partner_confirmation.menu_partner_confirmation_responsible
+msgid "Responsibles"
+msgstr "Responsáveis"
+
+#. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__activity_user_id
 msgid "Responsible User"
 msgstr "Usuário Responsável"
-
-#. module: eng_partner_confirmation
-#: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__smart_search
-#: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation_register__smart_search
-#: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_move__smart_search
-#: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_move_line__smart_search
-msgid "Smart Search"
-msgstr "Pesquisa Inteligente"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__state
@@ -434,40 +475,32 @@ msgstr ""
 "Planejado: atividades futuras."
 
 #. module: eng_partner_confirmation
+#. odoo-python
 #: code:addons/eng_partner_confirmation/models/account_move.py:0
 #, python-format
 msgid "The following Partner Confirmation has been cancelled: <br/>"
-msgstr "A seguinte confirmação de parceiro foi cancelada: <br/>"
+msgstr "A seguinte Confirmação do Parceiro foi cancelada: <br/>"
 
 #. module: eng_partner_confirmation
+#. odoo-python
 #: code:addons/eng_partner_confirmation/wizards/account_invoice_partner_confirmation_register.py:0
 #, python-format
 msgid ""
 "The register partner confirmation wizard should only be called on "
 "account.move records."
 msgstr ""
-"O assistente de confirmação de registro de parceiro só deve ser chamado em"
+"O assistente de registro de confirmação do parceiro só deve ser chamado em "
 "registros account.move."
 
 #. module: eng_partner_confirmation
 #: model:ir.model.constraint,message:eng_partner_confirmation.constraint_account_invoice_partner_confirmation_partner_confirmation_invoice_id_unique
 msgid "There is already an invoice for this Partner Confirmation"
-msgstr "Já existe uma fatura para esta Confirmação de Parceiro"
+msgstr "Já existe uma fatura para esta Confirmação do Parceiro"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,help:eng_partner_confirmation.field_account_invoice_partner_confirmation__activity_exception_decoration
 msgid "Type of the exception activity on record."
 msgstr "Tipo de atividade de exceção registrada."
-
-#. module: eng_partner_confirmation
-#: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__message_unread
-msgid "Unread Messages"
-msgstr "Mensagens Não Lidas"
-
-#. module: eng_partner_confirmation
-#: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__message_unread_counter
-msgid "Unread Messages Counter"
-msgstr "Contador de mensagens não lidas"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__vehicle_id
@@ -476,9 +509,14 @@ msgid "Vehicle"
 msgstr "Veículo"
 
 #. module: eng_partner_confirmation
+#: model:ir.ui.menu,name:eng_partner_confirmation.menu_partner_confirmation_vehicle
+msgid "Vehicles"
+msgstr "Veículos"
+
+#. module: eng_partner_confirmation
 #: model:ir.model.fields,field_description:eng_partner_confirmation.field_account_invoice_partner_confirmation__website_message_ids
 msgid "Website Messages"
-msgstr "Mensagens do website"
+msgstr "Mensagens do Website"
 
 #. module: eng_partner_confirmation
 #: model:ir.model.fields,help:eng_partner_confirmation.field_account_invoice_partner_confirmation__website_message_ids
@@ -492,6 +530,7 @@ msgid "With Pendencies"
 msgstr "Com Pendências"
 
 #. module: eng_partner_confirmation
+#. odoo-python
 #: code:addons/eng_partner_confirmation/wizards/account_invoice_partner_confirmation_register.py:0
 #, python-format
 msgid ""
@@ -504,6 +543,7 @@ msgstr ""
 "Fatura: "
 
 #. module: eng_partner_confirmation
+#. odoo-python
 #: code:addons/eng_partner_confirmation/wizards/account_invoice_partner_confirmation_register.py:0
 #, python-format
 msgid ""
@@ -511,15 +551,26 @@ msgid ""
 "\n"
 "Invoice: "
 msgstr ""
-"Você não pode selecionar faturas para as quais o parceiro já tenha confirmado o recebimento de mercadorias.\n"
+"Você não pode selecionar faturas para as quais o parceiro já confirmou o recebimento de mercadorias.\n"
 "\n"
 "Fatura: "
 
 #. module: eng_partner_confirmation
+#. odoo-python
 #: code:addons/eng_partner_confirmation/wizards/account_invoice_partner_confirmation_register.py:0
 #, python-format
 msgid ""
+"You cannot select invoices with move type differentof 'out_invoice'.\n"
+"\n"
+"Invoice: "
+msgstr ""
 "Você não pode selecionar faturas com tipo de movimentação diferente de 'out_invoice'.\n"
 "\n"
 "Fatura: "
-msgstr ""
+
+#. module: eng_partner_confirmation
+#. odoo-python
+#: code:addons/eng_partner_confirmation/models/partner_confirmation_responsible.py:0
+#, python-format
+msgid "You cannot delete a responsible that is linked to partner confirmations."
+msgstr "Você não pode excluir um responsável vinculado a confirmações de parceiro."
