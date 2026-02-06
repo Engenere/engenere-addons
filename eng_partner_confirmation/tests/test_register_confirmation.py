@@ -3,8 +3,11 @@
 
 from datetime import date
 
+from psycopg2 import IntegrityError
+
 from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase
+from odoo.tools import mute_logger
 
 
 class TestRegisterConfirmation(TransactionCase):
@@ -144,3 +147,133 @@ class TestRegisterConfirmation(TransactionCase):
         invoice = self.create_invoice(move_type="out_refund")
         with self.assertRaises(UserError):
             self.create_register_partner_confirm_wizard(invoice.ids)
+
+    def test_action_register_partner_confirmation(self):
+        """Test the button that opens the wizard from the invoice."""
+        invoice = self.create_invoice()
+        action = invoice.action_register_partner_confirmation()
+        self.assertEqual(
+            action["res_model"], "account.invoice.partner.confirmation.register"
+        )
+        self.assertEqual(action["view_mode"], "form")
+        self.assertEqual(action["target"], "new")
+        self.assertEqual(action["context"]["active_ids"], invoice.ids)
+
+    def test_cancel_confirmation_message_all_fields(self):
+        """Test cancel message includes all optional fields."""
+        invoice = self.create_invoice()
+        confirm_date = date(2024, 6, 15)
+        wizard = self.create_register_partner_confirm_wizard(invoice.ids, confirm_date)
+        wizard.vehicle_id = self.vehicle.id
+        wizard.responsible_employee_ids = [(6, 0, self.employee.ids)]
+        wizard.receipt_person = "John Doe"
+        wizard.observations = "Test observations"
+        wizard.register_confirmation()
+
+        confirmation = invoice.part_confirm_id
+        msg = invoice.get_delete_partner_conf_message(confirmation)
+        self.assertIn("15/06/2024", msg)
+        self.assertIn("Test Vehicle", msg)
+        self.assertIn("John Doe", msg)
+        self.assertIn("Test Employee", msg)
+        self.assertIn("Test observations", msg)
+
+    def test_computed_fields_on_invoice(self):
+        """Test part_conf_one_id, part_confirm_date, part_confirm_vehicle_id."""
+        invoice = self.create_invoice()
+        self.assertFalse(invoice.part_conf_one_id)
+        self.assertFalse(invoice.part_confirm_date)
+        self.assertFalse(invoice.part_confirm_vehicle_id)
+
+        confirm_date = date(2024, 1, 10)
+        wizard = self.create_register_partner_confirm_wizard(invoice.ids, confirm_date)
+        wizard.vehicle_id = self.vehicle.id
+        wizard.register_confirmation()
+
+        self.assertTrue(invoice.part_conf_one_id)
+        self.assertEqual(invoice.part_conf_one_id, invoice.part_confirm_id[0])
+        self.assertEqual(invoice.part_confirm_date, confirm_date)
+        self.assertEqual(invoice.part_confirm_vehicle_id, self.vehicle)
+
+    def test_company_id_from_invoice(self):
+        """Test that confirmation company_id comes from the invoice."""
+        invoice = self.create_invoice()
+        wizard = self.create_register_partner_confirm_wizard(invoice.ids)
+        wizard.register_confirmation()
+
+        confirmation = invoice.part_confirm_id
+        self.assertEqual(confirmation.company_id, invoice.company_id)
+
+    def test_responsible_unlink_protection(self):
+        """Test that a responsible linked to confirmations cannot be deleted."""
+        invoice = self.create_invoice()
+        wizard = self.create_register_partner_confirm_wizard(invoice.ids)
+        wizard.responsible_employee_ids = [(6, 0, self.employee.ids)]
+        wizard.register_confirmation()
+
+        with self.assertRaises(UserError):
+            self.employee.unlink()
+
+    def test_responsible_unlink_allowed_when_not_linked(self):
+        """Test that a responsible without confirmations can be deleted."""
+        responsible = self.env["partner.confirmation.responsible"].create(
+            {"name": "Temporary Responsible"}
+        )
+        responsible.unlink()
+        self.assertFalse(responsible.exists())
+
+    def test_vehicle_ondelete_restrict(self):
+        """Test that a vehicle linked to confirmations cannot be deleted."""
+        invoice = self.create_invoice()
+        wizard = self.create_register_partner_confirm_wizard(invoice.ids)
+        wizard.vehicle_id = self.vehicle.id
+        wizard.register_confirmation()
+
+        with self.assertRaises(IntegrityError), mute_logger("odoo.sql_db"):
+            self.vehicle.unlink()
+
+    def test_confirmation_order(self):
+        """Test that confirmations are ordered by date desc."""
+        invoice1 = self.create_invoice()
+        invoice2 = self.create_invoice()
+        invoice3 = self.create_invoice()
+
+        wizard1 = self.create_register_partner_confirm_wizard(
+            invoice1.ids, date(2024, 1, 1)
+        )
+        wizard1.register_confirmation()
+
+        wizard2 = self.create_register_partner_confirm_wizard(
+            invoice2.ids, date(2024, 6, 15)
+        )
+        wizard2.register_confirmation()
+
+        wizard3 = self.create_register_partner_confirm_wizard(
+            invoice3.ids, date(2024, 3, 10)
+        )
+        wizard3.register_confirmation()
+
+        confirmations = self.partner_confirm_obj.search(
+            [("invoice_id", "in", [invoice1.id, invoice2.id, invoice3.id])]
+        )
+        dates = confirmations.mapped("confirmation_date")
+        self.assertEqual(dates[0], date(2024, 6, 15))
+        self.assertEqual(dates[1], date(2024, 3, 10))
+        self.assertEqual(dates[2], date(2024, 1, 1))
+
+    @mute_logger("odoo.sql_db")
+    def test_sql_constraint_unique_invoice(self):
+        """Test that the same invoice cannot have two confirmations."""
+        invoice = self.create_invoice()
+        wizard = self.create_register_partner_confirm_wizard(invoice.ids)
+        wizard.register_confirmation()
+
+        with self.assertRaises(IntegrityError):
+            self.partner_confirm_obj.create(
+                {
+                    "name": "Duplicate",
+                    "confirmation_date": date.today(),
+                    "invoice_id": invoice.id,
+                    "state": "confirmed",
+                }
+            )
