@@ -20,7 +20,7 @@ class AccountInvoicePartnerConfirmationRegister(models.TransientModel):
         default="confirmed",
     )
 
-    vehicle_id = fields.Many2one("fleet.vehicle", string="Vehicle")
+    vehicle_id = fields.Many2one("partner.confirmation.vehicle", string="Vehicle")
 
     observations = fields.Text()
 
@@ -33,7 +33,9 @@ class AccountInvoicePartnerConfirmationRegister(models.TransientModel):
     receipt_person = fields.Char()
 
     responsible_employee_ids = fields.Many2many(
-        "hr.employee", string="Responsible Employees"
+        "partner.confirmation.responsible",
+        relation="conf_register_responsible_rel",
+        string="Responsible Employees",
     )
 
     batch_register = fields.Boolean(compute="_compute_batch_register")

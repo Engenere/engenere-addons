@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Engenere
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="partner_confirmation_vehicle_tree_view">
+        <field name="name">partner.confirmation.vehicle.tree</field>
+        <field name="model">partner.confirmation.vehicle</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="partner_confirmation_vehicle_form_view">
+        <field name="name">partner.confirmation.vehicle.form</field>
+        <field name="model">partner.confirmation.vehicle</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_partner_confirmation_vehicle">
+        <field name="name">Confirmation Vehicles</field>
+        <field name="res_model">partner.confirmation.vehicle</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_partner_confirmation_config"
+        name="Partner Confirmation"
+        parent="account.menu_finance_configuration"
+        sequence="50"
+        groups="eng_partner_confirmation.group_partner_confirmation"
+    />
+
+    <menuitem
+        id="menu_partner_confirmation_vehicle"
+        name="Vehicles"
+        parent="menu_partner_confirmation_config"
+        action="action_partner_confirmation_vehicle"
+        sequence="10"
+    />
+
+</odoo>

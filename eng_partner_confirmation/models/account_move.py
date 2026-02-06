@@ -35,14 +35,14 @@ class AccountMove(models.Model):
     )
 
     part_confirm_responsible_employee_ids = fields.Many2many(
-        "hr.employee",
+        "partner.confirmation.responsible",
         string="Responsible Employees",
         readonly=True,
         related="part_confirm_id.responsible_employee_ids",
     )
 
     part_confirm_vehicle_id = fields.Many2one(
-        "fleet.vehicle",
+        "partner.confirmation.vehicle",
         string="Delivery Vehicle",
         compute="_compute_confirmation",
         store=True,

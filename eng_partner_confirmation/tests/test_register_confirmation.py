@@ -21,6 +21,12 @@ class TestRegisterConfirmation(TransactionCase):
                 "groups_id": [
                     (6, 0, cls.env.user.groups_id.ids),
                     (4, cls.env.ref("account.group_account_user").id),
+                    (
+                        4,
+                        cls.env.ref(
+                            "eng_partner_confirmation.group_partner_confirmation"
+                        ).id,
+                    ),
                 ],
             }
         )
@@ -57,14 +63,12 @@ class TestRegisterConfirmation(TransactionCase):
             }
         )
 
-        cls.brand = cls.env["fleet.vehicle.model.brand"].create(
-            {"name": "Brand Vehicle"}
+        cls.vehicle = cls.env["partner.confirmation.vehicle"].create(
+            {"name": "Test Vehicle"}
         )
-        cls.model = cls.env["fleet.vehicle.model"].create(
-            {"brand_id": cls.brand.id, "name": "Test1"}
+        cls.employee = cls.env["partner.confirmation.responsible"].create(
+            {"name": "Test Employee"}
         )
-        cls.vehicle = cls.env["fleet.vehicle"].create({"model_id": cls.model.id})
-        cls.employee = cls.env["hr.employee"].create({"name": "Test Employee"})
 
     def create_invoice(self, posted=True, move_type="out_invoice"):
         invoice = self.account_move_model.create(

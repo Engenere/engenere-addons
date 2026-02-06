@@ -8,6 +8,8 @@ class AccountInvoicePartnerConfirmation(models.Model):
     _name = "account.invoice.partner.confirmation"
     _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Receipt of goods from the partners in account invoices"
+    _order = "confirmation_date desc, id desc"
+    _check_company_auto = True
     _sql_constraints = [
         (
             "partner_confirmation_invoice_id_unique",
@@ -20,6 +22,12 @@ class AccountInvoicePartnerConfirmation(models.Model):
 
     confirmation_date = fields.Date(required=True, tracking=True)
 
+    company_id = fields.Many2one(
+        "res.company",
+        related="invoice_id.company_id",
+        store=True,
+    )
+
     invoice_id = fields.Many2one(
         comodel_name="account.move",
         string="Invoice",
@@ -27,6 +35,7 @@ class AccountInvoicePartnerConfirmation(models.Model):
         readonly=True,
         tracking=True,
         ondelete="cascade",
+        check_company=True,
     )
 
     partner_id = fields.Many2one(
@@ -45,7 +54,12 @@ class AccountInvoicePartnerConfirmation(models.Model):
         tracking=True,
     )
 
-    vehicle_id = fields.Many2one("fleet.vehicle", string="Vehicle", tracking=True)
+    vehicle_id = fields.Many2one(
+        "partner.confirmation.vehicle",
+        string="Vehicle",
+        tracking=True,
+        ondelete="restrict",
+    )
 
     observations = fields.Text(tracking=True)
 
@@ -59,5 +73,8 @@ class AccountInvoicePartnerConfirmation(models.Model):
     receipt_person = fields.Char(tracking=True)
 
     responsible_employee_ids = fields.Many2many(
-        "hr.employee", string="Responsible Employees", tracking=True
+        "partner.confirmation.responsible",
+        relation="confirmation_responsible_rel",
+        string="Responsible Employees",
+        tracking=True,
     )

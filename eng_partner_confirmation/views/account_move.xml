@@ -19,7 +19,7 @@
                     type="object"
                     class="oe_highlight btn-success"
                     attrs="{'invisible': ['|', '|', ('state', '!=', 'posted'), ('move_type', '!=', 'out_invoice'), ('part_confirm_id', '!=', [])]}"
-                    groups="account.group_account_invoice"
+                    groups="eng_partner_confirmation.group_partner_confirmation"
                 />
                 <button
                     name="action_cancel_partner_confirmation"
@@ -29,7 +29,7 @@
                     type="object"
                     class="btn-secundary"
                     attrs="{'invisible': ['|', '|', ('state', '!=', 'posted'), ('move_type', '!=', 'out_invoice'), ('part_confirm_id', '=', [])]}"
-                    groups="account.group_account_invoice"
+                    groups="eng_partner_confirmation.group_partner_confirmation"
                     confirm="Are you sure that you want to cancel the partner confirmation?"
                 />
             </button>
