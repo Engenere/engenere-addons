@@ -8,6 +8,7 @@ class AccountInvoicePartnerConfirmation(models.Model):
     _name = "account.invoice.partner.confirmation"
     _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Receipt of goods from the partners in account invoices"
+    _order = "confirmation_date desc, id desc"
     _check_company_auto = True
     _sql_constraints = [
         (
