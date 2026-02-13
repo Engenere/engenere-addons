@@ -1,0 +1,33 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* eng_invoice_no_zero_price
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: eng_invoice_no_zero_price
+#: model:ir.model.fields,field_description:eng_invoice_no_zero_price.field_account_bank_statement_line__allow_zero_price
+#: model:ir.model.fields,field_description:eng_invoice_no_zero_price.field_account_move__allow_zero_price
+#: model:ir.model.fields,field_description:eng_invoice_no_zero_price.field_account_payment__allow_zero_price
+msgid "Allow Zero Price"
+msgstr ""
+
+#. module: eng_invoice_no_zero_price
+#: model:ir.model,name:eng_invoice_no_zero_price.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: eng_invoice_no_zero_price
+#. odoo-python
+#: code:addons/eng_invoice_no_zero_price/models/account_move.py:0
+#, python-format
+msgid "The following products have zero price: %s"
+msgstr ""
