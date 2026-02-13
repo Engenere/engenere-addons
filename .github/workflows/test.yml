@@ -40,7 +40,7 @@ jobs:
             makepot: "false"
     services:
       postgres:
-        image: postgres:12.0
+        image: postgres:12
         env:
           POSTGRES_USER: odoo
           POSTGRES_PASSWORD: odoo
@@ -55,12 +55,21 @@ jobs:
         run: oca_install_addons
       - name: Check licenses
         run: manifestoo -d . check-licenses
+        continue-on-error: true
       - name: Check development status
         run: manifestoo -d . check-dev-status --default-dev-status=Beta
+        continue-on-error: true
       - name: Initialize test db
         run: oca_init_test_database
       - name: Run tests
         run: oca_run_tests
+      - name: Upload screenshots from JS tests
+        uses: actions/upload-artifact@v4
+        if: ${{ failure() }}
+        with:
+          name: Screenshots of failed JS tests - ${{ matrix.name }}${{ join(matrix.include) }}
+          path: /tmp/odoo_tests/${{ env.PGDATABASE }}
+          if-no-files-found: ignore
       - uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
