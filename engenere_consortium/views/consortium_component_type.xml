@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Engenere - Felipe Motter Pereira
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="consortium_component_type_view_tree" model="ir.ui.view">
+        <field name="name">consortium.component.type.tree</field>
+        <field name="model">consortium.component.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="code" />
+                <field name="account_type" />
+                <field name="default_account_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="consortium_component_type_view_form" model="ir.ui.view">
+        <field name="name">consortium.component.type.form</field>
+        <field name="model">consortium.component.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="code" />
+                        <field name="account_type" />
+                        <field name="default_account_id" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="consortium_component_type_action" model="ir.actions.act_window">
+        <field name="name">Component Types</field>
+        <field name="res_model">consortium.component.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

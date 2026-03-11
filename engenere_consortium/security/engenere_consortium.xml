@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Category -->
+    <record id="module_category_consortium" model="ir.module.category">
+        <field name="name">Consortium</field>
+    </record>
+
+    <!-- Groups -->
+    <record id="group_consortium_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="module_category_consortium" />
+    </record>
+
+    <record id="group_consortium_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="module_category_consortium" />
+        <field name="implied_ids" eval="[(4, ref('group_consortium_user'))]" />
+        <field name="users" eval="[(4, ref('base.user_admin'))]" />
+    </record>
+
+    <!-- Settings admins get consortium manager -->
+    <record id="base.group_system" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('group_consortium_manager'))]" />
+    </record>
+
+    <!-- Multi-company record rule -->
+    <record id="rule_consortium_quota_multi_company" model="ir.rule">
+        <field name="name">Consortium Quota: Multi-Company</field>
+        <field name="model_id" ref="model_consortium_quota" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        <field name="global" eval="True" />
+    </record>
+</odoo>

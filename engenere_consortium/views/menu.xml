@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Engenere - Felipe Motter Pereira
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <menuitem
+        id="menu_consortium_root"
+        name="Consortiums"
+        parent="account.menu_finance_entries"
+        sequence="60"
+        groups="group_consortium_user"
+    />
+
+    <menuitem
+        id="menu_consortium_quotas"
+        name="Quotas"
+        parent="menu_consortium_root"
+        action="consortium_quota_action"
+        sequence="10"
+    />
+
+    <menuitem
+        id="menu_consortium_installments"
+        name="Installments"
+        parent="menu_consortium_root"
+        action="consortium_installment_action"
+        sequence="20"
+    />
+
+    <menuitem
+        id="menu_consortium_component_types"
+        name="Component Types"
+        parent="menu_consortium_root"
+        action="consortium_component_type_action"
+        sequence="90"
+    />
+
+</odoo>
