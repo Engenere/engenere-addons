@@ -12,27 +12,29 @@ class SaleOrderLine(models.Model):
     product_first_sale = fields.Selection(
         selection=[("first_sale", _("First Sale"))],
         string="First Sale?",
-        copy=False,
+        compute="_compute_product_first_sale",
+        store=True,
     )
 
-    @api.onchange("product_id", "order_partner_id")
-    def _onchange_product_first_sale(self):
+    @api.depends("product_id", "order_id.partner_id")
+    def _compute_product_first_sale(self):
         """Flag if it's the first time the partner buys this product."""
         Param = self.env["ir.config_parameter"].sudo()
         days_limit = int(Param.get_param("sale_first_sale.days_limit", default=0))
 
         for line in self:
-            # Do nothing on confirmed orders
-            if line.order_id.state in ("sale", "done"):
-                continue
-
-            line.product_first_sale = False
-            if not (line.product_id and line.order_partner_id):
+            partner = line.order_id.partner_id
+            if (
+                line.order_id.state in ("sale", "done")
+                or not line.product_id
+                or not partner
+            ):
+                line.product_first_sale = False
                 continue
 
             domain = [
                 ("product_id", "=", line.product_id.id),
-                ("order_partner_id", "=", line.order_partner_id.id),
+                ("order_partner_id", "=", partner.id),
                 ("order_id.state", "in", ["sale", "done"]),
                 ("product_uom_qty", ">", 0),
             ]
