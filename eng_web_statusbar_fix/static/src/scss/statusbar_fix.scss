@@ -1,0 +1,16 @@
+// Prevent horizontal scroll caused by too many header buttons.
+// When many buttons are present in the statusbar, the status arrows can be
+// pushed beyond the container boundary, causing an unwanted horizontal scroll
+// (especially with side chatter in xxl layout).
+// Fix: let the buttons section shrink so status arrows always fit.
+.o_form_statusbar {
+    > .o_statusbar_buttons {
+        min-width: 0;
+        flex: 1 1 auto;
+    }
+
+    > .o_field_statusbar {
+        flex-shrink: 0;
+        margin-left: 16px;
+    }
+}

@@ -40,6 +40,7 @@ addon | version | maintainers | summary
 [eng_sale_customer_order_ref](eng_sale_customer_order_ref/) | 16.0.1.0.0 | <a href='https://github.com/felipemotter'><img src='https://github.com/felipemotter.png' width='32' height='32' style='border-radius:50%;' alt='felipemotter'/></a> | Take the General Client Order Ref on Sale Order to Partner Order in Sale Order Line.
 [eng_sale_first_time_state](eng_sale_first_time_state/) | 16.0.1.0.0 | <a href='https://github.com/felipemotter'><img src='https://github.com/felipemotter.png' width='32' height='32' style='border-radius:50%;' alt='felipemotter'/></a> | Indicates whether the product is sold for the first time to the partner.
 [eng_web_company_color_responsive](eng_web_company_color_responsive/) | 16.0.1.0.0 | <a href='https://github.com/felipemotter'><img src='https://github.com/felipemotter.png' width='32' height='32' style='border-radius:50%;' alt='felipemotter'/></a> | Integration between Company Color And Responsive
+[eng_web_statusbar_fix](eng_web_statusbar_fix/) | 16.0.1.0.0 | <a href='https://github.com/felipemotter'><img src='https://github.com/felipemotter.png' width='32' height='32' style='border-radius:50%;' alt='felipemotter'/></a> | Prevents horizontal scroll when forms have many header buttons
 
 [//]: # (end addons)
 
