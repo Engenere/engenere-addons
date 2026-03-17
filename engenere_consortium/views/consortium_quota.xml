@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Engenere - Felipe Motter Pereira
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="consortium_quota_view_form" model="ir.ui.view">
+        <field name="name">consortium.quota.form</field>
+        <field name="model">consortium.quota</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_activate"
+                        string="Activate"
+                        type="object"
+                        class="btn-primary"
+                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                    />
+                    <button
+                        name="action_contemplate"
+                        string="Contemplate"
+                        type="object"
+                        class="btn-primary"
+                        attrs="{'invisible': [('state', '!=', 'active')]}"
+                    />
+                    <button
+                        name="action_complete"
+                        string="Complete"
+                        type="object"
+                        class="btn-primary"
+                        attrs="{'invisible': [('state', '!=', 'contemplated')]}"
+                    />
+                    <button
+                        name="action_cancel"
+                        string="Cancel"
+                        type="object"
+                        attrs="{'invisible': [('state', 'in', ('completed', 'cancelled'))]}"
+                    />
+                    <button
+                        name="action_draft"
+                        string="Back to Draft"
+                        type="object"
+                        attrs="{'invisible': [('state', '!=', 'cancelled')]}"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,active,contemplated,completed"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="%(consortium_installment_action)d"
+                            type="action"
+                            class="oe_stat_button"
+                            icon="fa-list-ol"
+                            context="{'search_default_quota_id': active_id}"
+                        >
+                            <field
+                                name="paid_installments_count"
+                                string="Installments"
+                                widget="statinfo"
+                            />
+                        </button>
+                        <button
+                            class="oe_stat_button"
+                            icon="fa-money"
+                            name="action_activate"
+                            type="object"
+                            attrs="{'invisible': [('id', '=', False)]}"
+                        >
+                            <field
+                                name="total_paid"
+                                string="Total Paid"
+                                widget="statinfo"
+                            />
+                        </button>
+                        <button
+                            class="oe_stat_button"
+                            icon="fa-balance-scale"
+                            name="action_activate"
+                            type="object"
+                            attrs="{'invisible': [('id', '=', False)]}"
+                        >
+                            <field
+                                name="outstanding_balance"
+                                string="Outstanding Balance"
+                                widget="statinfo"
+                            />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="administrator_id" />
+                            <field name="group_number" />
+                            <field name="quota_number" />
+                            <field name="proposal_number" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                        </group>
+                        <group>
+                            <field name="currency_id" invisible="1" />
+                            <field name="credit_value" />
+                            <field name="current_credit_value" />
+                            <field name="released_credit_value" />
+                            <field name="total_installments" />
+                            <field name="progress_percentage" widget="progressbar" />
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="start_date" />
+                            <field name="contemplation_date" />
+                            <field
+                                name="contemplation_type"
+                                attrs="{'invisible': [('contemplation_date', '=', False)]}"
+                            />
+                        </group>
+                        <group>
+                            <field name="admin_fee_rate" />
+                            <field name="reserve_fund_rate" />
+                            <field name="life_insurance_rate" />
+                            <field name="readjustment_type" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Installments" name="installments">
+                            <field
+                                name="installment_ids"
+                                context="{'default_quota_id': active_id}"
+                            >
+                                <tree editable="bottom">
+                                    <field name="number" />
+                                    <field name="due_date" />
+                                    <field name="currency_id" invisible="1" />
+                                    <field name="total_amount" />
+                                    <field name="is_lance" />
+                                    <field
+                                        name="state"
+                                        widget="badge"
+                                        decoration-info="state == 'draft'"
+                                        decoration-warning="state == 'open'"
+                                        decoration-success="state == 'paid'"
+                                        decoration-danger="state == 'cancelled'"
+                                    />
+                                    <field name="move_id" optional="show" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Account Configuration" name="account_config">
+                            <field name="component_config_ids">
+                                <tree editable="bottom">
+                                    <field name="component_type_id" />
+                                    <field name="account_id" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Readjustments" name="readjustments">
+                            <field name="readjustment_ids" readonly="1">
+                                <tree>
+                                    <field name="date" />
+                                    <field name="currency_id" invisible="1" />
+                                    <field name="previous_credit_value" />
+                                    <field name="new_credit_value" />
+                                    <field name="adjustment_percentage" />
+                                    <field name="applied_by" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Asset &amp; Notes" name="asset_notes">
+                            <group>
+                                <field name="asset_description" />
+                                <field name="product_id" />
+                            </group>
+                            <field name="notes" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="consortium_quota_view_tree" model="ir.ui.view">
+        <field name="name">consortium.quota.tree</field>
+        <field name="model">consortium.quota</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="administrator_id" />
+                <field name="group_number" />
+                <field name="quota_number" />
+                <field name="currency_id" invisible="1" />
+                <field name="credit_value" />
+                <field name="outstanding_balance" />
+                <field name="paid_installments_count" />
+                <field name="remaining_installments_count" />
+                <field name="next_due_date" />
+                <field
+                    name="state"
+                    widget="badge"
+                    decoration-info="state == 'draft'"
+                    decoration-success="state in ('active', 'completed')"
+                    decoration-warning="state == 'contemplated'"
+                    decoration-danger="state == 'cancelled'"
+                />
+            </tree>
+        </field>
+    </record>
+
+    <record id="consortium_quota_view_search" model="ir.ui.view">
+        <field name="name">consortium.quota.search</field>
+        <field name="model">consortium.quota</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="administrator_id" />
+                <field name="group_number" />
+                <field name="quota_number" />
+                <filter
+                    name="draft"
+                    string="Draft"
+                    domain="[('state', '=', 'draft')]"
+                />
+                <filter
+                    name="active_state"
+                    string="Active"
+                    domain="[('state', '=', 'active')]"
+                />
+                <filter
+                    name="contemplated"
+                    string="Contemplated"
+                    domain="[('state', '=', 'contemplated')]"
+                />
+                <filter
+                    name="completed"
+                    string="Completed"
+                    domain="[('state', '=', 'completed')]"
+                />
+                <separator />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_by_administrator"
+                        string="Administrator"
+                        context="{'group_by': 'administrator_id'}"
+                    />
+                    <filter
+                        name="group_by_state"
+                        string="State"
+                        context="{'group_by': 'state'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="consortium_quota_action" model="ir.actions.act_window">
+        <field name="name">Consortium Quotas</field>
+        <field name="res_model">consortium.quota</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

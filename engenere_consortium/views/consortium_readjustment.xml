@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Engenere - Felipe Motter Pereira
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="consortium_readjustment_view_tree" model="ir.ui.view">
+        <field name="name">consortium.readjustment.tree</field>
+        <field name="model">consortium.readjustment</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date" />
+                <field name="currency_id" invisible="1" />
+                <field name="previous_credit_value" />
+                <field name="new_credit_value" />
+                <field name="adjustment_percentage" />
+                <field name="notes" />
+                <field name="applied_by" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="consortium_readjustment_view_form" model="ir.ui.view">
+        <field name="name">consortium.readjustment.form</field>
+        <field name="model">consortium.readjustment</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="quota_id" readonly="1" />
+                            <field name="date" readonly="1" />
+                            <field name="applied_by" readonly="1" />
+                        </group>
+                        <group>
+                            <field name="currency_id" invisible="1" />
+                            <field name="previous_credit_value" readonly="1" />
+                            <field name="new_credit_value" readonly="1" />
+                            <field name="adjustment_percentage" readonly="1" />
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="previous_installment_amount" readonly="1" />
+                            <field name="new_installment_amount" readonly="1" />
+                        </group>
+                    </group>
+                    <group>
+                        <field name="notes" readonly="1" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+        <record id="component_type_common_fund" model="consortium.component.type">
+            <field name="name">Common Fund</field>
+            <field name="code">common_fund</field>
+            <field name="account_type">liability</field>
+        </record>
+
+        <record id="component_type_admin_fee" model="consortium.component.type">
+            <field name="name">Administration Fee</field>
+            <field name="code">admin_fee</field>
+            <field name="account_type">expense</field>
+        </record>
+
+        <record id="component_type_reserve_fund" model="consortium.component.type">
+            <field name="name">Reserve Fund</field>
+            <field name="code">reserve_fund</field>
+            <field name="account_type">asset</field>
+        </record>
+
+        <record id="component_type_life_insurance" model="consortium.component.type">
+            <field name="name">Life Insurance</field>
+            <field name="code">life_insurance</field>
+            <field name="account_type">expense</field>
+        </record>
+
+        <record id="component_type_penalty" model="consortium.component.type">
+            <field name="name">Penalty / Interest</field>
+            <field name="code">penalty</field>
+            <field name="account_type">expense</field>
+        </record>
+
+        <record id="component_type_installment_diff" model="consortium.component.type">
+            <field name="name">Installment Difference</field>
+            <field name="code">installment_diff</field>
+            <field name="account_type">liability</field>
+        </record>
+
+        <record id="component_type_proration" model="consortium.component.type">
+            <field name="name">Proration</field>
+            <field name="code">proration</field>
+            <field name="account_type">expense</field>
+        </record>
+
+        <record id="component_type_other" model="consortium.component.type">
+            <field name="name">Other Values</field>
+            <field name="code">other</field>
+            <field name="account_type">expense</field>
+        </record>
+</odoo>
