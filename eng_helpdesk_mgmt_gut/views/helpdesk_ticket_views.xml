@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<odoo>
+
+    <!-- Form: GUT Priorization group on main tab -->
+    <record id="ticket_view_form_gut" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.view.form.gut</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk_mgmt.ticket_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='main']" position="after">
+                <group name="gut" string="GUT Prioritization">
+                    <group>
+                        <field name="gut_gravity" />
+                        <field name="gut_urgency" />
+                        <field name="gut_tendency" />
+                    </group>
+                    <group>
+                        <field name="gut_score" />
+                        <field name="gut_band" />
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Tree: sortable gut_score column with band decoration -->
+    <record id="ticket_view_tree_gut" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.view.tree.gut</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk_mgmt.ticket_view_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='stage_id']" position="before">
+                <field name="gut_band" invisible="1" />
+                <field
+                    name="gut_score"
+                    optional="show"
+                    decoration-success="gut_band == 'low'"
+                    decoration-warning="gut_band == 'medium'"
+                    decoration-danger="gut_band == 'high'"
+                    decoration-bf="gut_band == 'critical'"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Kanban: GUT badge with band-based color -->
+    <record id="view_helpdesk_ticket_kanban_gut" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.kanban.gut</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk_mgmt.view_helpdesk_ticket_kanban" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute
+                    name="default_order"
+                >gut_score desc, priority desc, id desc</attribute>
+            </xpath>
+            <xpath expr="//kanban/field[@name='priority']" position="after">
+                <field name="gut_score" />
+                <field name="gut_band" />
+            </xpath>
+            <xpath
+                expr="//div[hasclass('oe_kanban_bottom_left')]/field[@name='priority']"
+                position="after"
+            >
+                <span
+                    t-if="record.gut_band.raw_value and record.gut_band.raw_value != 'unclassified'"
+                    t-attf-class="badge ms-1 #{
+                        record.gut_band.raw_value == 'low' ? 'text-bg-success' :
+                        record.gut_band.raw_value == 'medium' ? 'text-bg-warning' :
+                        record.gut_band.raw_value == 'high' ? 'text-bg-danger' :
+                        'text-bg-dark'
+                    }"
+                    t-att-title="'GUT ' + record.gut_band.value"
+                >
+                    GUT <t t-esc="record.gut_score.raw_value" />
+                </span>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Search: GUT band filters, unclassified filter, groupby band -->
+    <record id="helpdesk_ticket_view_search_gut" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.view.search.gut</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk_mgmt.helpdesk_ticket_view_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='high_priority']" position="after">
+                <separator />
+                <filter
+                    string="GUT Critical"
+                    name="gut_critical"
+                    domain="[('gut_band', '=', 'critical')]"
+                />
+                <filter
+                    string="GUT High"
+                    name="gut_high"
+                    domain="[('gut_band', '=', 'high')]"
+                />
+                <filter
+                    string="GUT Medium"
+                    name="gut_medium"
+                    domain="[('gut_band', '=', 'medium')]"
+                />
+                <filter
+                    string="GUT Low"
+                    name="gut_low"
+                    domain="[('gut_band', '=', 'low')]"
+                />
+                <filter
+                    string="GUT Unclassified"
+                    name="gut_unclassified"
+                    domain="[('gut_band', '=', 'unclassified')]"
+                />
+            </xpath>
+            <xpath expr="//filter[@name='group_stage']" position="after">
+                <filter
+                    string="GUT Band"
+                    name="group_gut_band"
+                    domain="[]"
+                    context="{'group_by':'gut_band'}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

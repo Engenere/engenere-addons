@@ -1,0 +1,212 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* eng_helpdesk_mgmt_gut
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-23 00:00+0000\n"
+"PO-Revision-Date: 2026-04-23 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+"Language: pt_BR\n"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.module.module,shortdesc:eng_helpdesk_mgmt_gut.module_meta_information
+msgid "Helpdesk GUT Matrix"
+msgstr "Matriz GUT para Helpdesk"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.module.module,summary:eng_helpdesk_mgmt_gut.module_meta_information
+msgid "Classify helpdesk tickets with the GUT priority matrix (Gravity, Urgency, Tendency)"
+msgstr "Classifica chamados do helpdesk com a matriz de priorização GUT (Gravidade, Urgência, Tendência)"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model,name:eng_helpdesk_mgmt_gut.model_helpdesk_ticket
+msgid "Helpdesk Ticket"
+msgstr "Chamado de Helpdesk"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields,field_description:eng_helpdesk_mgmt_gut.field_helpdesk_ticket__gut_gravity
+msgid "Gravity (G)"
+msgstr "Gravidade (G)"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields,help:eng_helpdesk_mgmt_gut.field_helpdesk_ticket__gut_gravity
+msgid "How serious is the problem: impact if nothing is done."
+msgstr "Quão grave é o problema: impacto caso nada seja feito."
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields,field_description:eng_helpdesk_mgmt_gut.field_helpdesk_ticket__gut_urgency
+msgid "Urgency (U)"
+msgstr "Urgência (U)"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields,help:eng_helpdesk_mgmt_gut.field_helpdesk_ticket__gut_urgency
+msgid "How much time is available before the problem must be solved."
+msgstr "Quanto tempo há disponível antes que o problema precise ser resolvido."
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields,field_description:eng_helpdesk_mgmt_gut.field_helpdesk_ticket__gut_tendency
+msgid "Tendency (T)"
+msgstr "Tendência (T)"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields,help:eng_helpdesk_mgmt_gut.field_helpdesk_ticket__gut_tendency
+msgid "How the problem evolves if nothing is done."
+msgstr "Como o problema evolui caso nada seja feito."
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields,field_description:eng_helpdesk_mgmt_gut.field_helpdesk_ticket__gut_score
+msgid "GUT Score"
+msgstr "Score GUT"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields,help:eng_helpdesk_mgmt_gut.field_helpdesk_ticket__gut_score
+msgid "Product of Gravity × Urgency × Tendency (1-125). Zero when any of the three is not set."
+msgstr "Produto de Gravidade × Urgência × Tendência (1-125). Zero quando algum dos três não está preenchido."
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields,field_description:eng_helpdesk_mgmt_gut.field_helpdesk_ticket__gut_band
+msgid "GUT Band"
+msgstr "Faixa GUT"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields,help:eng_helpdesk_mgmt_gut.field_helpdesk_ticket__gut_band
+msgid "Classification band derived from GUT Score: Unclassified (0), Low (1-15), Medium (16-45), High (46-99), Critical (100-125)."
+msgstr "Faixa de classificação derivada do Score GUT: Não classificado (0), Baixa (1-15), Média (16-45), Alta (46-99), Crítica (100-125)."
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields.selection,name:eng_helpdesk_mgmt_gut.selection__helpdesk_ticket__gut_gravity__1
+msgid "1 - No gravity"
+msgstr "1 - Sem gravidade"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields.selection,name:eng_helpdesk_mgmt_gut.selection__helpdesk_ticket__gut_gravity__2
+msgid "2 - Low gravity"
+msgstr "2 - Pouco grave"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields.selection,name:eng_helpdesk_mgmt_gut.selection__helpdesk_ticket__gut_gravity__3
+msgid "3 - Grave"
+msgstr "3 - Grave"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields.selection,name:eng_helpdesk_mgmt_gut.selection__helpdesk_ticket__gut_gravity__4
+msgid "4 - Very grave"
+msgstr "4 - Muito grave"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields.selection,name:eng_helpdesk_mgmt_gut.selection__helpdesk_ticket__gut_gravity__5
+msgid "5 - Extremely grave"
+msgstr "5 - Extremamente grave"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields.selection,name:eng_helpdesk_mgmt_gut.selection__helpdesk_ticket__gut_urgency__1
+msgid "1 - Can wait"
+msgstr "1 - Pode esperar"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields.selection,name:eng_helpdesk_mgmt_gut.selection__helpdesk_ticket__gut_urgency__2
+msgid "2 - Low urgency"
+msgstr "2 - Pouco urgente"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields.selection,name:eng_helpdesk_mgmt_gut.selection__helpdesk_ticket__gut_urgency__3
+msgid "3 - Urgent, needs attention"
+msgstr "3 - Urgente, merece atenção"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields.selection,name:eng_helpdesk_mgmt_gut.selection__helpdesk_ticket__gut_urgency__4
+msgid "4 - Very urgent"
+msgstr "4 - Muito urgente"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields.selection,name:eng_helpdesk_mgmt_gut.selection__helpdesk_ticket__gut_urgency__5
+msgid "5 - Immediate action"
+msgstr "5 - Ação imediata"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields.selection,name:eng_helpdesk_mgmt_gut.selection__helpdesk_ticket__gut_tendency__1
+msgid "1 - Will not change"
+msgstr "1 - Não vai mudar"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields.selection,name:eng_helpdesk_mgmt_gut.selection__helpdesk_ticket__gut_tendency__2
+msgid "2 - Will worsen long term"
+msgstr "2 - Vai piorar a longo prazo"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields.selection,name:eng_helpdesk_mgmt_gut.selection__helpdesk_ticket__gut_tendency__3
+msgid "3 - Will worsen medium term"
+msgstr "3 - Vai piorar a médio prazo"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields.selection,name:eng_helpdesk_mgmt_gut.selection__helpdesk_ticket__gut_tendency__4
+msgid "4 - Will worsen short term"
+msgstr "4 - Vai piorar a curto prazo"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields.selection,name:eng_helpdesk_mgmt_gut.selection__helpdesk_ticket__gut_tendency__5
+msgid "5 - Will worsen rapidly"
+msgstr "5 - Vai piorar rapidamente"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields.selection,name:eng_helpdesk_mgmt_gut.selection__helpdesk_ticket__gut_band__unclassified
+msgid "Unclassified"
+msgstr "Não classificado"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields.selection,name:eng_helpdesk_mgmt_gut.selection__helpdesk_ticket__gut_band__low
+msgid "Low"
+msgstr "Baixa"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields.selection,name:eng_helpdesk_mgmt_gut.selection__helpdesk_ticket__gut_band__medium
+msgid "Medium"
+msgstr "Média"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields.selection,name:eng_helpdesk_mgmt_gut.selection__helpdesk_ticket__gut_band__high
+msgid "High"
+msgstr "Alta"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model:ir.model.fields.selection,name:eng_helpdesk_mgmt_gut.selection__helpdesk_ticket__gut_band__critical
+msgid "Critical"
+msgstr "Crítica"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model_terms:ir.ui.view,arch_db:eng_helpdesk_mgmt_gut.ticket_view_form_gut
+msgid "GUT Prioritization"
+msgstr "Priorização GUT"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model_terms:ir.ui.view,arch_db:eng_helpdesk_mgmt_gut.helpdesk_ticket_view_search_gut
+msgid "GUT Critical"
+msgstr "GUT Crítico"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model_terms:ir.ui.view,arch_db:eng_helpdesk_mgmt_gut.helpdesk_ticket_view_search_gut
+msgid "GUT High"
+msgstr "GUT Alto"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model_terms:ir.ui.view,arch_db:eng_helpdesk_mgmt_gut.helpdesk_ticket_view_search_gut
+msgid "GUT Medium"
+msgstr "GUT Médio"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model_terms:ir.ui.view,arch_db:eng_helpdesk_mgmt_gut.helpdesk_ticket_view_search_gut
+msgid "GUT Low"
+msgstr "GUT Baixo"
+
+#. module: eng_helpdesk_mgmt_gut
+#: model_terms:ir.ui.view,arch_db:eng_helpdesk_mgmt_gut.helpdesk_ticket_view_search_gut
+msgid "GUT Unclassified"
+msgstr "GUT Não classificado"

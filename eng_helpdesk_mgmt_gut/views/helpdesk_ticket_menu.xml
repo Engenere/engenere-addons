@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<odoo>
+
+    <!-- Reorder tickets action to open kanban first (preserving pivot). -->
+    <record id="helpdesk_mgmt.helpdesk_ticket_action" model="ir.actions.act_window">
+        <field name="view_mode">kanban,tree,form,pivot</field>
+    </record>
+
+</odoo>
