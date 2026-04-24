@@ -60,10 +60,8 @@ Authors
 Contributors
 ------------
 
--  [Felipe Motter
-   Pereira](`https://github.com/felipemotter <https://github.com/felipemotter>`__)
--  [Antônio S. Pereira
-   Neto](`https://github.com/antoniospneto <https://github.com/antoniospneto>`__)
+-  [Felipe Motter Pereira](https://github.com/felipemotter)
+-  [Antônio S. Pereira Neto](https://github.com/antoniospneto)
 
 Maintainers
 -----------
