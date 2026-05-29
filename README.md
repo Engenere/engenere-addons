@@ -1,10 +1,13 @@
 [![Support the OCA](https://odoo-community.org/readme-banner-image)](https://odoo-community.org/get-involved?utm_source=repo-readme)
 
 # Open-source Odoo addons maintained by Engenere.
+
 <!-- /!\ Non OCA Context : Set here the badge of your runbot / runboat instance. -->
+
 [![Pre-commit Status](https://github.com/Engenere/engenere-addons/actions/workflows/pre-commit.yml/badge.svg?branch=16.0)](https://github.com/Engenere/engenere-addons/actions/workflows/pre-commit.yml?query=branch%3A16.0)
 [![Build Status](https://github.com/Engenere/engenere-addons/actions/workflows/test.yml/badge.svg?branch=16.0)](https://github.com/Engenere/engenere-addons/actions/workflows/test.yml?query=branch%3A16.0)
 [![codecov](https://codecov.io/gh/Engenere/engenere-addons/branch/16.0/graph/badge.svg)](https://codecov.io/gh/Engenere/engenere-addons)
+
 <!-- /!\ Non OCA Context : Set here the badge of your translation instance. -->
 
 <!-- /!\ do not modify above this line -->
@@ -40,6 +43,7 @@ addon | version | maintainers | summary
 [eng_reconcile_default_payment_filter](eng_reconcile_default_payment_filter/) | 16.0.1.0.0 |  | Always enable Outstanding Payments/Receipts filter in bank reconciliation.
 [eng_sale_customer_order_ref](eng_sale_customer_order_ref/) | 16.0.1.0.0 | <a href='https://github.com/felipemotter'><img src='https://github.com/felipemotter.png' width='32' height='32' style='border-radius:50%;' alt='felipemotter'/></a> | Take the General Client Order Ref on Sale Order to Partner Order in Sale Order Line.
 [eng_sale_first_time_state](eng_sale_first_time_state/) | 16.0.1.0.0 | <a href='https://github.com/felipemotter'><img src='https://github.com/felipemotter.png' width='32' height='32' style='border-radius:50%;' alt='felipemotter'/></a> | Indicates whether the product is sold for the first time to the partner.
+[eng_stock_picking_sales_purchase_readonly](eng_stock_picking_sales_purchase_readonly/) | 16.0.1.0.0 | <a href='https://github.com/felipemotter'><img src='https://github.com/felipemotter.png' width='32' height='32' style='border-radius:50%;' alt='felipemotter'/></a> | Make stock transfers (picking, moves, move lines) read-only for the Sales, Purchase and Invoicing roles: they can view transfers but cannot edit, cancel, scrap, unreserve, return or add lines. Order-side flows (confirm/cancel SO/PO, qty bump, delivery address) keep working.
 [eng_web_company_color_responsive](eng_web_company_color_responsive/) | 16.0.1.0.0 | <a href='https://github.com/felipemotter'><img src='https://github.com/felipemotter.png' width='32' height='32' style='border-radius:50%;' alt='felipemotter'/></a> | Integration between Company Color And Responsive
 [eng_web_statusbar_fix](eng_web_statusbar_fix/) | 16.0.1.0.0 | <a href='https://github.com/felipemotter'><img src='https://github.com/felipemotter.png' width='32' height='32' style='border-radius:50%;' alt='felipemotter'/></a> | Prevents horizontal scroll when forms have many header buttons
 
@@ -51,9 +55,10 @@ addon | version | maintainers | summary
 
 This repository is licensed under [AGPL-3.0](LICENSE).
 
-However, each module can have a totally different license, as long as they adhere to Engenere
-policy. Consult each module's `__manifest__.py` file, which contains a `license` key
-that explains its license.
+However, each module can have a totally different license, as long as they adhere to
+Engenere policy. Consult each module's `__manifest__.py` file, which contains a
+`license` key that explains its license.
 
-----
+---
+
 <!-- /!\ Non OCA Context : Set here the full description of your organization. -->

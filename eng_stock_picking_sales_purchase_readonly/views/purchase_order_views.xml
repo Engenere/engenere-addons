@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!--
+        The Receipt smart button on the purchase order is gated by
+        stock.group_stock_user upstream. Buyers need to reach the related
+        transfers in read-only, so widen the smart button to the purchase
+        roles as well. The "Receive Products" header button (a write
+        action) is intentionally left gated to stock users, and every
+        write action on the picking stays blocked by the lockdown ACL.
+    -->
+    <record id="view_purchase_order_form_picking_button_purchase" model="ir.ui.view">
+        <field name="name">purchase.order.form.picking.button.purchase</field>
+        <field name="model">purchase.order</field>
+        <field
+            name="inherit_id"
+            ref="purchase_stock.purchase_order_view_form_inherit"
+        />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//div[hasclass('oe_button_box')]//button[@name='action_view_picking']"
+                position="attributes"
+            >
+                <attribute
+                    name="groups"
+                >stock.group_stock_user,purchase.group_purchase_user</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
