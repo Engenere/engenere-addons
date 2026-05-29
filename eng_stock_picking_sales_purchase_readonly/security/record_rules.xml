@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!--
+        Sales and purchase roles keep their broad picking visibility on
+        purpose: they need to inspect transfers tied to any order, both
+        through the Inventory app and through the "Transfers" smart
+        button on their own sale and purchase orders. Write protection
+        is handled by the lockdown ACL in security/ir.model.access.csv,
+        not by record rules.
+
+        This file is intentionally empty (kept in the manifest so the
+        module structure stays explicit and ready to host future rules
+        without a manifest bump).
+    -->
+
+</odoo>
