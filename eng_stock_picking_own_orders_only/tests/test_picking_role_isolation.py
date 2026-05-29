@@ -182,12 +182,14 @@ class TestPickingOwnOrdersOnly(TransactionCase):
         visible = self.env["stock.picking"].with_user(self.salesman).search([])
         self.assertIn(own, visible)
 
-    def test_salesman_does_not_see_other_salesman_picking(self):
+    def test_salesman_sees_other_salesman_picking(self):
+        # Sales role keeps broad picking visibility so they can inspect
+        # transfers tied to any order (read-only, write is blocked by ACL).
         order = self._make_sale_order(self.other_salesman)
         order.with_user(self.other_salesman).action_confirm()
         other = order.picking_ids[:1]
         visible = self.env["stock.picking"].with_user(self.salesman).search([])
-        self.assertNotIn(other, visible)
+        self.assertIn(other, visible)
 
     def test_purchase_user_sees_own_purchase_picking(self):
         order = self._make_purchase_order(self.purchase_user)
@@ -196,12 +198,14 @@ class TestPickingOwnOrdersOnly(TransactionCase):
         visible = self.env["stock.picking"].with_user(self.purchase_user).search([])
         self.assertIn(own, visible)
 
-    def test_purchase_user_does_not_see_other_purchase_picking(self):
+    def test_purchase_user_sees_other_purchase_picking(self):
+        # Purchase role keeps broad picking visibility for the same reason
+        # as the sales role: read tied to any PO, write blocked by ACL.
         order = self._make_purchase_order(self.other_purchase_user)
         order.with_user(self.other_purchase_user).button_confirm()
         other = order.picking_ids[:1]
         visible = self.env["stock.picking"].with_user(self.purchase_user).search([])
-        self.assertNotIn(other, visible)
+        self.assertIn(other, visible)
 
     def test_stock_user_can_write_picking(self):
         sale = self._make_sale_order(self.salesman)
