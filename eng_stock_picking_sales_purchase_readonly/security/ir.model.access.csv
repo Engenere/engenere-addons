@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+sale_stock.access_stock_picking_salesman,stock.picking salesman,stock.model_stock_picking,sales_team.group_sale_salesman,1,0,0,0
+sale_stock.access_stock_picking_sales,stock.picking sale manager,stock.model_stock_picking,sales_team.group_sale_manager,1,0,0,0
+purchase_stock.access_stock_picking_purchase_user,stock.picking purchase user,stock.model_stock_picking,purchase.group_purchase_user,1,0,0,0
+purchase_stock.access_stock_picking_purchase_user_manager,stock.picking purchase manager,stock.model_stock_picking,purchase.group_purchase_manager,1,0,0,0
+stock_account.access_stock_picking_invoicing_payments,stock.picking invoicing,stock.model_stock_picking,account.group_account_invoice,1,0,0,0
+sale_stock.access_stock_move_salesman,stock.move salesman,stock.model_stock_move,sales_team.group_sale_salesman,1,0,0,0
+sale_stock.access_stock_move_manager,stock.move sale manager,stock.model_stock_move,sales_team.group_sale_manager,1,0,0,0
+purchase_stock.access_stock_move_purchase_user,stock.move purchase user,stock.model_stock_move,purchase.group_purchase_user,1,0,0,0
+purchase_stock.access_stock_move_purchase_user_manager,stock.move purchase manager,stock.model_stock_move,purchase.group_purchase_manager,1,0,0,0
+stock_account.access_stock_move_invoicing_payments,stock.move invoicing,stock.model_stock_move,account.group_account_invoice,1,0,0,0
+stock.access_stock_move_line_all,stock.move.line all,stock.model_stock_move_line,base.group_user,1,0,0,0

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="stock.action_unreserve_picking" model="ir.actions.server">
+        <field name="groups_id" eval="[(6, 0, [ref('stock.group_stock_user')])]" />
+    </record>
+
+</odoo>
