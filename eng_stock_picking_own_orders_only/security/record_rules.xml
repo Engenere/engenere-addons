@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!--
+        Sales/Purchase users only see transfers tied to their OWN orders.
+        Rules are read-only: write/create/unlink stay decided by ACLs.
+        Other groups with broad picking visibility need an "all" rule below
+        so the UNION across groups keeps working for users who carry
+        more than one role.
+    -->
+
+    <record id="rule_stock_picking_sale_salesman" model="ir.rule">
+        <field name="name">stock.picking: salesman sees own orders only</field>
+        <field name="model_id" ref="stock.model_stock_picking" />
+        <field name="groups" eval="[(4, ref('sales_team.group_sale_salesman'))]" />
+        <field name="perm_read" eval="True" />
+        <field name="perm_write" eval="False" />
+        <field name="perm_create" eval="False" />
+        <field name="perm_unlink" eval="False" />
+        <field name="domain_force">[('sale_id.user_id', '=', user.id)]</field>
+    </record>
+
+    <record id="rule_stock_picking_sale_manager" model="ir.rule">
+        <field name="name">stock.picking: sale manager sees own orders only</field>
+        <field name="model_id" ref="stock.model_stock_picking" />
+        <field name="groups" eval="[(4, ref('sales_team.group_sale_manager'))]" />
+        <field name="perm_read" eval="True" />
+        <field name="perm_write" eval="False" />
+        <field name="perm_create" eval="False" />
+        <field name="perm_unlink" eval="False" />
+        <field name="domain_force">[('sale_id.user_id', '=', user.id)]</field>
+    </record>
+
+    <record id="rule_stock_picking_purchase_user" model="ir.rule">
+        <field name="name">stock.picking: purchase user sees own orders only</field>
+        <field name="model_id" ref="stock.model_stock_picking" />
+        <field name="groups" eval="[(4, ref('purchase.group_purchase_user'))]" />
+        <field name="perm_read" eval="True" />
+        <field name="perm_write" eval="False" />
+        <field name="perm_create" eval="False" />
+        <field name="perm_unlink" eval="False" />
+        <field name="domain_force">[('purchase_id.user_id', '=', user.id)]</field>
+    </record>
+
+    <record id="rule_stock_picking_purchase_manager" model="ir.rule">
+        <field name="name">stock.picking: purchase manager sees own orders only</field>
+        <field name="model_id" ref="stock.model_stock_picking" />
+        <field name="groups" eval="[(4, ref('purchase.group_purchase_manager'))]" />
+        <field name="perm_read" eval="True" />
+        <field name="perm_write" eval="False" />
+        <field name="perm_create" eval="False" />
+        <field name="perm_unlink" eval="False" />
+        <field name="domain_force">[('purchase_id.user_id', '=', user.id)]</field>
+    </record>
+
+    <!--
+        Complementary "see all" rules so users that ALSO carry a Stock or
+        Shipping Viewer group keep full visibility through the UNION of
+        record rules.
+    -->
+
+    <record id="rule_stock_picking_stock_user_all" model="ir.rule">
+        <field name="name">stock.picking: stock user sees everything</field>
+        <field name="model_id" ref="stock.model_stock_picking" />
+        <field name="groups" eval="[(4, ref('stock.group_stock_user'))]" />
+        <field name="perm_read" eval="True" />
+        <field name="perm_write" eval="False" />
+        <field name="perm_create" eval="False" />
+        <field name="perm_unlink" eval="False" />
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="rule_stock_picking_stock_manager_all" model="ir.rule">
+        <field name="name">stock.picking: stock manager sees everything</field>
+        <field name="model_id" ref="stock.model_stock_picking" />
+        <field name="groups" eval="[(4, ref('stock.group_stock_manager'))]" />
+        <field name="perm_read" eval="True" />
+        <field name="perm_write" eval="False" />
+        <field name="perm_create" eval="False" />
+        <field name="perm_unlink" eval="False" />
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+</odoo>
