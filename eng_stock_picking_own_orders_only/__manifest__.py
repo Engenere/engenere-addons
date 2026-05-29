@@ -15,6 +15,7 @@
         "purchase_stock",
     ],
     "data": [
+        "security/ir.model.access.csv",
         "security/record_rules.xml",
         "security/server_actions.xml",
         "views/stock_picking_views.xml",
