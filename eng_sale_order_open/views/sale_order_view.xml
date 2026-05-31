@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Engenere.one
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_sales_order_filter" model="ir.ui.view">
+        <field name="name">sale.order.search (in eng_sale_order_open)</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='my_sale_orders_filter']" position="before">
+                <filter
+                    name="open"
+                    string="Open"
+                    domain="[('is_open', '=', True)]"
+                    help="Confirmed orders with pending delivery or pending invoice"
+                />
+                <separator />
+            </xpath>
+        </field>
+    </record>
+</odoo>
