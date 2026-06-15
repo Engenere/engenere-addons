@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_solution_plan_group,helpdesk.ticket.solution.plan group,model_helpdesk_ticket_solution_plan,group_helpdesk_solution_plan,1,1,1,1

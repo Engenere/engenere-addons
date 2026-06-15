@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Engenere - Felipe Motter Pereira
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="ticket_view_form_solution_plan" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.view.form.solution.plan</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk_mgmt.ticket_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page
+                    name="solution_plan"
+                    string="Solution Plan"
+                    groups="eng_helpdesk_mgmt_solution_plan.group_helpdesk_solution_plan"
+                >
+                    <field name="solution_plan_ids" mode="form">
+                        <form>
+                            <field name="content" widget="html" nolabel="1" />
+                        </form>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
