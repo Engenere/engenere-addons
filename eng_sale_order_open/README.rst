@@ -32,15 +32,15 @@ search view.
 A sale order is considered **open** when it is confirmed
 (``state == 'sale'`` or ``'done'``) **and** any of:
 
-- there is a related stock picking not in ``done``/``cancel`` state
-  (pending delivery);
-- the order is not fully invoiced **and** some line still has
-  ``qty_to_invoice > 0`` (pending invoice);
-- the order has **no net activity** — nothing delivered and nothing
-  invoiced. This keeps freshly-confirmed orders open and also forces
-  explicit handling of full-reversal scenarios (delivered + returned +
-  invoiced + refunded back to zero), pushing the user to cancel the
-  order.
+-  there is a related stock picking not in ``done``/``cancel`` state
+   (pending delivery);
+-  the order is not fully invoiced **and** some line still has
+   ``qty_to_invoice > 0`` (pending invoice);
+-  the order has **no net activity** — nothing delivered and nothing
+   invoiced. This keeps freshly-confirmed orders open and also forces
+   explicit handling of full-reversal scenarios (delivered + returned +
+   invoiced + refunded back to zero), pushing the user to cancel the
+   order.
 
 Short-shipment within tolerance closes naturally: once pickings are
 validated without backorder and the delivered quantity is invoiced, both

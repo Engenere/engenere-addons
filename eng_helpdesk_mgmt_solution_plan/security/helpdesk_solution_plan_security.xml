@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Engenere - Felipe Motter Pereira
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="group_helpdesk_solution_plan" model="res.groups">
+        <field name="name">Helpdesk Solution Plan (internal)</field>
+        <field
+            name="comment"
+        >Members can view and edit the internal technical solution plan of helpdesk tickets. It is hidden from every other user (including the portal).</field>
+    </record>
+
+    <record id="solution_plan_company_rule" model="ir.rule">
+        <field name="name">Helpdesk Solution Plan multi-company</field>
+        <field name="model_id" ref="model_helpdesk_ticket_solution_plan" />
+        <field name="global" eval="True" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>
