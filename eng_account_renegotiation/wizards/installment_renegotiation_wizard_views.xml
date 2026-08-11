@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Engenere
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="view_installment_renegotiation_wizard_form" model="ir.ui.view">
+        <field
+            name="name"
+        >account.installment.renegotiation.wizard.form.header.mode</field>
+        <field name="model">account.installment.renegotiation.wizard</field>
+        <field
+            name="inherit_id"
+            ref="l10n_br_account_renegotiation.view_installment_renegotiation_wizard_form"
+        />
+        <field name="arch" type="xml">
+            <field name="payment_term_id" position="after">
+                <field name="company_id" invisible="1" />
+                <field name="expected_payment_type" invisible="1" />
+                <field
+                    name="header_payment_mode_id"
+                    domain="[('company_id', '=', company_id), ('payment_type', '=', expected_payment_type)]"
+                />
+            </field>
+        </field>
+    </record>
+
+</odoo>

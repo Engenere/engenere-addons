@@ -1,0 +1,203 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* eng_account_renegotiation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-11 12:13+0000\n"
+"PO-Revision-Date: 2026-08-11 12:13+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: eng_account_renegotiation
+#. odoo-python
+#: code:addons/eng_account_renegotiation/models/account_move.py:0
+#, python-format
+msgid "%(date)s: %(amount)s"
+msgstr ""
+
+#. module: eng_account_renegotiation
+#. odoo-python
+#: code:addons/eng_account_renegotiation/wizards/installment_renegotiation_wizard.py:0
+#, python-format
+msgid "(none)"
+msgstr ""
+
+#. module: eng_account_renegotiation
+#. odoo-python
+#: code:addons/eng_account_renegotiation/models/account_move.py:0
+#, python-format
+msgid ""
+"<p><strong>Payment Installments Renegotiated</strong></p><p><strong>Previous"
+" installments:</strong><br/>%(old)s</p><p><strong>New "
+"installments:</strong><br/>%(new)s</p>"
+msgstr ""
+
+#. module: eng_account_renegotiation
+#: model:ir.module.category,description:eng_account_renegotiation.module_category_installment_renegotiation
+msgid "Access rights for renegotiating invoice installments."
+msgstr ""
+
+#. module: eng_account_renegotiation
+#. odoo-python
+#: code:addons/eng_account_renegotiation/wizards/installment_renegotiation_wizard.py:0
+#, python-format
+msgid "All installment amounts must be greater than zero."
+msgstr ""
+
+#. module: eng_account_renegotiation
+#. odoo-python
+#: code:addons/eng_account_renegotiation/wizards/installment_renegotiation_wizard.py:0
+#, python-format
+msgid "All installments must have a due date."
+msgstr ""
+
+#. module: eng_account_renegotiation
+#: model:ir.model.fields,help:eng_account_renegotiation.field_account_installment_renegotiation_wizard__header_payment_mode_id
+msgid ""
+"Also replace the payment mode on the invoice header. All new installments "
+"will use this mode."
+msgstr ""
+
+#. module: eng_account_renegotiation
+#: model:res.groups,comment:eng_account_renegotiation.group_vendor_bill_renegotiation
+msgid ""
+"Billing users in this group can renegotiate installments of vendor bills\n"
+"without Invoicing Manager rights. Customer invoices still require Invoicing\n"
+"Manager."
+msgstr ""
+
+#. module: eng_account_renegotiation
+#: model:ir.model.fields,field_description:eng_account_renegotiation.field_account_installment_renegotiation_wizard__expected_payment_type
+msgid "Expected Payment Type"
+msgstr ""
+
+#. module: eng_account_renegotiation
+#: model:ir.model.fields.selection,name:eng_account_renegotiation.selection__account_installment_renegotiation_wizard__expected_payment_type__inbound
+msgid "Inbound"
+msgstr ""
+
+#. module: eng_account_renegotiation
+#: model:ir.module.category,name:eng_account_renegotiation.module_category_installment_renegotiation
+msgid "Installment Renegotiation"
+msgstr ""
+
+#. module: eng_account_renegotiation
+#: model:ir.model,name:eng_account_renegotiation.model_account_installment_renegotiation_wizard
+msgid "Installment Renegotiation Wizard"
+msgstr ""
+
+#. module: eng_account_renegotiation
+#. odoo-python
+#: code:addons/eng_account_renegotiation/wizards/installment_renegotiation_wizard.py:0
+#, python-format
+msgid ""
+"Installments with a partial payment cannot be renegotiated: %(dates)s. "
+"Unreconcile the partial payment first."
+msgstr ""
+
+#. module: eng_account_renegotiation
+#. odoo-python
+#: code:addons/eng_account_renegotiation/wizards/installment_renegotiation_wizard.py:0
+#, python-format
+msgid "Invoice payment mode replaced during renegotiation: %(old)s → %(new)s"
+msgstr ""
+
+#. module: eng_account_renegotiation
+#: model:ir.model,name:eng_account_renegotiation.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: eng_account_renegotiation
+#: model:ir.model.fields,field_description:eng_account_renegotiation.field_account_installment_renegotiation_wizard__header_payment_mode_id
+msgid "New Invoice Payment Mode"
+msgstr ""
+
+#. module: eng_account_renegotiation
+#. odoo-python
+#: code:addons/eng_account_renegotiation/models/account_move.py:0
+#, python-format
+msgid ""
+"Only users with 'Billing Administrator' rights or, for vendor bills, Billing"
+" users in the 'Renegotiate Vendor Bill Installments' group can renegotiate "
+"installments."
+msgstr ""
+
+#. module: eng_account_renegotiation
+#: model:ir.model.fields.selection,name:eng_account_renegotiation.selection__account_installment_renegotiation_wizard__expected_payment_type__outbound
+msgid "Outbound"
+msgstr ""
+
+#. module: eng_account_renegotiation
+#. odoo-python
+#: code:addons/eng_account_renegotiation/models/account_move.py:0
+#, python-format
+msgid "Renegotiate Installments"
+msgstr ""
+
+#. module: eng_account_renegotiation
+#: model:res.groups,name:eng_account_renegotiation.group_vendor_bill_renegotiation
+msgid "Renegotiate Vendor Bill Installments"
+msgstr ""
+
+#. module: eng_account_renegotiation
+#. odoo-python
+#: code:addons/eng_account_renegotiation/wizards/installment_renegotiation_wizard.py:0
+#, python-format
+msgid "The invoice must be posted to renegotiate installments."
+msgstr ""
+
+#. module: eng_account_renegotiation
+#. odoo-python
+#: code:addons/eng_account_renegotiation/wizards/installment_renegotiation_wizard.py:0
+#, python-format
+msgid ""
+"The new invoice payment mode must be of type %(expected)s for this document."
+msgstr ""
+
+#. module: eng_account_renegotiation
+#. odoo-python
+#: code:addons/eng_account_renegotiation/wizards/installment_renegotiation_wizard.py:0
+#, python-format
+msgid ""
+"The total amount of installments must remain unchanged. Current difference: "
+"%(diff)s"
+msgstr ""
+
+#. module: eng_account_renegotiation
+#. odoo-python
+#: code:addons/eng_account_renegotiation/models/account_move.py:0
+#, python-format
+msgid ""
+"There are no unreconciled payment term lines to renegotiate. All "
+"installments have been paid or reconciled."
+msgstr ""
+
+#. module: eng_account_renegotiation
+#. odoo-python
+#: code:addons/eng_account_renegotiation/wizards/installment_renegotiation_wizard.py:0
+#, python-format
+msgid ""
+"When replacing the invoice payment mode, all installments must use the new "
+"mode. Clear the manual modes or the new invoice payment mode."
+msgstr ""
+
+#. module: eng_account_renegotiation
+#. odoo-python
+#: code:addons/eng_account_renegotiation/models/account_move.py:0
+#, python-format
+msgid "You can only renegotiate installments on posted invoices."
+msgstr ""
+
+#. module: eng_account_renegotiation
+#. odoo-python
+#: code:addons/eng_account_renegotiation/wizards/installment_renegotiation_wizard.py:0
+#, python-format
+msgid "You must have at least one installment."
+msgstr ""
