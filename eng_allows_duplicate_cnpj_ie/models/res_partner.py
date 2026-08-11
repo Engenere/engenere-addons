@@ -14,3 +14,12 @@ class Partner(models.Model):
         Permitir CNPJs e IEs duplicados
         """
         return
+
+    @api.constrains("vat", "l10n_br_ie_code")
+    def _check_cnpj_l10n_br_ie_code(self):
+        """
+        Mesma desativação para a constraint que substituiu a de cima no
+        l10n_br_base: sem este override o módulo deixou de ter efeito, e
+        cadastros com CNPJ repetido voltaram a ser recusados.
+        """
+        return
