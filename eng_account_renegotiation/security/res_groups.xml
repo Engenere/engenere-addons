@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Engenere
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="module_category_installment_renegotiation" model="ir.module.category">
+        <field name="name">Installment Renegotiation</field>
+        <field
+            name="description"
+        >Access rights for renegotiating invoice installments.</field>
+    </record>
+
+    <record id="group_vendor_bill_renegotiation" model="res.groups">
+        <field name="name">Renegotiate Vendor Bill Installments</field>
+        <field name="category_id" ref="module_category_installment_renegotiation" />
+        <field
+            name="comment"
+        >Billing users in this group can renegotiate installments of vendor bills
+without Invoicing Manager rights. Customer invoices still require Invoicing
+Manager.</field>
+    </record>
+
+</odoo>
