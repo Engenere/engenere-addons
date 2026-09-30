@@ -10,7 +10,9 @@
     "author": "Engenere",
     "depends": [
         "l10n_br_fiscal",
+        "l10n_br_fiscal_edi",
         "l10n_br_account_payment_order",
+        "l10n_br_account",
     ],
     "data": [
         "views/l10n_br_fiscal_document_view.xml",
