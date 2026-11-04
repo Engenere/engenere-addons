@@ -398,16 +398,24 @@ class AccountBankStatementLine(models.Model):
             order="internal_index",
         )
         for st_line in st_lines:
+            # The reason stays on the line as text, for the users of the
+            # company: not in the language of the user of the scheduled action
+            st_line = st_line.with_context(
+                lang=st_line.company_id.partner_id.lang or self.env.lang
+            )
             try:
                 with self.env.cr.savepoint():
                     st_line._eng_cnab_try_reconcile()
             except (UserError, ValidationError) as error:
-                st_line._eng_cnab_write_outcome(
-                    "error",
-                    _(
-                        "Error: the CNAB matching of this line failed, and the "
-                        "scheduled action went on with the other lines. Fix "
-                        "the cause, then retry.\n%(error)s",
-                        error=str(error),
-                    ),
-                )
+                st_line._eng_cnab_write_error(error)
+
+    def _eng_cnab_write_error(self, error):
+        self._eng_cnab_write_outcome(
+            "error",
+            _(
+                "Error: the CNAB matching of this line failed, and the "
+                "scheduled action went on with the other lines. Fix "
+                "the cause, then retry.\n%(error)s",
+                error=str(error),
+            ),
+        )
