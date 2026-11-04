@@ -143,12 +143,14 @@ msgid ""
 "CNAB clearing lines of the group, by the bank where the customer paid: any "
 "bank, the bank of the journal only, or the other banks only. Use the last "
 "two when the bank statement splits the collection credit of a day by "
-"receiving bank."
+"receiving bank. For Ailos, the bank of the journal is its own credit union: "
+"a title paid at another credit union counts as another bank."
 msgstr ""
 "Linhas da transitória CNAB que entram no grupo, pelo banco onde o cliente "
 "pagou: qualquer banco, só o banco do diário ou só os outros bancos. Use as "
 "duas últimas quando o extrato separa o crédito de cobrança de um dia por "
-"banco recebedor."
+"banco recebedor. Na Ailos, o banco do diário é a própria cooperativa: título"
+" pago em outra cooperativa conta como outro banco."
 
 #. module: eng_cnab_statement_reconcile
 #: model:ir.model.fields.selection,name:eng_cnab_statement_reconcile.selection__account_bank_statement_line__eng_cnab_reconcile_status__error
