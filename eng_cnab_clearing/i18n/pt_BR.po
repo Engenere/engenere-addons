@@ -217,9 +217,19 @@ msgid "Receiving Bank Code"
 msgstr "Código do banco recebedor"
 
 #. module: eng_cnab_clearing
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_l10n_br_cnab_return_event__eng_receiving_branch_code
+msgid "Receiving Branch Code"
+msgstr "Código da agência recebedora"
+
+#. module: eng_cnab_clearing
 #: model:ir.model.fields,help:eng_cnab_clearing.field_l10n_br_cnab_return_event__eng_receiving_bank_code
 msgid "Receiving bank exactly as returned by the BRCobranca API."
 msgstr "Banco recebedor exatamente como a API do BRCobranca o devolve."
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,help:eng_cnab_clearing.field_l10n_br_cnab_return_event__eng_receiving_branch_code
+msgid "Receiving branch exactly as returned by the BRCobranca API."
+msgstr "Agência recebedora exatamente como a API do BRCobranca a devolve."
 
 #. module: eng_cnab_clearing
 #. odoo-python
@@ -410,11 +420,14 @@ msgstr "Este arquivo de retorno CNAB já foi importado neste diário."
 #: model:ir.model.fields,help:eng_cnab_clearing.field_account_move_line__eng_cnab_receiving_bank_class
 msgid ""
 "Whether the title was paid at the bank of the journal or at another bank, "
-"from the receiving bank of the CNAB return. Empty when the return does not "
-"state it."
+"from the receiving bank of the CNAB return. For Ailos, the bank of the "
+"journal is its own credit union: a title paid at another credit union counts"
+" as another bank. Empty when the return does not state it."
 msgstr ""
 "Se o título foi pago no banco do diário ou em outro banco, pelo banco "
-"recebedor do retorno CNAB. Fica vazio quando o retorno não o informa."
+"recebedor do retorno CNAB. Na Ailos, o banco do diário é a própria "
+"cooperativa: título pago em outra cooperativa conta como outro banco. Fica "
+"vazio quando o retorno não o informa."
 
 #. module: eng_cnab_clearing
 #. odoo-python
@@ -422,6 +435,13 @@ msgstr ""
 #, python-format
 msgid "the liquidation has no receiving bank"
 msgstr "a liquidação não tem banco recebedor"
+
+#. module: eng_cnab_clearing
+#. odoo-python
+#: code:addons/eng_cnab_clearing/parser/cnab_clearing_parser.py:0
+#, python-format
+msgid "the liquidation has no receiving branch"
+msgstr "a liquidação não tem agência recebedora"
 
 #. module: eng_cnab_clearing
 #. odoo-python
