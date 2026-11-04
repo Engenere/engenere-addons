@@ -18,6 +18,11 @@ class L10nBrCNABReturnEvent(models.Model):
         readonly=True,
         help="Receiving bank exactly as returned by the BRCobranca API.",
     )
+    eng_receiving_branch_code = fields.Char(
+        string="Receiving Branch Code",
+        readonly=True,
+        help="Receiving branch exactly as returned by the BRCobranca API.",
+    )
     eng_move_id = fields.Many2one(
         comodel_name="account.move",
         string="CNAB Clearing Entry",

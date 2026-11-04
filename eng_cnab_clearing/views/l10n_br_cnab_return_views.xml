@@ -39,6 +39,7 @@
             </field>
             <field name="occurrences" position="after">
                 <field name="eng_receiving_bank_code" optional="hide" />
+                <field name="eng_receiving_branch_code" optional="hide" />
                 <field name="eng_move_id" optional="show" />
             </field>
         </field>

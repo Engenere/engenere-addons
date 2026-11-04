@@ -22,8 +22,10 @@ class AccountMoveLine(models.Model):
         copy=False,
         readonly=True,
         help="Whether the title was paid at the bank of the journal or at "
-        "another bank, from the receiving bank of the CNAB return. Empty when "
-        "the return does not state it.",
+        "another bank, from the receiving bank of the CNAB return. For Ailos, "
+        "the bank of the journal is its own credit union: a title paid at "
+        "another credit union counts as another bank. Empty when the return "
+        "does not state it.",
     )
     eng_cnab_return_event_id = fields.Many2one(
         comodel_name="l10n_br_cnab.return.event",

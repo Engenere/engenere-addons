@@ -38,8 +38,10 @@ entry that:
   on the credit date nor on the import date;
 - debits a single **clearing account** line with the received amount,
   due on the **credit date** and tagged with the class of the receiving
-  bank (own bank or other banks), where the bank statement line of that
-  credit date will reconcile it;
+  bank (own bank or other banks; for Ailos, the own bank is its own
+  credit union, and a title paid at another credit union counts as
+  another bank), where the bank statement line of that credit date will
+  reconcile it;
 - keeps the installment line (reconciled with the invoice as before) and
   the interest, discount and rebate lines in their result accounts;
 - has no line in the bank account of the journal and no tariff line: the
@@ -52,7 +54,8 @@ record (or, for a record without one, its position among the records
 read from the file) and the reason, when a detail record has no valid
 occurrence date (no fallback to the credit date or to today), when a
 liquidation has no valid credit date, or when an Ailos liquidation does
-not state the receiving bank.
+not state the receiving bank or, when paid at Ailos, the receiving
+branch.
 
 The module also:
 
@@ -107,8 +110,8 @@ file**). For the liquidations credited on or after the cutover date:
 - the clearing line waits for the bank statement line of its credit
   date, with the receiving bank class on it;
 - the return log shows the journal and the hash of the file, and each
-  event shows its position in the file, the receiving bank and the
-  clearing entry.
+  event shows its position in the file, the receiving bank and branch
+  and the clearing entry.
 
 When the file is refused, nothing is imported: no log, no attachment, no
 event, no entry and no CNAB state change. Ask the bank for a corrected

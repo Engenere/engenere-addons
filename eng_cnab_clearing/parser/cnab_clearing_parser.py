@@ -25,7 +25,10 @@ RESULT_ROW_SIDES = {
 }
 
 # Banks whose statement splits the daily collection credit by receiving bank:
-# every liquidation of their return files must state the receiving bank.
+# every liquidation of their return files must state the receiving bank. Each
+# Ailos credit union is a branch of bank 085, and its statement credits a title
+# paid at another credit union together with those of the other banks, so the
+# receiving branch counts too.
 RECEIVING_BANK_REQUIRED_CODES = ("085",)
 
 
@@ -68,6 +71,9 @@ class EngClearingCNABParser(CNABFileParser):
                 event["eng_record_position"] = position
                 event["eng_receiving_bank_code"] = (
                     record.get("banco_recebedor") or False
+                )
+                event["eng_receiving_branch_code"] = (
+                    record.get("agencia_recebedora_com_dv") or False
                 )
         return result_row_list
 
@@ -137,11 +143,11 @@ class EngClearingCNABParser(CNABFileParser):
         if self._eng_is_liquidation(record, bank_name):
             if self._eng_get_date_problem(record.get("data_credito"), date_format):
                 reasons.append(_("the liquidation has no valid credit date"))
-            if (
-                self.bank.code_bc in RECEIVING_BANK_REQUIRED_CODES
-                and not self._eng_get_receiving_bank(record)
-            ):
-                reasons.append(_("the liquidation has no receiving bank"))
+            if self.bank.code_bc in RECEIVING_BANK_REQUIRED_CODES:
+                if not self._eng_get_receiving_bank(record):
+                    reasons.append(_("the liquidation has no receiving bank"))
+                elif not self._eng_get_receiving_bank_class(record):
+                    reasons.append(_("the liquidation has no receiving branch"))
         return reasons
 
     @staticmethod
@@ -186,11 +192,30 @@ class EngClearingCNABParser(CNABFileParser):
         code = str(record.get("banco_recebedor") or "").strip()
         return code.zfill(3) if code.strip("0") else ""
 
+    @staticmethod
+    def _eng_get_branch(record, key):
+        """Branch of the record under that key, "" when blank or zeroed."""
+        branch = str(record.get(key) or "").strip()
+        return branch if branch.strip("0") else ""
+
     def _eng_get_receiving_bank_class(self, record):
+        """Where the title was paid, as the bank statement splits the credit.
+
+        False when the return does not tell it, which only a liquidation
+        outside RECEIVING_BANK_REQUIRED_CODES gets past the validation with.
+        """
         receiving_bank = self._eng_get_receiving_bank(record)
         if not receiving_bank:
             return False
-        return "own" if receiving_bank == self.bank.code_bc else "other"
+        if receiving_bank != self.bank.code_bc:
+            return "other"
+        if self.bank.code_bc not in RECEIVING_BANK_REQUIRED_CODES:
+            return "own"
+        own_branch = self._eng_get_branch(record, "agencia_com_dv")
+        receiving_branch = self._eng_get_branch(record, "agencia_recebedora_com_dv")
+        if not own_branch or not receiving_branch:
+            return False
+        return "own" if receiving_branch == own_branch else "other"
 
     # Processing of the validated records
 
