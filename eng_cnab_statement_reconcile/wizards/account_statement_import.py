@@ -41,12 +41,12 @@ class AccountStatementImport(models.TransientModel):
                 raise UserError(
                     _(
                         "The bank statement file %(file_name)s was not imported: "
-                        "%(count)s of its lines are dated before the bank cutover "
-                        "date %(cutover_date)s of the journal %(journal)s, the "
-                        "first of them on %(first_date)s. Until that date the CNAB "
-                        "returns post through the bank account, so these lines "
-                        "would enter it a second time. Export the statement again "
-                        "starting on the cutover date.",
+                        "it has lines dated before the bank cutover date "
+                        "%(cutover_date)s of the journal %(journal)s (number of "
+                        "lines: %(count)s, first date: %(first_date)s). Until that "
+                        "date the CNAB returns post through the bank account, so "
+                        "these lines would enter it a second time. Export the "
+                        "statement again starting on the cutover date.",
                         file_name=self.statement_filename,
                         count=len(older_dates),
                         cutover_date=format_date(self.env, cutover_date),
