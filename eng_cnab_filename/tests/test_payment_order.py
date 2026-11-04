@@ -24,11 +24,22 @@ class TestFileName(TransactionCase):
                 "number_increment": 1,
             }
         )
+        cls.cnab_sequence = cls.env["ir.sequence"].create(
+            {
+                "name": "test cnab seq",
+                "implementation": "standard",
+                "padding": 5,
+                "number_increment": 1,
+            }
+        )
         cls.cnab_config = cls.env["l10n_br_cnab.config"].create(
             {
                 "name": "CNAB config test",
                 "company_id": cls.company.id,
                 "filename_sequence_id": cls.sequence.id,
+                # When installed, l10n_br_account_payment_brcobranca draws the
+                # file number from it before generating any payment file
+                "cnab_sequence_id": cls.cnab_sequence.id,
             }
         )
         cls.payment_mode = cls.env["account.payment.mode"].create(
