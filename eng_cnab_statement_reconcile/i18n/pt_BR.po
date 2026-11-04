@@ -321,17 +321,18 @@ msgstr ""
 #: code:addons/eng_cnab_statement_reconcile/wizards/account_statement_import.py:0
 #, python-format
 msgid ""
-"The bank statement file %(file_name)s was not imported: %(count)s of its "
-"lines are dated before the bank cutover date %(cutover_date)s of the journal"
-" %(journal)s, the first of them on %(first_date)s. Until that date the CNAB "
-"returns post through the bank account, so these lines would enter it a "
-"second time. Export the statement again starting on the cutover date."
+"The bank statement file %(file_name)s was not imported: it has lines dated "
+"before the bank cutover date %(cutover_date)s of the journal %(journal)s "
+"(number of lines: %(count)s, first date: %(first_date)s). Until that date "
+"the CNAB returns post through the bank account, so these lines would enter "
+"it a second time. Export the statement again starting on the cutover date."
 msgstr ""
-"O arquivo de extrato %(file_name)s não foi importado: %(count)s das suas "
-"linhas têm data anterior à data de corte %(cutover_date)s do diário "
-"%(journal)s, a primeira delas em %(first_date)s. Até essa data, os retornos "
-"CNAB lançam pela conta do banco, então essas linhas entrariam nela pela "
-"segunda vez. Exporte o extrato de novo, começando na data de corte."
+"O arquivo de extrato %(file_name)s não foi importado: ele tem linhas com "
+"data anterior à data de corte %(cutover_date)s do diário %(journal)s "
+"(quantidade de linhas: %(count)s, primeira data: %(first_date)s). Até essa "
+"data, os retornos CNAB lançam pela conta do banco, então essas linhas "
+"entrariam nela pela segunda vez. Exporte o extrato de novo, começando na "
+"data de corte."
 
 #. module: eng_cnab_statement_reconcile
 #. odoo-python
