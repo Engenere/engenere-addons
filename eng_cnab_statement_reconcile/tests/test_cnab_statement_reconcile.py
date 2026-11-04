@@ -11,7 +11,11 @@ from odoo.exceptions import AccessError, UserError, ValidationError
 from odoo.tests import Form, tagged
 from odoo.tools.misc import formatLang
 
-from odoo.addons.eng_cnab_clearing.tests.common import CREDIT_DATE, CUTOVER_DATE
+from odoo.addons.eng_cnab_clearing.tests.common import (
+    CREDIT_DATE,
+    CUTOVER_DATE,
+    OTHER_AILOS_CREDIT_UNION,
+)
 
 from .common import (
     COLLECTION_LABEL,
@@ -192,6 +196,72 @@ class TestCnabStatementReconcile(CnabStatementReconcileCommon):
         self.assertEqual(
             self._counterpart_moves(other_banks_line), other_banks_st_line.move_id
         )
+
+    def test_title_paid_at_another_credit_union_is_credited_with_the_other_banks(self):
+        moves = self._import(
+            self.journal_ailos,
+            [
+                self._ailos_record(self.installment_ailos, received=30.0),
+                self._ailos_record(
+                    self.installment_ailos_2,
+                    received=70.0,
+                    agencia_recebedora_com_dv=OTHER_AILOS_CREDIT_UNION,
+                ),
+            ],
+        )
+        clearing_lines = self._clearing_lines(moves)
+        own_bank_line = clearing_lines.filtered(lambda line: line.debit == 30.0)
+        other_banks_line = clearing_lines - own_bank_line
+
+        own_bank_st_line = self._create_statement_line(
+            self.journal_ailos, 30.0, OWN_BANK_LABEL
+        )
+        other_banks_st_line = self._create_statement_line(
+            self.journal_ailos, 70.0, OTHER_BANKS_LABEL
+        )
+
+        self.assertTrue(own_bank_st_line.is_reconciled)
+        self.assertTrue(other_banks_st_line.is_reconciled)
+        self.assertEqual(
+            self._counterpart_moves(own_bank_line), own_bank_st_line.move_id
+        )
+        self.assertEqual(
+            self._counterpart_moves(other_banks_line), other_banks_st_line.move_id
+        )
+
+    def test_cron_writes_the_reason_in_the_language_of_the_company(self):
+        # The user of the scheduled action has no say: the reason stays on the
+        # line as text, for the users of the company
+        self.env["res.lang"]._activate_lang("pt_BR")
+        self.company.partner_id.lang = "pt_BR"
+        st_line = self._create_statement_line(self.journal_bb, 100.0, COLLECTION_LABEL)
+        self.assertEqual(st_line.eng_cnab_reconcile_status, "awaiting")
+
+        self.env["account.bank.statement.line"]._eng_cron_cnab_reconcile()
+
+        self.assertTrue(
+            st_line.eng_cnab_reconcile_message.startswith("Aguardando o retorno CNAB"),
+            st_line.eng_cnab_reconcile_message,
+        )
+
+    def test_cron_writes_the_error_in_the_language_of_the_company(self):
+        self.env["res.lang"]._activate_lang("pt_BR")
+        self.company.partner_id.lang = "pt_BR"
+        st_line = self._create_statement_line(self.journal_bb, 100.0, COLLECTION_LABEL)
+
+        with mock.patch.object(
+            type(st_line),
+            "_eng_cnab_try_reconcile",
+            side_effect=UserError(SYNTHETIC_BUSINESS_ERROR),
+        ):
+            self.env["account.bank.statement.line"]._eng_cron_cnab_reconcile()
+
+        self.assertEqual(st_line.eng_cnab_reconcile_status, "error")
+        self.assertTrue(
+            st_line.eng_cnab_reconcile_message.startswith("Erro:"),
+            st_line.eng_cnab_reconcile_message,
+        )
+        self.assertIn(SYNTHETIC_BUSINESS_ERROR, st_line.eng_cnab_reconcile_message)
 
     # Plan, test 24
     def test_statement_before_cnab_waits_then_the_cron_reconciles_it(self):
