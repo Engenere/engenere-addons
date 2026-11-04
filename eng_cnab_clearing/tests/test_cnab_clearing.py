@@ -26,10 +26,12 @@ from odoo.addons.l10n_br_account_payment_brcobranca.parser.cnab_file_parser impo
 
 from ..parser.cnab_clearing_parser import EngClearingCNABParser
 from .common import (
+    AILOS_CREDIT_UNION,
     CREDIT_DATE,
     CUTOVER_DATE,
     FILE_NAME,
     OCCURRENCE_DATE,
+    OTHER_AILOS_CREDIT_UNION,
     CnabClearingCommon,
 )
 
@@ -339,6 +341,27 @@ class TestCnabClearing(CnabClearingCommon):
             )
         self.assertEqual(self._count_import_records(), counts)
 
+    def test_ailos_liquidation_at_its_bank_without_branch_is_blocked(self):
+        counts = self._count_import_records()
+        # Nothing tells the credit union that received them
+        records = [
+            self._ailos_record(self.installment_ailos, agencia_recebedora_com_dv=None),
+            self._ailos_record(self.installment_ailos_2, agencia_com_dv="000000"),
+        ]
+
+        with self.assertRaises(UserError) as error:
+            self._import(self.journal_ailos, records)
+
+        message = str(error.exception)
+        for position, record in enumerate(records, start=1):
+            self.assertIn(
+                f"{self._listed_record(position)} "
+                f"(own number {record['nosso_numero']}): "
+                "the liquidation has no receiving branch",
+                message,
+            )
+        self.assertEqual(self._count_import_records(), counts)
+
     # Plan, test 11
     def test_two_events_of_the_same_installment_link_each_entry_to_its_event(self):
         moves = self._import(
@@ -546,6 +569,63 @@ class TestCnabClearing(CnabClearingCommon):
                     self.account_receivable: (0.0, 100.0),
                 },
             )
+
+    def test_ailos_title_paid_at_another_credit_union_is_of_the_other_banks(self):
+        moves = self._import(
+            self.journal_ailos,
+            [
+                self._ailos_record(self.installment_ailos),
+                self._ailos_record(
+                    self.installment_ailos_2,
+                    agencia_recebedora_com_dv=OTHER_AILOS_CREDIT_UNION,
+                ),
+            ],
+        )
+
+        events = moves.mapped("eng_cnab_return_event_id")
+        self.assertEqual(set(events.mapped("eng_receiving_bank_code")), {"085"})
+        classes = {
+            move.eng_cnab_return_event_id.eng_receiving_branch_code: (
+                self._clearing_line(move).eng_cnab_receiving_bank_class
+            )
+            for move in moves
+        }
+        self.assertEqual(
+            classes, {AILOS_CREDIT_UNION: "own", OTHER_AILOS_CREDIT_UNION: "other"}
+        )
+
+    def test_ailos_title_paid_at_another_bank_needs_no_branch(self):
+        move = self._import(
+            self.journal_ailos,
+            [
+                self._ailos_record(
+                    self.installment_ailos,
+                    banco_recebedor="237",
+                    agencia_recebedora_com_dv=None,
+                )
+            ],
+        )
+
+        self.assertEqual(
+            self._clearing_line(move).eng_cnab_receiving_bank_class, "other"
+        )
+        self.assertFalse(move.eng_cnab_return_event_id.eng_receiving_branch_code)
+
+    def test_receiving_branch_does_not_change_the_class_outside_ailos(self):
+        # Banco do Brasil credits the collection of a day at once, and its
+        # return gives the two branches in different formats
+        move = self._import(
+            self.journal_bb,
+            [
+                self._bb_record(
+                    self.installment_bb,
+                    agencia_com_dv="11119",
+                    agencia_recebedora_com_dv="00022",
+                )
+            ],
+        )
+
+        self.assertEqual(self._clearing_line(move).eng_cnab_receiving_bank_class, "own")
 
     def test_missing_receiving_bank_outside_ailos_leaves_the_class_empty(self):
         move = self._import(

@@ -20,6 +20,9 @@ OCCURRENCE_DATE = date(2025, 10, 30)
 CREDIT_DATE = date(2025, 11, 3)
 CUTOVER_DATE = date(2025, 11, 1)
 FILE_NAME = "SYNTHETIC.RET"
+# Each Ailos credit union is a branch of bank 085
+AILOS_CREDIT_UNION = "000011"
+OTHER_AILOS_CREDIT_UNION = "000022"
 
 
 class CnabClearingCommon(TransactionCase):
@@ -327,6 +330,8 @@ class CnabClearingCommon(TransactionCase):
             "valor_abatimento": self._cnab_amount(0.0, 15),
             "valor_tarifa": self._cnab_amount(tariff, 15),
             "banco_recebedor": "085",
+            "agencia_com_dv": AILOS_CREDIT_UNION,
+            "agencia_recebedora_com_dv": AILOS_CREDIT_UNION,
         }
         record.update(values)
         return record
