@@ -62,4 +62,7 @@ while the other lines go on.
 The module also refuses a bank statement file in which a transaction
 already imported comes back with the same identifier (the FITID of an OFX
 file) but another date or amount. The same transaction imported again with
-the same content is still skipped, as before.
+the same content is still skipped, as before. In a journal with the CNAB
+clearing flow, it also refuses a file with lines dated before the bank cutover
+date: until that date the CNAB returns post through the bank account, so these
+lines would enter it a second time.

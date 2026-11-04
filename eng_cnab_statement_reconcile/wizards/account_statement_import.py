@@ -10,10 +10,50 @@ class AccountStatementImport(models.TransientModel):
     _inherit = "account.statement.import"
 
     def _create_bank_statements(self, stmts_vals, result):
+        self._eng_check_lines_before_cutover(stmts_vals)
         # A transaction imported again with the same content is skipped by
         # the standard import; with another date or amount it is a conflict
         self._eng_check_unique_import_id_conflicts(stmts_vals)
         return super()._create_bank_statements(stmts_vals, result)
+
+    def _eng_check_lines_before_cutover(self, stmts_vals):
+        """Refuse the file when a line is dated before the bank cutover date of
+        a journal with the CNAB clearing flow.
+
+        Until that date the CNAB returns post through the bank account, so
+        such a line would enter it a second time, and only the balance of the
+        account would show it, much later.
+        """
+        for st_vals in stmts_vals:
+            journal = self.env["account.journal"].browse(st_vals["journal_id"])
+            if not journal.eng_cnab_clearing_enabled:
+                continue
+            cutover_date = journal.eng_bank_cutover_date
+            older_dates = sorted(
+                line_date
+                for line_date in (
+                    fields.Date.to_date(line_vals["date"])
+                    for line_vals in st_vals["transactions"]
+                )
+                if line_date < cutover_date
+            )
+            if older_dates:
+                raise UserError(
+                    _(
+                        "The bank statement file %(file_name)s was not imported: "
+                        "%(count)s of its lines are dated before the bank cutover "
+                        "date %(cutover_date)s of the journal %(journal)s, the "
+                        "first of them on %(first_date)s. Until that date the CNAB "
+                        "returns post through the bank account, so these lines "
+                        "would enter it a second time. Export the statement again "
+                        "starting on the cutover date.",
+                        file_name=self.statement_filename,
+                        count=len(older_dates),
+                        cutover_date=format_date(self.env, cutover_date),
+                        journal=journal.display_name,
+                        first_date=format_date(self.env, older_dates[0]),
+                    )
+                )
 
     def _eng_check_unique_import_id_conflicts(self, stmts_vals):
         """Refuse the file when a known transaction id (the FITID of an OFX

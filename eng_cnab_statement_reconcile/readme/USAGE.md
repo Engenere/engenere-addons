@@ -16,4 +16,6 @@ line you unreconcile stays with you until you press **Retry CNAB Matching**.
 
 A bank statement file is refused when one of its transactions was already
 imported with the same identifier but another date or amount: check the file
-with the bank.
+with the bank. In a journal with the CNAB clearing flow, a file with lines dated
+before the bank cutover date is refused as well: export the statement again
+starting on that date.

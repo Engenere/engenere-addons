@@ -438,7 +438,10 @@ its reason while the other lines go on.</p>
 <p>The module also refuses a bank statement file in which a transaction
 already imported comes back with the same identifier (the FITID of an
 OFX file) but another date or amount. The same transaction imported
-again with the same content is still skipped, as before.</p>
+again with the same content is still skipped, as before. In a journal
+with the CNAB clearing flow, it also refuses a file with lines dated
+before the bank cutover date: until that date the CNAB returns post
+through the bank account, so these lines would enter it a second time.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -503,7 +506,9 @@ can still be reconciled by hand. A line you unreconcile stays with you
 until you press <strong>Retry CNAB Matching</strong>.</p>
 <p>A bank statement file is refused when one of its transactions was
 already imported with the same identifier but another date or amount:
-check the file with the bank.</p>
+check the file with the bank. In a journal with the CNAB clearing flow,
+a file with lines dated before the bank cutover date is refused as well:
+export the statement again starting on that date.</p>
 </div>
 <div class="section" id="known-issues-roadmap">
 <h2><a class="toc-backref" href="#toc-entry-3">Known issues / Roadmap</a></h2>

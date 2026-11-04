@@ -95,7 +95,10 @@ its reason while the other lines go on.
 The module also refuses a bank statement file in which a transaction
 already imported comes back with the same identifier (the FITID of an
 OFX file) but another date or amount. The same transaction imported
-again with the same content is still skipped, as before.
+again with the same content is still skipped, as before. In a journal
+with the CNAB clearing flow, it also refuses a file with lines dated
+before the bank cutover date: until that date the CNAB returns post
+through the bank account, so these lines would enter it a second time.
 
 **Table of contents**
 
@@ -153,7 +156,9 @@ until you press **Retry CNAB Matching**.
 
 A bank statement file is refused when one of its transactions was
 already imported with the same identifier but another date or amount:
-check the file with the bank.
+check the file with the bank. In a journal with the CNAB clearing flow,
+a file with lines dated before the bank cutover date is refused as well:
+export the statement again starting on that date.
 
 Known issues / Roadmap
 ======================
