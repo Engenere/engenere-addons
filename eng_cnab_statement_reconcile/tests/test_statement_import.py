@@ -3,13 +3,14 @@
 
 import base64
 import copy
-from datetime import timedelta
+from datetime import datetime, time, timedelta
 from unittest import mock
 
 from odoo.exceptions import UserError
 from odoo.tests import tagged
+from odoo.tools.misc import format_date
 
-from odoo.addons.eng_cnab_clearing.tests.common import CREDIT_DATE
+from odoo.addons.eng_cnab_clearing.tests.common import CREDIT_DATE, CUTOVER_DATE
 
 from .common import CnabStatementReconcileCommon
 
@@ -156,3 +157,53 @@ class TestStatementImport(CnabStatementReconcileCommon):
         self.assertEqual(self._journal_st_lines(), st_lines)
         self.assertEqual(self._journal_st_lines().statement_id, statements)
         self.assertEqual((st_lines.amount, st_lines.date), (100.0, CREDIT_DATE))
+
+    @staticmethod
+    def _transaction(line_date, fitid, amount=30.0):
+        """A transaction as the OFX format gives it, dated with a datetime."""
+        return {
+            "payment_ref": f"TRANSFER {fitid}",
+            "date": datetime.combine(line_date, time()),
+            "amount": amount,
+            "unique_import_id": fitid,
+        }
+
+    def test_file_with_lines_before_the_cutover_is_refused_whole(self):
+        day_before = CUTOVER_DATE - timedelta(days=1)
+        two_days_before = CUTOVER_DATE - timedelta(days=2)
+
+        with self.assertRaises(UserError) as error:
+            self._import_statement(
+                [
+                    self._transaction(CREDIT_DATE, "SYNTHETIC-FITID-1"),
+                    self._transaction(day_before, "SYNTHETIC-FITID-2"),
+                    self._transaction(two_days_before, "SYNTHETIC-FITID-3"),
+                ]
+            )
+
+        message = str(error.exception)
+        self.assertIn("SYNTHETIC.OFX", message)
+        self.assertIn("2 of its lines are dated before", message)
+        self.assertIn(format_date(self.env, CUTOVER_DATE), message)
+        self.assertIn(self.journal_bb.display_name, message)
+        self.assertIn(f"on {format_date(self.env, two_days_before)}", message)
+        self.assertFalse(self._journal_st_lines())
+
+    def test_file_with_lines_from_the_cutover_date_on_is_imported(self):
+        self._import_statement(
+            [
+                self._transaction(CUTOVER_DATE, "SYNTHETIC-FITID-1"),
+                self._transaction(CREDIT_DATE, "SYNTHETIC-FITID-2"),
+            ]
+        )
+
+        self.assertEqual(len(self._journal_st_lines()), 2)
+
+    def test_file_before_the_cutover_date_is_imported_without_the_flow(self):
+        self.journal_bb.eng_cnab_clearing_enabled = False
+
+        self._import_statement(
+            [self._transaction(CUTOVER_DATE - timedelta(days=1), "SYNTHETIC-FITID-1")]
+        )
+
+        self.assertEqual(len(self._journal_st_lines()), 1)
