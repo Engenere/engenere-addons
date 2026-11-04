@@ -183,10 +183,11 @@ class TestStatementImport(CnabStatementReconcileCommon):
 
         message = str(error.exception)
         self.assertIn("SYNTHETIC.OFX", message)
-        self.assertIn("2 of its lines are dated before", message)
+        self.assertIn("it has lines dated before", message)
+        self.assertIn("number of lines: 2", message)
         self.assertIn(format_date(self.env, CUTOVER_DATE), message)
         self.assertIn(self.journal_bb.display_name, message)
-        self.assertIn(f"on {format_date(self.env, two_days_before)}", message)
+        self.assertIn(f"first date: {format_date(self.env, two_days_before)}", message)
         self.assertFalse(self._journal_st_lines())
 
     def test_file_with_lines_from_the_cutover_date_on_is_imported(self):
