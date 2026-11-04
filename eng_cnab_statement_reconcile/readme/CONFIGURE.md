@@ -10,7 +10,8 @@
    - **CNAB Clearing Matching** enabled;
    - the **Receiving Bank** filter: **Any Bank** when the bank credits the
      collection of a day at once, or **Own Bank** and **Other Banks** in two
-     rules when the statement splits it by receiving bank.
+     rules when the statement splits it by receiving bank (for Ailos, a title
+     paid at another credit union counts as another bank).
 3. Give the CNAB rules a sequence lower than the other rules.
 4. The tariffs and the movements of an investment account can be posted by
    rules of the type **Rule to suggest counterpart entry**, with

@@ -389,7 +389,9 @@ the same company and currency, and posted;</li>
 is the credit date of the liquidations;</li>
 <li>belong to the receiving bank class of the rule: any bank, the bank of
 the journal only, or the other banks only, for the banks that split
-the collection credit of a day by receiving bank.</li>
+the collection credit of a day by receiving bank. For Ailos, the bank
+of the journal is its own credit union: a title paid at another credit
+union counts as another bank.</li>
 </ul>
 <p>The statement line is reconciled only when the whole group sums exactly
 its amount. There is no search for a subset of the group, no tolerance
@@ -468,8 +470,9 @@ condition that only the collection credit meets;</li>
 <li><strong>CNAB Clearing Matching</strong> enabled;</li>
 <li>the <strong>Receiving Bank</strong> filter: <strong>Any Bank</strong> when the bank credits
 the collection of a day at once, or <strong>Own Bank</strong> and <strong>Other
-Banks</strong> in two rules when the statement splits it by receiving
-bank.</li>
+Banks</strong> in two rules when the statement splits it by receiving bank
+(for Ailos, a title paid at another credit union counts as another
+bank).</li>
 </ul>
 </li>
 <li>Give the CNAB rules a sequence lower than the other rules.</li>

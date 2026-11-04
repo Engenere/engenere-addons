@@ -31,7 +31,9 @@ class AccountReconcileModel(models.Model):
         help="CNAB clearing lines of the group, by the bank where the "
         "customer paid: any bank, the bank of the journal only, or the other "
         "banks only. Use the last two when the bank statement splits the "
-        "collection credit of a day by receiving bank.",
+        "collection credit of a day by receiving bank. For Ailos, the bank of "
+        "the journal is its own credit union: a title paid at another credit "
+        "union counts as another bank.",
     )
 
     @api.constrains("eng_cnab_clearing_match", "rule_type", "auto_reconcile")

@@ -41,7 +41,9 @@ that:
   is the credit date of the liquidations;
 - belong to the receiving bank class of the rule: any bank, the bank of
   the journal only, or the other banks only, for the banks that split
-  the collection credit of a day by receiving bank.
+  the collection credit of a day by receiving bank. For Ailos, the bank
+  of the journal is its own credit union: a title paid at another credit
+  union counts as another bank.
 
 The statement line is reconciled only when the whole group sums exactly
 its amount. There is no search for a subset of the group, no tolerance
@@ -117,8 +119,9 @@ Configuration
    - **CNAB Clearing Matching** enabled;
    - the **Receiving Bank** filter: **Any Bank** when the bank credits
      the collection of a day at once, or **Own Bank** and **Other
-     Banks** in two rules when the statement splits it by receiving
-     bank.
+     Banks** in two rules when the statement splits it by receiving bank
+     (for Ailos, a title paid at another credit union counts as another
+     bank).
 
 3. Give the CNAB rules a sequence lower than the other rules.
 4. The tariffs and the movements of an investment account can be posted

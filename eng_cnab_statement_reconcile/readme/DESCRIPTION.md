@@ -11,7 +11,9 @@ line with the **whole group** of open CNAB clearing lines that:
   credit date of the liquidations;
 - belong to the receiving bank class of the rule: any bank, the bank of the
   journal only, or the other banks only, for the banks that split the
-  collection credit of a day by receiving bank.
+  collection credit of a day by receiving bank. For Ailos, the bank of the
+  journal is its own credit union: a title paid at another credit union
+  counts as another bank.
 
 The statement line is reconciled only when the whole group sums exactly its
 amount. There is no search for a subset of the group, no tolerance and no
