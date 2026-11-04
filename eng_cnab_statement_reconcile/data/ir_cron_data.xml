@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Engenere - Felipe Motter Pereira
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+
+    <!-- Recurring retry of the pending collection credits. Each CNAB import
+         triggers it too, so that the matching runs after the commit of the
+         import, in a transaction of its own. -->
+    <record id="ir_cron_cnab_statement_reconcile" model="ir.cron">
+        <field name="name">CNAB Clearing: Reconcile Pending Bank Statement Lines</field>
+        <field name="model_id" ref="account.model_account_bank_statement_line" />
+        <field name="state">code</field>
+        <field name="code">model._eng_cron_cnab_reconcile()</field>
+        <field name="user_id" ref="base.user_root" />
+        <field name="active" eval="True" />
+        <field name="interval_number">30</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False" />
+    </record>
+
+</odoo>
