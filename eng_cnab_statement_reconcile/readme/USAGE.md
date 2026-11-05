@@ -11,8 +11,10 @@ On the reconciliation screen, a pending collection credit shows its reason
 and the **Retry CNAB Matching** button; the list of statement lines shows
 the status, and the filter **CNAB Pending** lists every pending one. A
 difference or an ambiguity is never adjusted automatically: review the line
-on the reconciliation screen, where it can still be reconciled by hand. A
-line you unreconcile stays with you until you press **Retry CNAB Matching**.
+on the reconciliation screen, where it can still be reconciled by hand. No
+reconciliation model proposes a CNAB clearing line there: look for it in the
+list, removing first any default filter that hides it. A line you unreconcile
+stays with you until you press **Retry CNAB Matching**.
 
 A bank statement file is refused when one of its transactions was already
 imported with the same identifier but another date or amount: check the file
