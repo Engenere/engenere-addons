@@ -102,6 +102,14 @@ class AccountReconcileModel(models.Model):
 
     # Matching
 
+    def _get_invoice_matching_amls_domain(self, st_line, partner):
+        # A CNAB clearing line only closes in the exact group of the CNAB rules:
+        # no other rule may propose it, whatever the journal of the statement
+        # line. The CNAB rules look for their group in _eng_cnab_evaluate.
+        domain = super()._get_invoice_matching_amls_domain(st_line, partner)
+        domain.append(("eng_cnab_clearing", "=", False))
+        return domain
+
     def _get_invoice_matching_rules_map(self):
         if self.eng_cnab_clearing_match:
             # Only the CNAB group, whatever other modules add to the map

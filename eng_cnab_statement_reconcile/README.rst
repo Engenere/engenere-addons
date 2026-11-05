@@ -62,6 +62,11 @@ exact amount, none of them is applied. Neither is a group of its exact
 amount that another fully open collection credit of the same day also
 meets under one of these rules: no rule wins the line by its sequence.
 
+The other reconciliation models never propose a CNAB clearing line, in
+any journal, so that a transfer of the same amount does not take a
+liquidation by chance. It can still be picked by hand on the
+reconciliation screen.
+
 The matching runs:
 
 - when the statement line is created, through the automatic
