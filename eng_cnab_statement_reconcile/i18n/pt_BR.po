@@ -1,0 +1,409 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* eng_cnab_statement_reconcile
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-04 03:00+0000\n"
+"PO-Revision-Date: 2026-11-04 03:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.model.fields.selection,name:eng_cnab_statement_reconcile.selection__account_bank_statement_line__eng_cnab_reconcile_status__ambiguous
+msgid "Ambiguous"
+msgstr "Ambígua"
+
+#. module: eng_cnab_statement_reconcile
+#. odoo-python
+#: code:addons/eng_cnab_statement_reconcile/models/account_bank_statement_line.py:0
+#, python-format
+msgid ""
+"Ambiguous: %(others)s other open statement lines of the journal on %(date)s "
+"(%(lines)s) also meet the conditions of the rule %(rule)s, so its CNAB "
+"clearing lines are not assigned automatically. Review them on the "
+"reconciliation screen."
+msgstr ""
+"Ambígua: a regra %(rule)s também atende a linhas de extrato em aberto do "
+"diário em %(date)s (quantidade: %(others)s; linhas: %(lines)s), por isso as "
+"linhas da transitória CNAB não são atribuídas automaticamente. Revise na "
+"tela de conciliação."
+
+#. module: eng_cnab_statement_reconcile
+#. odoo-python
+#: code:addons/eng_cnab_statement_reconcile/models/account_bank_statement_line.py:0
+#, python-format
+msgid ""
+"Ambiguous: the rules %(rules)s each match a different group of open CNAB "
+"clearing lines of %(account)s due on %(date)s that sums exactly the amount "
+"of the statement line, so none of them is reconciled automatically. Review "
+"them on the reconciliation screen."
+msgstr ""
+"Ambígua: as regras %(rules)s casam, cada uma, um grupo diferente de linhas "
+"em aberto da transitória CNAB %(account)s com vencimento em %(date)s que "
+"soma exatamente o valor da linha do extrato, por isso nenhum deles é "
+"conciliado automaticamente. Revise-os na tela de conciliação."
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.model.fields.selection,name:eng_cnab_statement_reconcile.selection__account_bank_statement_line__eng_cnab_reconcile_status__difference
+msgid "Amount Difference"
+msgstr "Diferença de valor"
+
+#. module: eng_cnab_statement_reconcile
+#. odoo-python
+#: code:addons/eng_cnab_statement_reconcile/models/account_bank_statement_line.py:0
+#, python-format
+msgid ""
+"Amount difference of %(difference)s: the statement line amount is "
+"%(amount)s, and the %(count)s open CNAB clearing lines of %(account)s due on"
+" %(date)s for the rule %(rule)s sum %(total)s. Nothing was reconciled: "
+"review it on the reconciliation screen."
+msgstr ""
+"Diferença de valor de %(difference)s: a linha do extrato vale %(amount)s, e "
+"o grupo de linhas em aberto da transitória CNAB %(account)s com vencimento "
+"em %(date)s pela regra %(rule)s soma %(total)s (quantidade de linhas: "
+"%(count)s). Nada foi conciliado: revise na tela de conciliação."
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.model.fields,help:eng_cnab_statement_reconcile.field_account_bank_statement_line__eng_cnab_reconcile_difference
+msgid ""
+"Amount of the statement line minus the sum of its group of CNAB clearing "
+"lines, when they differ."
+msgstr ""
+"Valor da linha do extrato menos a soma do seu grupo de linhas da transitória"
+" CNAB, quando são diferentes."
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.model.fields.selection,name:eng_cnab_statement_reconcile.selection__account_reconcile_model__eng_receiving_bank_filter__any
+msgid "Any Bank"
+msgstr "Qualquer banco"
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.model.fields.selection,name:eng_cnab_statement_reconcile.selection__account_bank_statement_line__eng_cnab_reconcile_status__awaiting
+msgid "Awaiting CNAB Return"
+msgstr "Aguardando retorno CNAB"
+
+#. module: eng_cnab_statement_reconcile
+#. odoo-python
+#: code:addons/eng_cnab_statement_reconcile/models/account_bank_statement_line.py:0
+#, python-format
+msgid ""
+"Awaiting the CNAB return: no open CNAB clearing line of %(account)s due on "
+"%(date)s matches the rule %(rule)s yet."
+msgstr ""
+"Aguardando o retorno CNAB: ainda não há linha em aberto da transitória CNAB "
+"%(account)s com vencimento em %(date)s que atenda à regra %(rule)s."
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.model,name:eng_cnab_statement_reconcile.model_account_bank_statement_line
+msgid "Bank Statement Line"
+msgstr "Linha de Extrato Bancário"
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.model.fields,field_description:eng_cnab_statement_reconcile.field_account_reconcile_model__eng_cnab_clearing_match
+msgid "CNAB Clearing Matching"
+msgstr "Conciliação com a transitória CNAB"
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.actions.server,name:eng_cnab_statement_reconcile.ir_cron_cnab_statement_reconcile_ir_actions_server
+#: model:ir.cron,cron_name:eng_cnab_statement_reconcile.ir_cron_cnab_statement_reconcile
+msgid "CNAB Clearing: Reconcile Pending Bank Statement Lines"
+msgstr "Transitória CNAB: conciliar as linhas de extrato pendentes"
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.model.fields,field_description:eng_cnab_statement_reconcile.field_account_bank_statement_line__eng_cnab_reconcile_status
+msgid "CNAB Matching"
+msgstr "Conciliação CNAB"
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.model.fields,field_description:eng_cnab_statement_reconcile.field_account_bank_statement_line__eng_cnab_reconcile_difference
+msgid "CNAB Matching Difference"
+msgstr "Diferença da conciliação CNAB"
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.model.fields,field_description:eng_cnab_statement_reconcile.field_account_bank_statement_line__eng_cnab_reconcile_message
+msgid "CNAB Matching Reason"
+msgstr "Motivo da conciliação CNAB"
+
+#. module: eng_cnab_statement_reconcile
+#: model_terms:ir.ui.view,arch_db:eng_cnab_statement_reconcile.account_bank_statement_line_search_cnab
+msgid "CNAB Pending"
+msgstr "Pendências CNAB"
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.model.fields,help:eng_cnab_statement_reconcile.field_account_reconcile_model__eng_receiving_bank_filter
+msgid ""
+"CNAB clearing lines of the group, by the bank where the customer paid: any "
+"bank, the bank of the journal only, or the other banks only. Use the last "
+"two when the bank statement splits the collection credit of a day by "
+"receiving bank. For Ailos, the bank of the journal is its own credit union: "
+"a title paid at another credit union counts as another bank."
+msgstr ""
+"Linhas da transitória CNAB que entram no grupo, pelo banco onde o cliente "
+"pagou: qualquer banco, só o banco do diário ou só os outros bancos. Use as "
+"duas últimas quando o extrato separa o crédito de cobrança de um dia por "
+"banco recebedor. Na Ailos, o banco do diário é a própria cooperativa: título"
+" pago em outra cooperativa conta como outro banco."
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.model.fields.selection,name:eng_cnab_statement_reconcile.selection__account_bank_statement_line__eng_cnab_reconcile_status__error
+msgid "Error"
+msgstr "Erro"
+
+#. module: eng_cnab_statement_reconcile
+#. odoo-python
+#: code:addons/eng_cnab_statement_reconcile/models/account_bank_statement_line.py:0
+#, python-format
+msgid ""
+"Error: the CNAB matching of this line failed, and the scheduled action went on with the other lines. Fix the cause, then retry.\n"
+"%(error)s"
+msgstr ""
+"Erro: a conciliação CNAB desta linha falhou, e a ação agendada seguiu com as outras linhas. Corrija a causa e tente de novo.\n"
+"%(error)s"
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.model,name:eng_cnab_statement_reconcile.model_account_statement_import
+msgid "Import Bank Statement Files"
+msgstr "Importar Extrato Bancário"
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.model.fields.selection,name:eng_cnab_statement_reconcile.selection__account_bank_statement_line__eng_cnab_reconcile_status__invalid_config
+msgid "Invalid Configuration"
+msgstr "Configuração inválida"
+
+#. module: eng_cnab_statement_reconcile
+#. odoo-python
+#: code:addons/eng_cnab_statement_reconcile/models/account_bank_statement_line.py:0
+#, python-format
+msgid ""
+"Invalid configuration: %(error)s Until it is fixed, no reconciliation model "
+"proposes anything for this collection credit."
+msgstr ""
+"Configuração inválida: %(error)s Até ela ser corrigida, nenhum modelo de "
+"conciliação propõe nada para este crédito de cobrança."
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.model,name:eng_cnab_statement_reconcile.model_account_journal
+msgid "Journal"
+msgstr "Diário"
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.model.fields,help:eng_cnab_statement_reconcile.field_account_reconcile_model__eng_cnab_clearing_match
+msgid ""
+"Match the bank statement line with the whole group of open CNAB clearing "
+"lines of its journal due on its date, and only when the group sums exactly "
+"the amount of the line: no partial group, no tolerance and no write-off. A "
+"statement line that meets the conditions of such a rule is matched by these "
+"rules only, never by the other reconciliation models."
+msgstr ""
+"Concilia a linha do extrato com o grupo inteiro de linhas em aberto da "
+"transitória CNAB do seu diário com vencimento na data dela, e só quando o "
+"grupo soma exatamente o valor da linha: sem grupo parcial, sem tolerância e "
+"sem lançamento de diferença. Uma linha de extrato que atende às condições de"
+" uma regra assim só é conciliada por essas regras, nunca pelos outros "
+"modelos de conciliação."
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.model.fields.selection,name:eng_cnab_statement_reconcile.selection__account_reconcile_model__eng_receiving_bank_filter__other
+msgid "Other Banks"
+msgstr "Outros bancos"
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.model.fields,field_description:eng_cnab_statement_reconcile.field_account_bank_statement_line__eng_cnab_excluded
+msgid "Out of the CNAB Matching"
+msgstr "Fora da conciliação CNAB"
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.model.fields,help:eng_cnab_statement_reconcile.field_account_bank_statement_line__eng_cnab_reconcile_status
+msgid ""
+"Outcome of the last CNAB clearing matching of this collection credit. Empty "
+"when no CNAB clearing rule routes the line."
+msgstr ""
+"Resultado da última conciliação CNAB deste crédito de cobrança. Fica vazio "
+"quando nenhuma regra da transitória CNAB atende a linha."
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.model.fields.selection,name:eng_cnab_statement_reconcile.selection__account_reconcile_model__eng_receiving_bank_filter__own
+msgid "Own Bank"
+msgstr "Banco do diário"
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.model.fields.selection,name:eng_cnab_statement_reconcile.selection__account_bank_statement_line__eng_cnab_reconcile_status__partial
+msgid "Partially Reconciled"
+msgstr "Parcialmente conciliada"
+
+#. module: eng_cnab_statement_reconcile
+#. odoo-python
+#: code:addons/eng_cnab_statement_reconcile/models/account_bank_statement_line.py:0
+#, python-format
+msgid ""
+"Partially reconciled: the statement line already has a counterpart, or its "
+"residual amount is not its whole amount, so the CNAB matching left it out. "
+"Review it on the reconciliation screen."
+msgstr ""
+"Parcialmente conciliada: a linha do extrato já tem contrapartida, ou o seu "
+"saldo em aberto não é o valor inteiro, por isso a conciliação CNAB a deixou "
+"de fora. Revise-a na tela de conciliação."
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.model,name:eng_cnab_statement_reconcile.model_account_reconcile_model
+msgid ""
+"Preset to create journal entries during a invoices and payments matching"
+msgstr ""
+"Configuração para criar entradas do diário quando ocorre uma correspondência"
+" entre faturas e pagamentos"
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.model.fields,field_description:eng_cnab_statement_reconcile.field_account_reconcile_model__eng_receiving_bank_filter
+msgid "Receiving Bank"
+msgstr "Banco recebedor"
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.model.fields.selection,name:eng_cnab_statement_reconcile.selection__account_bank_statement_line__eng_cnab_reconcile_status__reconciled
+msgid "Reconciled"
+msgstr "Conciliada"
+
+#. module: eng_cnab_statement_reconcile
+#. odoo-python
+#: code:addons/eng_cnab_statement_reconcile/models/account_bank_statement_line.py:0
+#, python-format
+msgid ""
+"Reconciled with the whole group of CNAB clearing lines of %(account)s due on"
+" %(date)s: %(count)s line(s)."
+msgstr ""
+"Conciliada com o grupo inteiro de linhas da transitória CNAB %(account)s com"
+" vencimento em %(date)s (quantidade de linhas: %(count)s)."
+
+#. module: eng_cnab_statement_reconcile
+#. odoo-python
+#: code:addons/eng_cnab_statement_reconcile/models/account_bank_statement_line.py:0
+#, python-format
+msgid "Reconciled."
+msgstr "Conciliada."
+
+#. module: eng_cnab_statement_reconcile
+#: model_terms:ir.ui.view,arch_db:eng_cnab_statement_reconcile.account_bank_statement_line_tree_cnab
+#: model_terms:ir.ui.view,arch_db:eng_cnab_statement_reconcile.bank_statement_line_form_reconcile_view_cnab
+msgid "Retry CNAB Matching"
+msgstr "Tentar de novo a conciliação CNAB"
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.model.fields,help:eng_cnab_statement_reconcile.field_account_bank_statement_line__eng_cnab_excluded
+msgid ""
+"Set when the line is unreconciled by hand: neither the scheduled action nor "
+"the automatic reconciliation match it with CNAB clearing lines again, until "
+"the Retry CNAB Matching button."
+msgstr ""
+"Marcado quando a linha é desconciliada à mão: nem a ação agendada nem a "
+"conciliação automática voltam a conciliá-la com linhas da transitória CNAB, "
+"até o botão Tentar de novo a conciliação CNAB."
+
+#. module: eng_cnab_statement_reconcile
+#. odoo-python
+#: code:addons/eng_cnab_statement_reconcile/models/account_reconcile_model.py:0
+#, python-format
+msgid ""
+"The CNAB clearing matching of the rule %(rule)s needs the type 'Rule to "
+"match invoices/bills'."
+msgstr ""
+"A conciliação com a transitória CNAB da regra %(rule)s precisa do tipo "
+"'Regra para corresponder faturas'."
+
+#. module: eng_cnab_statement_reconcile
+#. odoo-python
+#: code:addons/eng_cnab_statement_reconcile/wizards/account_statement_import.py:0
+#, python-format
+msgid ""
+"The bank statement file %(file_name)s was not imported: it has lines dated "
+"before the bank cutover date %(cutover_date)s of the journal %(journal)s "
+"(number of lines: %(count)s, first date: %(first_date)s). Until that date "
+"the CNAB returns post through the bank account, so these lines would enter "
+"it a second time. Export the statement again starting on the cutover date."
+msgstr ""
+"O arquivo de extrato %(file_name)s não foi importado: ele tem linhas com "
+"data anterior à data de corte %(cutover_date)s do diário %(journal)s "
+"(quantidade de linhas: %(count)s, primeira data: %(first_date)s). Até essa "
+"data, os retornos CNAB lançam pela conta do banco, então essas linhas "
+"entrariam nela pela segunda vez. Exporte o extrato de novo, começando na "
+"data de corte."
+
+#. module: eng_cnab_statement_reconcile
+#. odoo-python
+#: code:addons/eng_cnab_statement_reconcile/wizards/account_statement_import.py:0
+#, python-format
+msgid ""
+"The bank statement file was not imported: some of its transactions were already imported with the same identifier but another date or amount. Check the file with the bank.\n"
+"%(conflicts)s"
+msgstr ""
+"O arquivo de extrato bancário não foi importado: algumas transações dele já foram importadas com o mesmo identificador, mas com outra data ou outro valor. Confira o arquivo com o banco.\n"
+"%(conflicts)s"
+
+#. module: eng_cnab_statement_reconcile
+#. odoo-python
+#: code:addons/eng_cnab_statement_reconcile/models/account_journal.py:0
+#, python-format
+msgid ""
+"The clearing account %(account)s of the journal %(journal)s cannot be its "
+"suspense account: the bank statement lines reconcile the clearing account."
+msgstr ""
+"A conta transitória CNAB %(account)s do diário %(journal)s não pode ser a "
+"mesma do campo Conta transitória do diário: as linhas do extrato conciliam a"
+" conta transitória CNAB."
+
+#. module: eng_cnab_statement_reconcile
+#. odoo-python
+#: code:addons/eng_cnab_statement_reconcile/models/account_journal.py:0
+#, python-format
+msgid ""
+"The journal %(journal)s has the CNAB clearing flow: its bank statement lines"
+" must be reconciled in the 'Edit Move' mode."
+msgstr ""
+"O diário %(journal)s usa o fluxo da transitória CNAB: as linhas de extrato "
+"dele precisam ser conciliadas no modo 'Editar Movimento'."
+
+#. module: eng_cnab_statement_reconcile
+#. odoo-python
+#: code:addons/eng_cnab_statement_reconcile/models/account_reconcile_model.py:0
+#, python-format
+msgid ""
+"The rule %(rule)s matches CNAB clearing lines, which is always automatic: "
+"enable its Auto-validate option."
+msgstr ""
+"A regra %(rule)s concilia linhas da transitória CNAB, o que é sempre "
+"automático: ative a opção Autovalidar dela."
+
+#. module: eng_cnab_statement_reconcile
+#. odoo-python
+#: code:addons/eng_cnab_statement_reconcile/wizards/account_statement_import.py:0
+#, python-format
+msgid ""
+"Transaction %(transaction)s: imported on %(old_date)s for %(old_amount)s, "
+"now on %(new_date)s for %(new_amount)s."
+msgstr ""
+"Transação %(transaction)s: importada em %(old_date)s com %(old_amount)s, "
+"agora em %(new_date)s com %(new_amount)s."
+
+#. module: eng_cnab_statement_reconcile
+#: model:ir.model.fields.selection,name:eng_cnab_statement_reconcile.selection__account_bank_statement_line__eng_cnab_reconcile_status__excluded
+msgid "Unreconciled by Hand"
+msgstr "Desconciliada à mão"
+
+#. module: eng_cnab_statement_reconcile
+#. odoo-python
+#: code:addons/eng_cnab_statement_reconcile/models/account_bank_statement_line.py:0
+#, python-format
+msgid ""
+"Unreconciled by hand: the CNAB matching no longer reconciles this line by "
+"itself. Reconcile it on the reconciliation screen, or use Retry CNAB "
+"Matching to hand it back to the CNAB matching."
+msgstr ""
+"Desconciliada à mão: a conciliação CNAB não concilia mais esta linha "
+"sozinha. Concilie-a na tela de conciliação, ou use Tentar de novo a "
+"conciliação CNAB para devolvê-la à conciliação CNAB."

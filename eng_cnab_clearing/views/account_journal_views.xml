@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Engenere - Felipe Motter Pereira
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="view_account_journal_form_cnab_clearing" model="ir.ui.view">
+        <field name="name">account.journal.form.eng.cnab.clearing</field>
+        <field name="model">account.journal</field>
+        <field
+            name="inherit_id"
+            ref="l10n_br_account_payment_brcobranca.journal_importer_view_form"
+        />
+        <field name="arch" type="xml">
+            <field name="return_auto_reconcile" position="after">
+                <field name="eng_cnab_clearing_enabled" />
+                <field
+                    name="eng_bank_cutover_date"
+                    attrs="{'invisible': [('eng_cnab_clearing_enabled', '=', False)], 'required': [('eng_cnab_clearing_enabled', '=', True)]}"
+                />
+                <field
+                    name="eng_cnab_receipt_method_line_id"
+                    options="{'no_create': True}"
+                    attrs="{'invisible': [('eng_cnab_clearing_enabled', '=', False)], 'required': [('eng_cnab_clearing_enabled', '=', True)]}"
+                />
+                <field
+                    name="eng_cnab_clearing_account_id"
+                    attrs="{'invisible': [('eng_cnab_clearing_enabled', '=', False)]}"
+                />
+            </field>
+        </field>
+    </record>
+
+</odoo>

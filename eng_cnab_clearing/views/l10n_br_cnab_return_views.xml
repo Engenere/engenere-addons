@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Engenere - Felipe Motter Pereira
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="view_cnab_return_log_form_cnab_clearing" model="ir.ui.view">
+        <field name="name">l10n_br_cnab.return.log.form.eng.cnab.clearing</field>
+        <field name="model">l10n_br_cnab.return.log</field>
+        <field
+            name="inherit_id"
+            ref="l10n_br_account_payment_order.l10n_br_cnab_return_log_form_view"
+        />
+        <field name="arch" type="xml">
+            <field name="cnab_date_import" position="after">
+                <field
+                    name="eng_journal_id"
+                    readonly="1"
+                    attrs="{'invisible': [('eng_journal_id', '=', False)]}"
+                />
+                <field
+                    name="eng_file_hash"
+                    readonly="1"
+                    attrs="{'invisible': [('eng_file_hash', '=', False)]}"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_cnab_return_event_tree_cnab_clearing" model="ir.ui.view">
+        <field name="name">l10n_br_cnab.return.event.tree.eng.cnab.clearing</field>
+        <field name="model">l10n_br_cnab.return.event</field>
+        <field
+            name="inherit_id"
+            ref="l10n_br_account_payment_order.l10n_br_cnab_return_event_tree_view"
+        />
+        <field name="arch" type="xml">
+            <field name="lot_id" position="after">
+                <field name="eng_record_position" optional="show" />
+            </field>
+            <field name="occurrences" position="after">
+                <field name="eng_receiving_bank_code" optional="hide" />
+                <field name="eng_receiving_branch_code" optional="hide" />
+                <field name="eng_move_id" optional="show" />
+            </field>
+        </field>
+    </record>
+
+</odoo>

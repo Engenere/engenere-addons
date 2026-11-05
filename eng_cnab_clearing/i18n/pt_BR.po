@@ -1,0 +1,472 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* eng_cnab_clearing
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-04 03:00+0000\n"
+"PO-Revision-Date: 2026-11-04 03:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+
+#. module: eng_cnab_clearing
+#. odoo-python
+#: code:addons/eng_cnab_clearing/parser/cnab_clearing_parser.py:0
+#, python-format
+msgid "%(record)s (own number %(own_number)s): %(reason)s"
+msgstr "%(record)s (nosso número %(own_number)s): %(reason)s"
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_account_journal__eng_bank_cutover_date
+msgid "Bank Cutover Date"
+msgstr "Data de corte do banco"
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_account_journal__eng_cnab_clearing_account_id
+msgid "CNAB Clearing Account"
+msgstr "Conta transitória CNAB"
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_account_bank_statement_line__eng_cnab_clearing
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_account_move__eng_cnab_clearing
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_account_payment__eng_cnab_clearing
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_l10n_br_cnab_return_event__eng_move_id
+msgid "CNAB Clearing Entry"
+msgstr "Lançamento na transitória CNAB"
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_account_journal__eng_cnab_clearing_enabled
+msgid "CNAB Clearing Flow"
+msgstr "Fluxo da transitória CNAB"
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_account_move_line__eng_cnab_clearing
+msgid "CNAB Clearing Line"
+msgstr "Linha da transitória CNAB"
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_account_bank_statement_line__eng_cnab_credit_date
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_account_move__eng_cnab_credit_date
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_account_payment__eng_cnab_credit_date
+msgid "CNAB Credit Date"
+msgstr "Data do crédito CNAB"
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_account_bank_statement_line__eng_cnab_occurrence_date
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_account_move__eng_cnab_occurrence_date
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_account_payment__eng_cnab_occurrence_date
+msgid "CNAB Occurrence Date"
+msgstr "Data da ocorrência CNAB"
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_account_journal__eng_cnab_receipt_method_line_id
+msgid "CNAB Receipt Method"
+msgstr "Método de recebimento CNAB"
+
+#. module: eng_cnab_clearing
+#: model:ir.model,name:eng_cnab_clearing.model_l10n_br_cnab_return_event
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_account_bank_statement_line__eng_cnab_return_event_id
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_account_move__eng_cnab_return_event_id
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_account_move_line__eng_cnab_return_event_id
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_account_payment__eng_cnab_return_event_id
+msgid "CNAB Return Event"
+msgstr "Evento de Retorno do CNAB"
+
+#. module: eng_cnab_clearing
+#: model:ir.model,name:eng_cnab_clearing.model_l10n_br_cnab_return_log
+msgid "CNAB Return Log"
+msgstr "Registro de Retorno de CNAB"
+
+#. module: eng_cnab_clearing
+#. odoo-python
+#: code:addons/eng_cnab_clearing/parser/cnab_clearing_parser.py:0
+#, python-format
+msgid "CNAB receipt %(document)s"
+msgstr "Recebimento CNAB %(document)s"
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,help:eng_cnab_clearing.field_account_journal__eng_cnab_clearing_enabled
+msgid ""
+"CNAB return liquidations credited on or after the bank cutover date are "
+"settled on the occurrence date against the clearing account of the CNAB "
+"receipt method, with no bank and no tariff lines. The bank statement then "
+"reconciles the clearing account."
+msgstr ""
+"As liquidações do retorno CNAB creditadas a partir da data de corte do banco"
+" são baixadas na data da ocorrência contra a conta transitória do método de "
+"recebimento CNAB, sem linhas de banco nem de tarifa. Depois, o extrato "
+"bancário concilia a conta transitória."
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,help:eng_cnab_clearing.field_account_move_line__eng_cnab_clearing
+msgid ""
+"Clearing account line of a CNAB return liquidation, due on its credit date, "
+"waiting for the bank statement."
+msgstr ""
+"Linha da conta transitória de uma liquidação do retorno CNAB, com vencimento"
+" na data do crédito, à espera do extrato bancário."
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_l10n_br_cnab_return_log__eng_company_id
+msgid "Company"
+msgstr "Empresa"
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,help:eng_cnab_clearing.field_l10n_br_cnab_return_log__eng_company_id
+msgid "Company related to this journal"
+msgstr "Empresa relacionada a este diário"
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,help:eng_cnab_clearing.field_account_bank_statement_line__eng_cnab_credit_date
+#: model:ir.model.fields,help:eng_cnab_clearing.field_account_move__eng_cnab_credit_date
+#: model:ir.model.fields,help:eng_cnab_clearing.field_account_payment__eng_cnab_credit_date
+msgid "Date the bank credits the payment, due date of the clearing line."
+msgstr ""
+"Data em que o banco credita o pagamento, que é o vencimento da linha da "
+"transitória."
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,help:eng_cnab_clearing.field_account_bank_statement_line__eng_cnab_occurrence_date
+#: model:ir.model.fields,help:eng_cnab_clearing.field_account_move__eng_cnab_occurrence_date
+#: model:ir.model.fields,help:eng_cnab_clearing.field_account_payment__eng_cnab_occurrence_date
+msgid ""
+"Date the customer paid, which the clearing entry must keep as its accounting"
+" date."
+msgstr ""
+"Data em que o cliente pagou, que o lançamento na transitória deve manter "
+"como data contábil."
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_l10n_br_cnab_return_log__eng_file_hash
+msgid "File Hash"
+msgstr "Hash do arquivo"
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,help:eng_cnab_clearing.field_account_journal__eng_cnab_receipt_method_line_id
+msgid ""
+"Inbound payment method of this journal whose outstanding receipts account is"
+" the clearing account of the bank."
+msgstr ""
+"Método de recebimento deste diário cuja conta de recebimentos pendentes é a "
+"conta transitória do banco."
+
+#. module: eng_cnab_clearing
+#: model:ir.model,name:eng_cnab_clearing.model_account_journal
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_l10n_br_cnab_return_log__eng_journal_id
+msgid "Journal"
+msgstr "Diário"
+
+#. module: eng_cnab_clearing
+#: model:ir.model,name:eng_cnab_clearing.model_account_move
+msgid "Journal Entry"
+msgstr "Lançamento de Diário"
+
+#. module: eng_cnab_clearing
+#: model:ir.model,name:eng_cnab_clearing.model_account_move_line
+msgid "Journal Item"
+msgstr "Item de Diário"
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,help:eng_cnab_clearing.field_account_journal__eng_bank_cutover_date
+msgid ""
+"Liquidations credited before this date keep the legacy flow, through the "
+"bank account of the journal."
+msgstr ""
+"As liquidações creditadas antes desta data seguem o fluxo antigo, pela conta"
+" do banco do diário."
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields.selection,name:eng_cnab_clearing.selection__account_move_line__eng_cnab_receiving_bank_class__other
+msgid "Other Banks"
+msgstr "Outros bancos"
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields.selection,name:eng_cnab_clearing.selection__account_move_line__eng_cnab_receiving_bank_class__own
+msgid "Own Bank"
+msgstr "Banco do diário"
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_l10n_br_cnab_return_event__eng_record_position
+msgid "Position in File"
+msgstr "Posição no arquivo"
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,help:eng_cnab_clearing.field_l10n_br_cnab_return_event__eng_record_position
+msgid ""
+"Position of the record in the return file, as listed by the BRCobranca API "
+"(1 is the first record after the file header)."
+msgstr ""
+"Posição do registro no arquivo de retorno, na lista da API do BRCobranca (1 "
+"é o primeiro registro depois do cabeçalho do arquivo)."
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_account_move_line__eng_cnab_receiving_bank_class
+msgid "Receiving Bank Class"
+msgstr "Classe do banco recebedor"
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_l10n_br_cnab_return_event__eng_receiving_bank_code
+msgid "Receiving Bank Code"
+msgstr "Código do banco recebedor"
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,field_description:eng_cnab_clearing.field_l10n_br_cnab_return_event__eng_receiving_branch_code
+msgid "Receiving Branch Code"
+msgstr "Código da agência recebedora"
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,help:eng_cnab_clearing.field_l10n_br_cnab_return_event__eng_receiving_bank_code
+msgid "Receiving bank exactly as returned by the BRCobranca API."
+msgstr "Banco recebedor exatamente como a API do BRCobranca o devolve."
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,help:eng_cnab_clearing.field_l10n_br_cnab_return_event__eng_receiving_branch_code
+msgid "Receiving branch exactly as returned by the BRCobranca API."
+msgstr "Agência recebedora exatamente como a API do BRCobranca a devolve."
+
+#. module: eng_cnab_clearing
+#. odoo-python
+#: code:addons/eng_cnab_clearing/parser/cnab_clearing_parser.py:0
+#, python-format
+msgid ""
+"Record in position %(position)s of the records read from the file, which has"
+" no sequence number"
+msgstr ""
+"Registro na posição %(position)s dos registros lidos do arquivo, que não tem"
+" número sequencial"
+
+#. module: eng_cnab_clearing
+#. odoo-python
+#: code:addons/eng_cnab_clearing/parser/cnab_clearing_parser.py:0
+#, python-format
+msgid "Record with sequence number %(sequence)s"
+msgstr "Registro de número sequencial %(sequence)s"
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,help:eng_cnab_clearing.field_l10n_br_cnab_return_log__eng_file_hash
+msgid "SHA-256 of the imported return file, unique per company and journal."
+msgstr "SHA-256 do arquivo de retorno importado, único por empresa e diário."
+
+#. module: eng_cnab_clearing
+#. odoo-python
+#: code:addons/eng_cnab_clearing/models/account_journal.py:0
+#, python-format
+msgid ""
+"Set the bank cutover date of the journal %(journal)s to enable its CNAB "
+"clearing flow."
+msgstr ""
+"Defina a data de corte do banco do diário %(journal)s para habilitar o fluxo"
+" da transitória CNAB dele."
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,help:eng_cnab_clearing.field_account_bank_statement_line__eng_cnab_clearing
+#: model:ir.model.fields,help:eng_cnab_clearing.field_account_move__eng_cnab_clearing
+#: model:ir.model.fields,help:eng_cnab_clearing.field_account_payment__eng_cnab_clearing
+msgid ""
+"Settlement of a CNAB return liquidation by the clearing flow: posted on the "
+"occurrence date, against the clearing account."
+msgstr ""
+"Baixa de uma liquidação do retorno CNAB pelo fluxo da transitória: lançada "
+"na data da ocorrência, contra a conta transitória."
+
+#. module: eng_cnab_clearing
+#. odoo-python
+#: code:addons/eng_cnab_clearing/models/account_move.py:0
+#, python-format
+msgid ""
+"The CNAB clearing entry %(entry)s cannot be posted: its occurrence date "
+"%(occurrence_date)s is not after the %(lock_type)s lock date %(lock_date)s, "
+"and posting would move it to %(accounting_date)s. Review the lock date or "
+"the return file with the accounting team."
+msgstr ""
+"O lançamento na transitória CNAB %(entry)s não pode ser confirmado: a data "
+"da ocorrência %(occurrence_date)s não é posterior à data de bloqueio "
+"(%(lock_type)s) de %(lock_date)s, e a confirmação o levaria para "
+"%(accounting_date)s. Revise a data de bloqueio ou o arquivo de retorno com a"
+" contabilidade."
+
+#. module: eng_cnab_clearing
+#. odoo-python
+#: code:addons/eng_cnab_clearing/models/account_move.py:0
+#, python-format
+msgid ""
+"The CNAB clearing entry %(entry)s was posted on %(date)s instead of its "
+"occurrence date %(occurrence_date)s, so the posting was cancelled. Check the"
+" modules that change the accounting date when posting."
+msgstr ""
+"O lançamento na transitória CNAB %(entry)s foi confirmado em %(date)s, e não"
+" na data da ocorrência %(occurrence_date)s, por isso a confirmação foi "
+"cancelada. Confira os módulos que mudam a data contábil na confirmação."
+
+#. module: eng_cnab_clearing
+#. odoo-python
+#: code:addons/eng_cnab_clearing/models/account_journal.py:0
+#, python-format
+msgid ""
+"The CNAB clearing flow of the journal %(journal)s supports only Banco do "
+"Brasil (001) CNAB 400 and Ailos (085) CNAB 240 return files. Any other "
+"layout needs its own tests first."
+msgstr ""
+"O fluxo da transitória CNAB do diário %(journal)s só aceita arquivos de "
+"retorno CNAB 400 do Banco do Brasil (001) e CNAB 240 da Ailos (085). "
+"Qualquer outro layout precisa antes de testes próprios."
+
+#. module: eng_cnab_clearing
+#. odoo-python
+#: code:addons/eng_cnab_clearing/models/account_journal.py:0
+#, python-format
+msgid ""
+"The CNAB receipt method %(method)s of the journal %(journal)s must have its "
+"own outstanding receipts account: the default account of the company is not "
+"used as a fallback."
+msgstr ""
+"O método de recebimento CNAB %(method)s do diário %(journal)s precisa ter a "
+"sua própria conta de recebimentos pendentes: a conta padrão da empresa não é"
+" usada no lugar dela."
+
+#. module: eng_cnab_clearing
+#. odoo-python
+#: code:addons/eng_cnab_clearing/models/account_journal.py:0
+#, python-format
+msgid ""
+"The CNAB receipt method of the journal %(journal)s must be one of its "
+"inbound payment methods."
+msgstr ""
+"O método de recebimento CNAB do diário %(journal)s precisa ser um dos "
+"métodos de recebimento dele."
+
+#. module: eng_cnab_clearing
+#. odoo-python
+#: code:addons/eng_cnab_clearing/models/account_journal.py:0
+#, python-format
+msgid ""
+"The CNAB return file %(file_name)s was already imported in the journal "
+"%(journal)s (return log %(log)s). Importing it again would duplicate its "
+"entries."
+msgstr ""
+"O arquivo de retorno CNAB %(file_name)s já foi importado no diário "
+"%(journal)s (registro de retorno %(log)s). Importá-lo de novo duplicaria os "
+"seus lançamentos."
+
+#. module: eng_cnab_clearing
+#. odoo-python
+#: code:addons/eng_cnab_clearing/parser/cnab_clearing_parser.py:0
+#, python-format
+msgid ""
+"The CNAB return file %(file_name)s was not imported because some of its records are invalid, and none of its records was processed. Ask the bank for a corrected file.\n"
+"%(errors)s"
+msgstr ""
+"O arquivo de retorno CNAB %(file_name)s não foi importado porque alguns dos seus registros são inválidos, e nenhum registro foi processado. Peça ao banco um arquivo corrigido.\n"
+"%(errors)s"
+
+#. module: eng_cnab_clearing
+#. odoo-python
+#: code:addons/eng_cnab_clearing/parser/cnab_clearing_parser.py:0
+#, python-format
+msgid ""
+"The CNAB return file %(file_name)s was not imported: %(record)s (own number "
+"%(own_number)s) is a liquidation that settles no amount of the installment."
+msgstr ""
+"O arquivo de retorno CNAB %(file_name)s não foi importado: %(record)s (nosso"
+" número %(own_number)s) é uma liquidação que não baixa nenhum valor da "
+"parcela."
+
+#. module: eng_cnab_clearing
+#. odoo-python
+#: code:addons/eng_cnab_clearing/models/account_journal.py:0
+#, python-format
+msgid ""
+"The clearing account %(account)s must belong to the company of the journal "
+"%(journal)s."
+msgstr ""
+"A conta transitória %(account)s precisa ser da empresa do diário "
+"%(journal)s."
+
+#. module: eng_cnab_clearing
+#. odoo-python
+#: code:addons/eng_cnab_clearing/models/account_journal.py:0
+#, python-format
+msgid ""
+"The clearing account %(account)s of the journal %(journal)s cannot be its "
+"bank account."
+msgstr ""
+"A conta transitória %(account)s do diário %(journal)s não pode ser a conta "
+"do banco dele."
+
+#. module: eng_cnab_clearing
+#. odoo-python
+#: code:addons/eng_cnab_clearing/models/account_journal.py:0
+#, python-format
+msgid ""
+"The clearing account %(account)s of the journal %(journal)s must allow "
+"reconciliation."
+msgstr ""
+"A conta transitória %(account)s do diário %(journal)s precisa permitir "
+"conciliação."
+
+#. module: eng_cnab_clearing
+#: model:ir.model.constraint,message:eng_cnab_clearing.constraint_l10n_br_cnab_return_log_eng_file_hash_unique
+msgid "This CNAB return file was already imported in this journal."
+msgstr "Este arquivo de retorno CNAB já foi importado neste diário."
+
+#. module: eng_cnab_clearing
+#: model:ir.model.fields,help:eng_cnab_clearing.field_account_move_line__eng_cnab_receiving_bank_class
+msgid ""
+"Whether the title was paid at the bank of the journal or at another bank, "
+"from the receiving bank of the CNAB return. For Ailos, the bank of the "
+"journal is its own credit union: a title paid at another credit union counts"
+" as another bank. Empty when the return does not state it."
+msgstr ""
+"Se o título foi pago no banco do diário ou em outro banco, pelo banco "
+"recebedor do retorno CNAB. Na Ailos, o banco do diário é a própria "
+"cooperativa: título pago em outra cooperativa conta como outro banco. Fica "
+"vazio quando o retorno não o informa."
+
+#. module: eng_cnab_clearing
+#. odoo-python
+#: code:addons/eng_cnab_clearing/parser/cnab_clearing_parser.py:0
+#, python-format
+msgid "the liquidation has no receiving bank"
+msgstr "a liquidação não tem banco recebedor"
+
+#. module: eng_cnab_clearing
+#. odoo-python
+#: code:addons/eng_cnab_clearing/parser/cnab_clearing_parser.py:0
+#, python-format
+msgid "the liquidation has no receiving branch"
+msgstr "a liquidação não tem agência recebedora"
+
+#. module: eng_cnab_clearing
+#. odoo-python
+#: code:addons/eng_cnab_clearing/parser/cnab_clearing_parser.py:0
+#, python-format
+msgid "the liquidation has no valid credit date"
+msgstr "a liquidação não tem data de crédito válida"
+
+#. module: eng_cnab_clearing
+#. odoo-python
+#: code:addons/eng_cnab_clearing/parser/cnab_clearing_parser.py:0
+#, python-format
+msgid "the occurrence date %(value)s is invalid"
+msgstr "a data da ocorrência %(value)s é inválida"
+
+#. module: eng_cnab_clearing
+#. odoo-python
+#: code:addons/eng_cnab_clearing/parser/cnab_clearing_parser.py:0
+#, python-format
+msgid "the occurrence date is missing"
+msgstr "falta a data da ocorrência"
+
+#. module: eng_cnab_clearing
+#. odoo-python
+#: code:addons/eng_cnab_clearing/parser/cnab_clearing_parser.py:0
+#, python-format
+msgid "the occurrence date is zeroed"
+msgstr "a data da ocorrência está zerada"
