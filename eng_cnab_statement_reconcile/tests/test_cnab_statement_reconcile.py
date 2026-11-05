@@ -1173,3 +1173,150 @@ class TestCnabStatementReconcile(CnabStatementReconcileCommon):
             with self.assertRaises(ValidationError) as error:
                 self.journal_bb.write(values)
             self.assertIn(message, str(error.exception))
+
+    # The generic rules and the CNAB clearing lines
+
+    def _import_clearing_line(self, received=100.0):
+        moves = self._import(
+            self.journal_bb,
+            [self._bb_record(self.installment_bb, received=received)],
+        )
+        return self._clearing_lines(moves)
+
+    def _generic_candidates(self, generic_rule, st_line):
+        return generic_rule._get_invoice_matching_amls_candidates(
+            st_line, self.env["res.partner"]
+        )
+
+    def _number_label(self, clearing_line):
+        """A label with the number of the clearing entry, as the core reads it."""
+        number = "".join(
+            character
+            for character in clearing_line.move_id.name
+            if character.isdecimal()
+        )
+        return f"PIX {number}"
+
+    @staticmethod
+    def _screen_line_ids(st_line):
+        return [
+            item["id"]
+            for item in st_line._default_reconcile_data()["data"]
+            if item["kind"] == "other"
+        ]
+
+    def test_generic_rule_does_not_propose_clearing_line_by_amount(self):
+        clearing_line = self._import_clearing_line()
+        generic_rule = self._create_generic_rule(auto_reconcile=False)
+        payment_line = self._receive_manual_payment(100.0)
+        st_line = self._create_statement_line(self.journal_bb, 100.0, TRANSFER_LABEL)
+
+        with self._without_clearing_exclusion():
+            core_lines = self._generic_candidates(generic_rule, st_line)["amls"]
+        self.assertIn(clearing_line, core_lines)
+
+        lines = self._generic_candidates(generic_rule, st_line)["amls"]
+        self.assertNotIn(clearing_line, lines)
+        self.assertIn(payment_line, lines)
+        self.assertIn(self.installment_bb_2, lines)
+
+    def test_generic_rule_does_not_propose_clearing_line_in_another_journal(self):
+        clearing_line = self._import_clearing_line()
+        generic_rule = self._create_generic_rule(auto_reconcile=False)
+        # A bank with no CNAB and no clearing flow at all
+        journal = self.env["account.journal"].create(
+            {
+                "name": "Synthetic plain bank",
+                "code": "ENGPB",
+                "type": "bank",
+                "company_id": self.company.id,
+                "default_account_id": self._create_account(
+                    "ENGSR.PB", "Synthetic Plain Bank", "asset_cash"
+                ).id,
+                "suspense_account_id": self.account_suspense.id,
+            }
+        )
+        st_line = self._create_statement_line(journal, 100.0, TRANSFER_LABEL)
+
+        with self._without_clearing_exclusion():
+            core_lines = self._generic_candidates(generic_rule, st_line)["amls"]
+        self.assertIn(clearing_line, core_lines)
+
+        lines = self._generic_candidates(generic_rule, st_line)["amls"]
+        self.assertNotIn(clearing_line, lines)
+        self.assertIn(self.installment_bb_2, lines)
+
+    def test_generic_rule_does_not_consume_clearing_line_by_number(self):
+        clearing_line = self._import_clearing_line()
+        label = self._number_label(clearing_line)
+        generic_rule = self._create_generic_rule(auto_reconcile=False)
+        generic_rule.match_text_location_label = True
+        first_line = self._create_statement_line(self.journal_bb, 100.0, label)
+
+        with self._without_clearing_exclusion():
+            core_result = self._generic_candidates(generic_rule, first_line)
+        self.assertIn(clearing_line, core_result["amls"])
+        self.assertTrue(core_result["allow_auto_reconcile"])
+
+        # With the label on, the core stops when the number is not found
+        self.assertFalse(self._generic_candidates(generic_rule, first_line))
+
+        generic_rule.auto_reconcile = True
+        second_line = self._create_statement_line(self.journal_bb, 100.0, label)
+        self.assertFalse(second_line.is_reconciled)
+        self.assertFalse(clearing_line.reconciled)
+        self.assertEqual(clearing_line.amount_residual, 100.0)
+
+    def test_generic_rule_would_consume_clearing_line_without_the_exclusion(self):
+        clearing_line = self._import_clearing_line()
+        generic_rule = self._create_generic_rule(auto_reconcile=True)
+        generic_rule.match_text_location_label = True
+
+        with self._without_clearing_exclusion():
+            st_line = self._create_statement_line(
+                self.journal_bb, 100.0, self._number_label(clearing_line)
+            )
+
+        self.assertTrue(st_line.is_reconciled)
+        self.assertTrue(clearing_line.reconciled)
+
+    def test_reconcile_screen_does_not_suggest_clearing_line(self):
+        # An amount of its own, so that the order of the rule decides nothing
+        clearing_line = self._import_clearing_line(received=73.0)
+        payment_line = self._receive_manual_payment(73.0)
+        self._create_generic_rule(auto_reconcile=False)
+        st_line = self._create_statement_line(self.journal_bb, 73.0, TRANSFER_LABEL)
+
+        with self._without_clearing_exclusion():
+            self.assertIn(clearing_line.id, self._screen_line_ids(st_line))
+
+        line_ids = self._screen_line_ids(st_line)
+        self.assertNotIn(clearing_line.id, line_ids)
+        self.assertIn(payment_line.id, line_ids)
+
+    def test_cnab_rule_still_matches_with_a_generic_rule_present(self):
+        clearing_line = self._import_clearing_line()
+        self._create_generic_rule(auto_reconcile=True)
+
+        st_line = self._create_statement_line(self.journal_bb, 100.0, COLLECTION_LABEL)
+
+        self.assertTrue(st_line.is_reconciled)
+        self.assertTrue(clearing_line.reconciled)
+        self.assertEqual(st_line.eng_cnab_reconcile_status, "reconciled")
+
+    def test_clearing_line_can_still_be_picked_by_hand(self):
+        # An amount of its own: no other open item comes already on the screen
+        clearing_line = self._import_clearing_line(received=73.0)
+        self._create_generic_rule(auto_reconcile=False)
+        st_line = self._create_statement_line(self.journal_bb, 73.0, TRANSFER_LABEL)
+
+        with Form(
+            st_line,
+            view="account_reconcile_oca.bank_statement_line_form_reconcile_view",
+        ) as reconcile_form:
+            reconcile_form.add_account_move_line_id = clearing_line
+            self.assertTrue(reconcile_form.can_reconcile)
+        st_line.reconcile_bank_line()
+
+        self.assertTrue(st_line.is_reconciled)
+        self.assertTrue(clearing_line.reconciled)

@@ -12,6 +12,9 @@ from odoo.addons.eng_cnab_clearing.tests.common import (
     CUTOVER_DATE,
     CnabClearingCommon,
 )
+from odoo.addons.eng_cnab_statement_reconcile.models.account_reconcile_model import (
+    AccountReconcileModel,
+)
 
 # Synthetic labels of the bank statement lines, with no numeric token that
 # the generic invoice matching could look for
@@ -103,6 +106,21 @@ class CnabStatementReconcileCommon(CnabClearingCommon):
                 "match_text_location_label": False,
                 "past_months_limit": 0,
             }
+        )
+
+    @staticmethod
+    def _without_clearing_exclusion():
+        """The rule domain as the core has it: what the exclusion prevents."""
+        exclusion = ("eng_cnab_clearing", "=", False)
+        original = AccountReconcileModel._get_invoice_matching_amls_domain
+
+        def core_domain(rule, st_line, partner):
+            return [
+                term for term in original(rule, st_line, partner) if term != exclusion
+            ]
+
+        return mock.patch.object(
+            AccountReconcileModel, "_get_invoice_matching_amls_domain", core_domain
         )
 
     def _create_statement_line(self, journal, amount, label, line_date=CREDIT_DATE):
