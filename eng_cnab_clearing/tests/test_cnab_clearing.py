@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 import hashlib
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from unittest import mock
 
 from freezegun import freeze_time
@@ -783,3 +783,399 @@ class TestCnabClearing(CnabClearingCommon):
         self.assertFalse(EngClearingCNABParser.parser_for("cnab400"))
         self.assertFalse(EngClearingCNABParser.parser_for("cnab240"))
         self.assertIs(type(new_move_parser(self.journal_bb)), CNABFileParser)
+
+
+@tagged("post_install", "-at_install")
+class TestPaymentBeforeCutover(CnabClearingCommon):
+    def setUp(self):
+        super().setUp()
+        # The synthetic company has no chart template, so no default account
+        self.debit_account = self._create_account(
+            "ENGCC.ODB", "Synthetic Outstanding Receipts", "asset_current", True
+        )
+        self.credit_account = self._create_account(
+            "ENGCC.OCR", "Synthetic Outstanding Payments", "asset_current", True
+        )
+        self.company.write(
+            {
+                "account_journal_payment_debit_account_id": self.debit_account.id,
+                "account_journal_payment_credit_account_id": self.credit_account.id,
+                "transfer_account_id": self._create_account(
+                    "ENGCC.TRA", "Synthetic Transfers", "asset_current", True
+                ).id,
+            }
+        )
+        self.assertTrue(self.company.account_journal_payment_debit_account_id)
+        self.partner.with_company(
+            self.company
+        ).property_account_payable_id = self._create_account(
+            "ENGCC.PAY", "Synthetic Payable", "liability_payable", True
+        )
+        self.manual_method = self.journal_bb.inbound_payment_method_line_ids.filtered(
+            lambda method_line: method_line.code == "manual"
+        )
+        self.manual_method.payment_account_id = self.account_clearing_bb
+        self.before = CUTOVER_DATE - timedelta(days=1)
+
+    def _payment_values(self, payment_date, **values):
+        return {
+            "payment_type": "inbound",
+            "partner_type": "customer",
+            "partner_id": self.partner.id,
+            "amount": 100.0,
+            "date": payment_date,
+            "journal_id": self.journal_bb.id,
+            "payment_method_line_id": self.manual_method.id,
+            **values,
+        }
+
+    def _create_payment(self, payment_date, **values):
+        return self.env["account.payment"].create(
+            self._payment_values(payment_date, **values)
+        )
+
+    def _receive_payment(self, payment_date, **values):
+        payment = self._create_payment(payment_date, **values)
+        payment.action_post()
+        return payment
+
+    @staticmethod
+    def _liquidity_line(payment):
+        return payment._seek_for_lines()[0]
+
+    def _assert_outstanding_account(self, payment, account):
+        self.assertEqual(payment.outstanding_account_id, account)
+        liquidity_line = self._liquidity_line(payment)
+        self.assertEqual(len(liquidity_line), 1)
+        self.assertEqual(liquidity_line.account_id, account)
+
+    def test_receipt_before_cutover_goes_to_outstanding_account(self):
+        payment = self._receive_payment(self.before)
+
+        self._assert_outstanding_account(payment, self.debit_account)
+        self.assertEqual(self._liquidity_line(payment).debit, 100.0)
+        lines = payment.move_id.line_ids
+        self.assertFalse(
+            lines.filtered(lambda line: line.account_id == self.account_clearing_bb)
+        )
+        self.assertFalse(lines.filtered("eng_cnab_clearing"))
+
+    def test_receipt_on_cutover_date_goes_to_clearing_account(self):
+        payment = self._receive_payment(CUTOVER_DATE)
+
+        self._assert_outstanding_account(payment, self.account_clearing_bb)
+        self.assertFalse(self._liquidity_line(payment).eng_cnab_clearing)
+
+    def test_outbound_payment_before_cutover_keeps_its_account(self):
+        outbound_method = self.journal_bb.outbound_payment_method_line_ids.filtered(
+            lambda method_line: method_line.code == "manual"
+        )
+        payment = self._receive_payment(
+            self.before,
+            payment_type="outbound",
+            partner_type="supplier",
+            payment_method_line_id=outbound_method.id,
+        )
+
+        self._assert_outstanding_account(payment, self.credit_account)
+
+    def test_receipt_of_journal_out_of_flow_keeps_its_account(self):
+        self.journal_bb.eng_cnab_clearing_enabled = False
+
+        payment = self._receive_payment(self.before)
+
+        self._assert_outstanding_account(payment, self.account_clearing_bb)
+
+    def test_receipt_before_cutover_through_the_wizard_keeps_the_discount(self):
+        invoice = self.env["account.move"].create(
+            {
+                "move_type": "out_invoice",
+                "partner_id": self.partner.id,
+                "journal_id": self.journal_sale.id,
+                "invoice_date": self.before,
+                "invoice_line_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": "Synthetic product",
+                            "quantity": 1.0,
+                            "price_unit": 100.0,
+                            "account_id": self.account_income.id,
+                            "tax_ids": [(5, 0, 0)],
+                        },
+                    )
+                ],
+            }
+        )
+        invoice.action_post()
+        wizard = (
+            self.env["account.payment.register"]
+            .with_context(active_model="account.move", active_ids=invoice.ids)
+            .create(
+                {
+                    "journal_id": self.journal_bb.id,
+                    "payment_method_line_id": self.manual_method.id,
+                    "payment_date": self.before,
+                    "amount": 90.0,
+                    "payment_difference_handling": "reconcile",
+                    "writeoff_account_id": self.account_discount.id,
+                    "writeoff_label": "Discount",
+                }
+            )
+        )
+
+        payment = wizard._create_payments()
+
+        self._assert_outstanding_account(payment, self.debit_account)
+        lines = payment.move_id.line_ids
+        self.assertEqual(self._liquidity_line(payment).debit, 90.0)
+        self.assertEqual(
+            lines.filtered(lambda line: line.account_id == self.account_discount).debit,
+            10.0,
+        )
+        self.assertEqual(
+            lines.filtered(
+                lambda line: line.account_id == self.account_receivable
+            ).credit,
+            100.0,
+        )
+        self.assertEqual(invoice.amount_residual, 0.0)
+
+    def test_draft_receipt_follows_its_date_across_the_cutover(self):
+        payment = self._create_payment(CUTOVER_DATE)
+        self._assert_outstanding_account(payment, self.account_clearing_bb)
+        self.assertEqual(len(payment.move_id.line_ids), 2)
+
+        payment.date = self.before
+        self._assert_outstanding_account(payment, self.debit_account)
+        self.assertEqual(len(payment.move_id.line_ids), 2)
+
+        payment.date = CUTOVER_DATE
+        self._assert_outstanding_account(payment, self.account_clearing_bb)
+        self.assertEqual(len(payment.move_id.line_ids), 2)
+
+    def test_receipt_before_cutover_in_another_account_stays_there(self):
+        other_account = self._create_account(
+            "ENGCC.OTH", "Synthetic Other Outstanding", "asset_current", True
+        )
+        self.manual_method.payment_account_id = other_account
+
+        payment = self._receive_payment(self.before)
+
+        self._assert_outstanding_account(payment, other_account)
+
+    def test_changing_the_cutover_does_not_touch_posted_receipts(self):
+        payment = self._receive_payment(CUTOVER_DATE)
+
+        self.journal_bb.eng_bank_cutover_date = CUTOVER_DATE + timedelta(days=5)
+        payment.flush_recordset()
+        payment.invalidate_recordset()
+
+        self.assertEqual(payment.state, "posted")
+        self._assert_outstanding_account(payment, self.account_clearing_bb)
+
+    def test_supplier_refund_before_cutover_goes_to_outstanding_account(self):
+        before = self._receive_payment(self.before, partner_type="supplier")
+        on_cutover = self._receive_payment(CUTOVER_DATE, partner_type="supplier")
+
+        self._assert_outstanding_account(before, self.debit_account)
+        self._assert_outstanding_account(on_cutover, self.account_clearing_bb)
+
+    def test_internal_transfer_before_cutover(self):
+        # The paired payment takes the default method line of the journal
+        self.journal_bb.inbound_payment_method_line_ids.payment_account_id = (
+            self.account_clearing_bb
+        )
+        plain_journal = self.env["account.journal"].create(
+            {
+                "name": "Synthetic plain bank",
+                "code": "ECPLN",
+                "type": "bank",
+                "company_id": self.company.id,
+                "default_account_id": self._create_account(
+                    "ENGCC.PLN", "Synthetic Plain Bank", "asset_cash"
+                ).id,
+            }
+        )
+        outbound_method = plain_journal.outbound_payment_method_line_ids.filtered(
+            lambda method_line: method_line.code == "manual"
+        )
+
+        def transfer(payment_date):
+            payment = self.env["account.payment"].create(
+                {
+                    "payment_type": "outbound",
+                    "is_internal_transfer": True,
+                    "journal_id": plain_journal.id,
+                    "destination_journal_id": self.journal_bb.id,
+                    "payment_method_line_id": outbound_method.id,
+                    "amount": 100.0,
+                    "date": payment_date,
+                }
+            )
+            payment.action_post()
+            return payment.paired_internal_transfer_payment_id
+
+        before = transfer(self.before)
+        on_cutover = transfer(CUTOVER_DATE)
+
+        for paired in before | on_cutover:
+            self.assertEqual(paired.payment_type, "inbound")
+            self.assertEqual(paired.journal_id, self.journal_bb)
+            self.assertEqual(
+                paired.payment_method_line_id.payment_account_id,
+                self.account_clearing_bb,
+            )
+        self._assert_outstanding_account(before, self.debit_account)
+        self._assert_outstanding_account(on_cutover, self.account_clearing_bb)
+
+    def test_copy_follows_a_date_edited_on_the_copy(self):
+        # The copy takes the lines of the original, and the method line is not
+        # copied: it is the edit of the date that moves the line
+        old_payment = self._receive_payment(self.before)
+        new_payment = self._receive_payment(CUTOVER_DATE)
+        self.assertEqual(
+            self.manual_method.payment_account_id, self.account_clearing_bb
+        )
+        method_values = {"payment_method_line_id": self.manual_method.id}
+        copy_on_cutover = old_payment.copy(method_values)
+        copy_before = new_payment.copy(method_values)
+
+        copy_on_cutover.date = CUTOVER_DATE
+        copy_before.date = self.before
+
+        self._assert_outstanding_account(copy_on_cutover, self.account_clearing_bb)
+        self._assert_outstanding_account(copy_before, self.debit_account)
+
+    def _legacy_account(self):
+        return self._create_account(
+            "ENGCC.LEG", "Synthetic Legacy Outstanding", "asset_current", True
+        )
+
+    def _assert_payment_stays_in(self, payment, account):
+        self.assertEqual(payment.outstanding_account_id, account)
+        self.assertEqual(len(payment.move_id.line_ids), 2)
+        self.assertEqual(
+            payment.move_id.line_ids.filtered(
+                lambda line: line.account_id == account
+            ).balance,
+            payment.amount if payment.payment_type == "inbound" else -payment.amount,
+        )
+
+    def test_date_change_out_of_the_flow_keeps_the_legacy_account(self):
+        legacy_account = self._legacy_account()
+        self.journal_bb.eng_cnab_clearing_enabled = False
+        self.manual_method.payment_account_id = legacy_account
+        payment = self._receive_payment(CUTOVER_DATE)
+        self.manual_method.payment_account_id = False
+
+        payment.action_draft()
+        payment.date = CUTOVER_DATE + timedelta(days=1)
+
+        self._assert_payment_stays_in(payment, legacy_account)
+
+    def test_date_change_of_an_outbound_payment_keeps_the_legacy_account(self):
+        legacy_account = self._legacy_account()
+        outbound_method = self.journal_bb.outbound_payment_method_line_ids.filtered(
+            lambda method_line: method_line.code == "manual"
+        )
+        outbound_method.payment_account_id = legacy_account
+        payment = self._receive_payment(
+            CUTOVER_DATE,
+            payment_type="outbound",
+            partner_type="supplier",
+            payment_method_line_id=outbound_method.id,
+        )
+        outbound_method.payment_account_id = False
+
+        payment.action_draft()
+        payment.date = self.before
+
+        self._assert_payment_stays_in(payment, legacy_account)
+
+    def test_date_change_in_the_flow_keeps_a_legacy_account(self):
+        legacy_account = self._legacy_account()
+        self.manual_method.payment_account_id = legacy_account
+        payment = self._receive_payment(CUTOVER_DATE)
+        self.manual_method.payment_account_id = self.account_clearing_bb
+
+        payment.action_draft()
+        payment.date = CUTOVER_DATE + timedelta(days=1)
+
+        self._assert_payment_stays_in(payment, legacy_account)
+
+    def test_date_changed_on_the_entry_keeps_field_and_line_together(self):
+        # The date is corrected on the payment: on the entry, nothing follows it
+        payment = self._create_payment(CUTOVER_DATE)
+
+        payment.move_id.date = self.before
+
+        self._assert_outstanding_account(payment, self.account_clearing_bb)
+
+    def test_redraft_keeps_account_and_lines_of_an_old_payment(self):
+        # Posted before the method was pointed to the clearing account
+        self.manual_method.payment_account_id = False
+        payment = self._receive_payment(CUTOVER_DATE)
+        self._assert_outstanding_account(payment, self.debit_account)
+        self.manual_method.payment_account_id = self.account_clearing_bb
+
+        payment.action_draft()
+        payment.action_post()
+
+        self._assert_outstanding_account(payment, self.debit_account)
+
+    def test_batch_create_decides_payment_by_payment(self):
+        before, on_cutover = self.env["account.payment"].create(
+            [self._payment_values(self.before), self._payment_values(CUTOVER_DATE)]
+        )
+
+        self._assert_outstanding_account(before, self.debit_account)
+        self._assert_outstanding_account(on_cutover, self.account_clearing_bb)
+
+    def test_default_account_comes_from_the_company_of_the_journal(self):
+        other_company = self.env["res.company"].create(
+            {"name": "Synthetic Other Company"}
+        )
+        self.env.user.write({"company_ids": [(4, other_company.id)]})
+        other_account = self.env["account.account"].create(
+            {
+                "code": "ENGOT.ODB",
+                "name": "Synthetic Other Outstanding Receipts",
+                "account_type": "asset_current",
+                "reconcile": True,
+                "company_id": other_company.id,
+            }
+        )
+        other_company.account_journal_payment_debit_account_id = other_account
+
+        payment = (
+            self.env["account.payment"]
+            .with_context(allowed_company_ids=[other_company.id, self.company.id])
+            .create(self._payment_values(self.before))
+        )
+
+        self.assertEqual(payment.outstanding_account_id, self.debit_account)
+        self.assertNotEqual(payment.outstanding_account_id, other_account)
+
+    def test_foreign_currency_receipt_before_cutover(self):
+        currency = self.env.ref("base.EUR")
+        currency.active = True
+        self.env["res.currency.rate"].create(
+            {
+                "name": self.before,
+                "rate": 2.0,
+                "currency_id": currency.id,
+                "company_id": self.company.id,
+            }
+        )
+
+        payment = self._receive_payment(self.before, currency_id=currency.id)
+
+        self._assert_outstanding_account(payment, self.debit_account)
+
+    def test_receipt_before_cutover_without_default_account_is_refused(self):
+        self.company.account_journal_payment_debit_account_id = False
+
+        with self.assertRaises(UserError):
+            self._create_payment(self.before)
