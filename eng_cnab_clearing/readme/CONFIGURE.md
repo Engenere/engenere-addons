@@ -12,7 +12,9 @@
      company is not used as a fallback.
 3. Point the other inbound payment methods of the journal to the same
    clearing account, so that manual receipts are reconciled by the bank
-   statement as well.
+   statement as well. An inbound payment dated before the cutover date goes to
+   the outstanding receipts account of the company instead, so the company must
+   have one.
 
 The clearing flow supports Banco do Brasil CNAB 400 and Ailos CNAB 240
 return files only. Any other layout needs its own tests first.
