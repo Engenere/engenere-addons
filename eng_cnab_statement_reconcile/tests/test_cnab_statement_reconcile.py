@@ -1305,7 +1305,9 @@ class TestCnabStatementReconcile(CnabStatementReconcileCommon):
         self.assertEqual(st_line.eng_cnab_reconcile_status, "reconciled")
 
     def test_clearing_line_can_still_be_picked_by_hand(self):
-        # An amount of its own: no other open item comes already on the screen
+        # An amount of its own: no other open item comes already on the screen.
+        # The form sets the line directly, so this proves that a picked line
+        # reconciles, and not that the list of the screen shows it.
         clearing_line = self._import_clearing_line(received=73.0)
         self._create_generic_rule(auto_reconcile=False)
         st_line = self._create_statement_line(self.journal_bb, 73.0, TRANSFER_LABEL)
