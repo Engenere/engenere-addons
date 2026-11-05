@@ -33,7 +33,9 @@ wins the line by its sequence.
 
 The other reconciliation models never propose a CNAB clearing line, in any
 journal, so that a transfer of the same amount does not take a liquidation by
-chance. It can still be picked by hand on the reconciliation screen.
+chance. It can still be picked by hand on the reconciliation screen, once any
+default filter of that list that hides it is removed, such as the Outstanding
+Payments/Receipts filter of `eng_reconcile_default_payment_filter`.
 
 The matching runs:
 
