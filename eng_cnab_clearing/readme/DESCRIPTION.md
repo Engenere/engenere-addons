@@ -39,3 +39,9 @@ The module also:
 
 Liquidations credited before the cutover date, and journals without the
 clearing flow, keep the original import of `l10n_br_account_payment_brcobranca`.
+
+An inbound payment dated before the cutover date, whatever its kind (customer
+receipt, supplier refund, internal transfer), goes to the outstanding receipts
+account of the company, as before the flow, because its bank statement line
+never comes into the journal. From the cutover date on, it goes to the clearing
+account.
