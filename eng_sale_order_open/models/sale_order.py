@@ -16,6 +16,7 @@ class SaleOrder(models.Model):
 
     @api.depends(
         "state",
+        "force_invoiced",
         "invoice_status",
         "picking_ids.state",
         "order_line.qty_to_invoice",
@@ -24,18 +25,18 @@ class SaleOrder(models.Model):
     )
     def _compute_is_open(self):
         for order in self:
-            if order.state not in ("sale", "done"):
+            # ``force_invoiced`` is the user explicitly closing the order: it
+            # wins over everything else, including a delivery still pending.
+            if order.state not in ("sale", "done") or order.force_invoiced:
                 order.is_open = False
                 continue
             pending_delivery = any(
-                p.state not in ("done", "cancel") for p in order.picking_ids
+                picking.state not in ("done", "cancel") for picking in order.picking_ids
             )
             # Pending invoice only when Odoo does not consider the order fully
-            # invoiced AND there is still quantity to invoice. The first check
-            # honors manual overrides like ``force_invoiced`` (which forces
-            # ``invoice_status='invoiced'``); the second handles short-shipment
-            # tolerances where ``invoice_status`` stays ``'no'`` even with
-            # nothing left to invoice.
+            # invoiced AND there is still quantity to invoice. The second check
+            # handles short-shipment tolerances where ``invoice_status`` stays
+            # ``'no'`` even with nothing left to invoice.
             pending_invoice = order.invoice_status != "invoiced" and any(
                 line.qty_to_invoice for line in order.order_line
             )
@@ -43,11 +44,9 @@ class SaleOrder(models.Model):
             # invoiced) is treated as still open even with no pending action:
             # covers freshly-confirmed orders and full-reversal scenarios
             # (delivered + returned and invoiced + refunded back to zero)
-            # where the user is expected to explicitly cancel the order.
-            # Skip this rule when ``invoice_status='invoiced'`` — that signals
-            # the user has explicitly closed the invoice side (typically via
-            # ``force_invoiced`` from ``sale_force_invoiced``), so the order
-            # should close even with zero delivered/invoiced quantities.
+            # where the user is expected to explicitly cancel the order or
+            # mark it as ``force_invoiced``. Skipped when Odoo already considers
+            # the order fully invoiced (e.g. every line has zero quantity).
             has_net_activity = any(
                 line.qty_delivered or line.qty_invoiced for line in order.order_line
             )

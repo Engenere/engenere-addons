@@ -1,0 +1,36 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* eng_sale_order_open
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+
+#. module: eng_sale_order_open
+#: model:ir.model.fields,help:eng_sale_order_open.field_sale_order__is_open
+msgid "Confirmed order with pending delivery or pending invoice."
+msgstr "Pedido confirmado com entrega ou faturamento pendente."
+
+#. module: eng_sale_order_open
+#: model_terms:ir.ui.view,arch_db:eng_sale_order_open.view_sales_order_filter
+msgid "Confirmed orders with pending delivery or pending invoice"
+msgstr "Pedidos confirmados com entrega ou faturamento pendente"
+
+#. module: eng_sale_order_open
+#: model:ir.model.fields,field_description:eng_sale_order_open.field_sale_order__is_open
+#: model_terms:ir.ui.view,arch_db:eng_sale_order_open.view_sales_order_filter
+msgid "Open"
+msgstr "Em Aberto"
+
+#. module: eng_sale_order_open
+#: model:ir.model,name:eng_sale_order_open.model_sale_order
+msgid "Sales Order"
+msgstr ""
