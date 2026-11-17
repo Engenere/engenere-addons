@@ -378,7 +378,8 @@ ul.auto-toc {
 <p>Adds an <tt class="docutils literal">Open</tt> boolean to <tt class="docutils literal">sale.order</tt> and a matching filter in the
 search view.</p>
 <p>A sale order is considered <strong>open</strong> when it is confirmed
-(<tt class="docutils literal">state == 'sale'</tt> or <tt class="docutils literal">'done'</tt>) <strong>and</strong> any of:</p>
+(<tt class="docutils literal">state == 'sale'</tt> or <tt class="docutils literal">'done'</tt>), it is not marked as
+<tt class="docutils literal">force_invoiced</tt> (from <tt class="docutils literal">sale_force_invoiced</tt>) <strong>and</strong> any of:</p>
 <ul class="simple">
 <li>there is a related stock picking not in <tt class="docutils literal">done</tt>/<tt class="docutils literal">cancel</tt> state
 (pending delivery);</li>
@@ -393,9 +394,10 @@ order.</li>
 <p>Short-shipment within tolerance closes naturally: once pickings are
 validated without backorder and the delivered quantity is invoiced, both
 <tt class="docutils literal">qty_to_invoice</tt> and pending-picking checks return false, regardless
-of <tt class="docutils literal">qty_delivered &lt; product_uom_qty</tt>. Manual overrides like
-<tt class="docutils literal">force_invoiced</tt> (from <tt class="docutils literal">sale_force_invoiced</tt>) are honored because
-they set <tt class="docutils literal"><span class="pre">invoice_status='invoiced'</span></tt>.</p>
+of <tt class="docutils literal">qty_delivered &lt; product_uom_qty</tt>.</p>
+<p>Marking an order as <tt class="docutils literal">force_invoiced</tt> always closes it, even with a
+delivery still pending: it is the user explicitly stating that nothing
+else will happen on that order.</p>
 <p>This helps the sales team quickly answer “what is still pending for
 customer X?” without combining multiple filters.</p>
 <p><strong>Table of contents</strong></p>

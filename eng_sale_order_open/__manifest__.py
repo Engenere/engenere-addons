@@ -6,13 +6,14 @@
     "summary": """
         Adds an 'Open' filter to sale orders (confirmed with pending delivery
         or pending invoice).""",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.1.0",
     "license": "AGPL-3",
     "author": "Engenere",
     "maintainers": ["antoniospneto"],
     "website": "https://github.com/Engenere/engenere-addons",
     "depends": [
         "l10n_br_sale_stock",
+        "sale_force_invoiced",
     ],
     "data": [
         "views/sale_order_view.xml",

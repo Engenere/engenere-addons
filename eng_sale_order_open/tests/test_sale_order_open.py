@@ -122,22 +122,29 @@ class TestSaleOrderOpen(AccountTestInvoicingCommon):
         self.assertFalse(order.is_open)
 
     def test_force_invoiced_with_no_activity_is_not_open(self):
-        """``force_invoiced`` (from ``sale_force_invoiced``) sets
-        ``invoice_status='invoiced'`` even with zero delivered/invoiced
-        quantities. That signals the user has explicitly closed the invoice
-        side, so the no-net-activity heuristic must yield and the order
-        closes."""
-        if "force_invoiced" not in self.env["sale.order"]._fields:
-            self.skipTest("sale_force_invoiced not installed")
+        """``force_invoiced`` closes an order with zero delivered/invoiced
+        quantities: the no-net-activity heuristic must yield."""
         order = self._create_order(product=self.product_service)
         order.action_confirm()
         self.assertTrue(order.is_open)
         order.force_invoiced = True
-        order.invalidate_recordset(["invoice_status", "is_open"])
-        self.assertEqual(order.invoice_status, "invoiced")
         self.assertEqual(sum(order.order_line.mapped("qty_invoiced")), 0)
         self.assertEqual(sum(order.order_line.mapped("qty_delivered")), 0)
         self.assertFalse(order.is_open)
+
+    def test_force_invoiced_with_open_picking_is_not_open(self):
+        """``force_invoiced`` closes the order even with a delivery still
+        pending, and unsetting it reopens the order."""
+        order = self._create_order()
+        order.action_confirm()
+        self.assertTrue(
+            any(p.state not in ("done", "cancel") for p in order.picking_ids)
+        )
+        self.assertTrue(order.is_open)
+        order.force_invoiced = True
+        self.assertFalse(order.is_open)
+        order.force_invoiced = False
+        self.assertTrue(order.is_open)
 
     def test_service_policy_delivery_no_activity_is_open(self):
         """Service with policy='delivery' freshly confirmed has no pickings,
