@@ -45,6 +45,29 @@ class TestSaleCustomerOrderRef(TransactionCase):
             self.order.order_line.mapped("partner_order"), ["PO0099", "PO0042"]
         )
 
+    def test_new_line_without_partner_order_takes_the_customer_reference(self):
+        """The line form opened on a new line sends an empty partner order."""
+        line = self.env["sale.order.line"].create(
+            {
+                "order_id": self.order.id,
+                "product_id": self.product.id,
+                "partner_order": False,
+            }
+        )
+
+        self.assertEqual(line.partner_order, "PO0042")
+
+    def test_new_line_keeps_the_partner_order_it_brings(self):
+        line = self.env["sale.order.line"].create(
+            {
+                "order_id": self.order.id,
+                "product_id": self.product.id,
+                "partner_order": "PO0099",
+            }
+        )
+
+        self.assertEqual(line.partner_order, "PO0099")
+
     def test_duplicated_order_starts_without_partner_order(self):
         new_order = self.order.copy()
 
