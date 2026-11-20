@@ -7,8 +7,9 @@ from odoo import api, fields, models
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
+    # Not copied, like the customer reference of the order it comes from
     partner_order = fields.Char(
-        compute="_compute_partner_order", store=True, readonly=False
+        compute="_compute_partner_order", store=True, readonly=False, copy=False
     )
 
     @api.depends("order_id", "order_id.client_order_ref")

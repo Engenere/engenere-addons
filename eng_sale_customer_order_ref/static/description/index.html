@@ -375,8 +375,13 @@ ul.auto-toc {
 !! source digest: sha256:e15e4500d78d28708ab7e9adaea76e3f476704171238646c22aafd95beccd186
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Alpha" src="https://img.shields.io/badge/maturity-Alpha-red.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/license-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/Engenere/engenere-addons/tree/16.0/eng_sale_customer_order_ref"><img alt="Engenere/engenere-addons" src="https://img.shields.io/badge/github-Engenere%2Fengenere--addons-lightgray.png?logo=github" /></a></p>
-<p>Este módulo leva a referência do pedido do cliente (client_order_ref) no
-pedido de venda para o campo (partner_order) na linha do pedido de venda</p>
+<p>Este módulo faz o número do pedido do cliente ser digitado uma única vez
+no pedido de venda.</p>
+<p>O campo <em>Referência do Cliente</em> (<tt class="docutils literal">client_order_ref</tt>) passa a ficar no
+cabeçalho do pedido, junto do cliente, e as linhas herdam o valor como
+pedido do parceiro (<tt class="docutils literal">partner_order</tt>), que sai na NF-e como <tt class="docutils literal">xPed</tt>. A
+linha ainda aceita um número próprio, que vale até a referência do
+pedido mudar. Um pedido duplicado nasce sem o número.</p>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
 <p class="last">This is an alpha version, the data model and design can change at any time without warning.
