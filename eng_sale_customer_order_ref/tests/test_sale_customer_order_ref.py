@@ -4,7 +4,7 @@
 from lxml import etree
 
 from odoo.fields import Command
-from odoo.tests import TransactionCase
+from odoo.tests import Form, TransactionCase
 
 
 class TestSaleCustomerOrderRef(TransactionCase):
@@ -74,14 +74,37 @@ class TestSaleCustomerOrderRef(TransactionCase):
         self.assertFalse(new_order.client_order_ref)
         self.assertEqual(new_order.order_line.mapped("partner_order"), [False, False])
 
+    def _get_order_form_arch(self):
+        view = self.env.ref("sale.view_order_form")
+        return etree.fromstring(self.env["sale.order"].get_view(view.id)["arch"])
+
     def test_customer_reference_is_in_the_partner_group(self):
         """The customer reference is typed next to the customer, not in the
         Other Info tab."""
-        view = self.env.ref("sale.view_order_form")
-        arch = etree.fromstring(self.env["sale.order"].get_view(view.id)["arch"])
+        arch = self._get_order_form_arch()
 
         self.assertEqual(
             arch.xpath("//field[@name='client_order_ref']/..")[0].get("name"),
             "partner_details",
         )
         self.assertEqual(len(arch.xpath("//field[@name='client_order_ref']")), 1)
+
+    def test_new_line_shows_the_customer_reference_before_saving(self):
+        """The partner order is in the list of lines, hidden by default: the
+        form of a line not saved yet only shows what the list has loaded."""
+        with Form(self.order) as order_form:
+            with order_form.order_line.new() as line:
+                line.product_id = self.product
+
+                self.assertEqual(line.partner_order, "PO0042")
+
+    def test_new_line_follows_the_customer_reference_before_saving(self):
+        with Form(self.order) as order_form:
+            with order_form.order_line.new() as line:
+                line.product_id = self.product
+            order_form.client_order_ref = "PO0043"
+
+        self.assertEqual(
+            self.order.order_line.mapped("partner_order"),
+            ["PO0043", "PO0043", "PO0043"],
+        )
