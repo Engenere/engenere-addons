@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Engenere.
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.form (in eng_sale_commitment_date)</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <!-- The delivery date is moved, not repeated: a second
+                 commitment_date above the original would take over the anchor
+                 of every view that locates the field by name. -->
+            <xpath
+                expr="//group[@name='order_details']/field[@name='date_order'][last()]"
+                position="after"
+            >
+                <xpath
+                    expr="//group[@name='sale_shipping']/label[@for='commitment_date']"
+                    position="move"
+                />
+                <xpath
+                    expr="//group[@name='sale_shipping']/div[field[@name='commitment_date']]"
+                    position="move"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_quotation_tree" model="ir.ui.view">
+        <field name="name">sale.order.tree (in eng_sale_commitment_date)</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree" />
+        <field name="arch" type="xml">
+            <field name="commitment_date" position="attributes">
+                <attribute name="optional">show</attribute>
+                <attribute name="widget">date</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_order_tree" model="ir.ui.view">
+        <field name="name">sale.order.tree (in eng_sale_commitment_date)</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree" />
+        <field name="arch" type="xml">
+            <field name="commitment_date" position="attributes">
+                <attribute name="optional">show</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
