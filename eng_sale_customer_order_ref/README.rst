@@ -35,6 +35,9 @@ pedido do parceiro (``partner_order``), que sai na NF-e como ``xPed``. A
 linha ainda aceita um número próprio, que vale até a referência do
 pedido mudar. Um pedido duplicado nasce sem o número.
 
+O pedido do parceiro também fica disponível como coluna opcional na
+lista de linhas do pedido, oculta por padrão.
+
 .. IMPORTANT::
    This is an alpha version, the data model and design can change at any time without warning.
    Only for development or testing purpose, do not use in production.

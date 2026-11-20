@@ -10,6 +10,14 @@
             <group name="partner_details" position="inside">
                 <field name="client_order_ref" position="move" />
             </group>
+            <!-- The form of a line not saved yet only shows what the list
+                 has loaded: without the field here, it opens empty. -->
+            <xpath
+                expr="//field[@name='order_line']/tree/field[@name='name']"
+                position="after"
+            >
+                <field name="partner_order" optional="hide" />
+            </xpath>
         </field>
     </record>
 </odoo>
